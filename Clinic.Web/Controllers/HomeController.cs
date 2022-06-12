@@ -11,6 +11,7 @@ namespace Clinic.Web.Controllers
         
         public ActionResult Index()
         {
+            ViewBag.Name = "Seliem";
             return View();
         }
 
