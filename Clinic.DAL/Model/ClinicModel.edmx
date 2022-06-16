@@ -1,0 +1,1061 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OutpatientClinic_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Areas">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CityFk" Type="int" Nullable="false" />
+          <Property Name="AreaIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="BlodGroups">
+          <Key>
+            <PropertyRef Name="BlodGroupId" />
+          </Key>
+          <Property Name="BlodGroupId" Type="tinyint" Nullable="false" />
+          <Property Name="BlodGroupName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="BlodGroupIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Bookings">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingNo" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="datetime" Nullable="false" />
+          <Property Name="BookingAmount" Type="float" Nullable="false" />
+          <Property Name="BookingFees" Type="float" Nullable="false" />
+          <Property Name="BookingStatusFk" Type="tinyint" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" />
+          <Property Name="PaidDate" Type="datetime" />
+          <Property Name="DoctorFk" Type="int" Nullable="false" />
+          <Property Name="PatientFk" Type="int" Nullable="false" />
+          <Property Name="ScheduleTimingFk" Type="int" />
+        </EntityType>
+        <EntityType Name="BookingStatuses">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="tinyint" Nullable="false" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryFk" Type="int" Nullable="false" />
+          <Property Name="CityIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryShortName" Type="nvarchar" MaxLength="10" />
+          <Property Name="CountryCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CountryIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Diseases">
+          <Key>
+            <PropertyRef Name="DiseaseId" />
+          </Key>
+          <Property Name="DiseaseId" Type="int" Nullable="false" />
+          <Property Name="DiseaseName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DiseaseIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="DoctorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorPhone" Type="nvarchar" MaxLength="15" />
+          <Property Name="DoctorEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoctorDateOfBirth" Type="datetime" />
+          <Property Name="DoctorDegree" Type="nvarchar" MaxLength="500" />
+          <Property Name="DoctorCollege" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoctorAwards" Type="nvarchar(max)" />
+          <Property Name="DoctorProfileImage" Type="nvarchar(max)" />
+          <Property Name="DoctorMemberSince" Type="datetime" />
+          <Property Name="DoctorGender" Type="tinyint" Nullable="false" />
+          <Property Name="NationalID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DoctorAbout" Type="nvarchar(max)" />
+          <Property Name="InsideServicePrice" Type="float" />
+          <Property Name="OutsideServicePrice" Type="float" />
+          <Property Name="SpecialityFk" Type="int" Nullable="false" />
+          <Property Name="CountryFk" Type="int" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="DoctorIsActive" Type="bit" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="EmployeePhone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="EmployeeEmail" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeGender" Type="tinyint" Nullable="false" />
+          <Property Name="EmployeeDateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="EmployeeProfileImage" Type="nvarchar(max)" />
+          <Property Name="EmployeeAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="EmployeeIsActive" Type="bit" Nullable="false" />
+          <Property Name="NationalID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Medications">
+          <Key>
+            <PropertyRef Name="MedicationId" />
+          </Key>
+          <Property Name="MedicationId" Type="int" Nullable="false" />
+          <Property Name="MedicationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MedicationAbout" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MedicationImagePath" Type="nvarchar(max)" />
+          <Property Name="MedicationIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PatientPhone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="PatientEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientDateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="PatientAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientGender" Type="tinyint" Nullable="false" />
+          <Property Name="NationalID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientWeight" Type="float" />
+          <Property Name="PatientsHeight" Type="float" />
+          <Property Name="PatientProfileImage" Type="nvarchar(max)" />
+          <Property Name="BlodGroupFk" Type="tinyint" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Prescriptions">
+          <Key>
+            <PropertyRef Name="PrescriptionId" />
+          </Key>
+          <Property Name="PrescriptionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrescriptionDate" Type="datetime" Nullable="false" />
+          <Property Name="PrescriptionNotes" Type="nvarchar(max)" />
+          <Property Name="DoctorReport" Type="nvarchar(max)" />
+          <Property Name="DiseaseFk" Type="int" Nullable="false" />
+          <Property Name="BookingFk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduleTimings">
+          <Key>
+            <PropertyRef Name="DrTimingId" />
+          </Key>
+          <Property Name="DrTimingId" Type="int" Nullable="false" />
+          <Property Name="DrTimingSlotFrom" Type="time" Precision="7" Nullable="false" />
+          <Property Name="DrTimingSlotTo" Type="time" Precision="7" Nullable="false" />
+          <Property Name="WeekDayFk" Type="tinyint" Nullable="false" />
+          <Property Name="DoctorFk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specialities">
+          <Key>
+            <PropertyRef Name="SpecialityId" />
+          </Key>
+          <Property Name="SpecialityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecialityName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SpecialityDescription" Type="nvarchar(max)" />
+          <Property Name="SpecialityImagePath" Type="nvarchar(max)" />
+          <Property Name="SpecialityIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="WeekDays">
+          <Key>
+            <PropertyRef Name="WeekDayId" />
+          </Key>
+          <Property Name="WeekDayId" Type="tinyint" Nullable="false" />
+          <Property Name="WeekDayName" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Areas_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Areas" Type="Self.Areas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Areas">
+              <PropertyRef Name="CityFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_BookingStatuses">
+          <End Role="BookingStatuses" Type="Self.BookingStatuses" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingStatuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="BookingStatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="DoctorFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="PatientFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_ScheduleTimings">
+          <End Role="ScheduleTimings" Type="Self.ScheduleTimings" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleTimings">
+              <PropertyRef Name="DrTimingId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="ScheduleTimingFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cities_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountryFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="CountryFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Specialities">
+          <End Role="Specialities" Type="Self.Specialities" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialities">
+              <PropertyRef Name="SpecialityId" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="SpecialityFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_BlodGroups">
+          <End Role="BlodGroups" Type="Self.BlodGroups" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlodGroups">
+              <PropertyRef Name="BlodGroupId" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="BlodGroupFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_Bookings">
+          <End Role="Bookings" Type="Self.Bookings" Multiplicity="1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="BookingFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_Diseases">
+          <End Role="Diseases" Type="Self.Diseases" Multiplicity="1" />
+          <End Role="Prescriptions" Type="Self.Prescriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diseases">
+              <PropertyRef Name="DiseaseId" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="DiseaseFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleTimings_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="ScheduleTimings" Type="Self.ScheduleTimings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="ScheduleTimings">
+              <PropertyRef Name="DoctorFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleTimings_WeekDays">
+          <End Role="WeekDays" Type="Self.WeekDays" Multiplicity="1" />
+          <End Role="ScheduleTimings" Type="Self.ScheduleTimings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDays">
+              <PropertyRef Name="WeekDayId" />
+            </Principal>
+            <Dependent Role="ScheduleTimings">
+              <PropertyRef Name="WeekDayFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OutpatientClinic_DBModelStoreContainer">
+          <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlodGroups" EntityType="Self.BlodGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingStatuses" EntityType="Self.BookingStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diseases" EntityType="Self.Diseases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medications" EntityType="Self.Medications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleTimings" EntityType="Self.ScheduleTimings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialities" EntityType="Self.Specialities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeekDays" EntityType="Self.WeekDays" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Areas_Cities" Association="Self.FK_Areas_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Areas" EntitySet="Areas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_BookingStatuses" Association="Self.FK_Bookings_BookingStatuses">
+            <End Role="BookingStatuses" EntitySet="BookingStatuses" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_Doctors" Association="Self.FK_Bookings_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_Patients" Association="Self.FK_Bookings_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_ScheduleTimings" Association="Self.FK_Bookings_ScheduleTimings">
+            <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cities_Countries" Association="Self.FK_Cities_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Countries" Association="Self.FK_Doctors_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Specialities" Association="Self.FK_Doctors_Specialities">
+            <End Role="Specialities" EntitySet="Specialities" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_BlodGroups" Association="Self.FK_Patients_BlodGroups">
+            <End Role="BlodGroups" EntitySet="BlodGroups" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_Bookings" Association="Self.FK_Prescriptions_Bookings">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_Diseases" Association="Self.FK_Prescriptions_Diseases">
+            <End Role="Diseases" EntitySet="Diseases" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleTimings_Doctors" Association="Self.FK_ScheduleTimings_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleTimings_WeekDays" Association="Self.FK_ScheduleTimings_WeekDays">
+            <End Role="WeekDays" EntitySet="WeekDays" />
+            <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OutpatientClinic_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityFk" Type="Int32" Nullable="false" />
+          <Property Name="AreaIsActive" Type="Boolean" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Areas_Cities" FromRole="Areas" ToRole="Cities" />
+        </EntityType>
+        <EntityType Name="BlodGroup">
+          <Key>
+            <PropertyRef Name="BlodGroupId" />
+          </Key>
+          <Property Name="BlodGroupId" Type="Byte" Nullable="false" />
+          <Property Name="BlodGroupName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BlodGroupIsActive" Type="Boolean" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patients_BlodGroups" FromRole="BlodGroups" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingId" />
+          </Key>
+          <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingNo" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BookingAmount" Type="Double" Nullable="false" />
+          <Property Name="BookingFees" Type="Double" Nullable="false" />
+          <Property Name="BookingStatusFk" Type="Byte" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPaid" Type="Boolean" />
+          <Property Name="PaidDate" Type="DateTime" Precision="3" />
+          <Property Name="DoctorFk" Type="Int32" Nullable="false" />
+          <Property Name="PatientFk" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleTimingFk" Type="Int32" />
+          <NavigationProperty Name="BookingStatus" Relationship="Self.FK_Bookings_BookingStatuses" FromRole="Bookings" ToRole="BookingStatuses" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Bookings_Doctors" FromRole="Bookings" ToRole="Doctors" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK_Bookings_Patients" FromRole="Bookings" ToRole="Patients" />
+          <NavigationProperty Name="ScheduleTiming" Relationship="Self.FK_Bookings_ScheduleTimings" FromRole="Bookings" ToRole="ScheduleTimings" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Bookings" FromRole="Bookings" ToRole="Prescriptions" />
+        </EntityType>
+        <EntityType Name="BookingStatus">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Byte" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_BookingStatuses" FromRole="BookingStatuses" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryFk" Type="Int32" Nullable="false" />
+          <Property Name="CityIsActive" Type="Boolean" />
+          <NavigationProperty Name="Areas" Relationship="Self.FK_Areas_Cities" FromRole="Cities" ToRole="Areas" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Cities_Countries" FromRole="Cities" ToRole="Countries" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CountryIsActive" Type="Boolean" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_Countries" FromRole="Countries" ToRole="Cities" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_Countries" FromRole="Countries" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="Disease">
+          <Key>
+            <PropertyRef Name="DiseaseId" />
+          </Key>
+          <Property Name="DiseaseId" Type="Int32" Nullable="false" />
+          <Property Name="DiseaseName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiseaseIsActive" Type="Boolean" />
+          <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Diseases" FromRole="Diseases" ToRole="Prescriptions" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorDateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="DoctorDegree" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorCollege" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorAwards" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorMemberSince" Type="DateTime" Precision="3" />
+          <Property Name="DoctorGender" Type="Byte" Nullable="false" />
+          <Property Name="NationalID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorAbout" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsideServicePrice" Type="Double" />
+          <Property Name="OutsideServicePrice" Type="Double" />
+          <Property Name="SpecialityFk" Type="Int32" Nullable="false" />
+          <Property Name="CountryFk" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="DoctorIsActive" Type="Boolean" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_Doctors" FromRole="Doctors" ToRole="Bookings" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Doctors_Countries" FromRole="Doctors" ToRole="Countries" />
+          <NavigationProperty Name="Speciality" Relationship="Self.FK_Doctors_Specialities" FromRole="Doctors" ToRole="Specialities" />
+          <NavigationProperty Name="ScheduleTimings" Relationship="Self.FK_ScheduleTimings_Doctors" FromRole="Doctors" ToRole="ScheduleTimings" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeePhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeGender" Type="Byte" Nullable="false" />
+          <Property Name="EmployeeDateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmployeeProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeIsActive" Type="Boolean" Nullable="false" />
+          <Property Name="NationalID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Medication">
+          <Key>
+            <PropertyRef Name="MedicationId" />
+          </Key>
+          <Property Name="MedicationId" Type="Int32" Nullable="false" />
+          <Property Name="MedicationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MedicationAbout" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MedicationImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MedicationIsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientDateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PatientAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientGender" Type="Byte" Nullable="false" />
+          <Property Name="NationalID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientWeight" Type="Double" />
+          <Property Name="PatientsHeight" Type="Double" />
+          <Property Name="PatientProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlodGroupFk" Type="Byte" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BlodGroup" Relationship="Self.FK_Patients_BlodGroups" FromRole="Patients" ToRole="BlodGroups" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_Patients" FromRole="Patients" ToRole="Bookings" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="PrescriptionId" />
+          </Key>
+          <Property Name="PrescriptionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrescriptionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PrescriptionNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorReport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiseaseFk" Type="Int32" Nullable="false" />
+          <Property Name="BookingFk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_Prescriptions_Bookings" FromRole="Prescriptions" ToRole="Bookings" />
+          <NavigationProperty Name="Disease" Relationship="Self.FK_Prescriptions_Diseases" FromRole="Prescriptions" ToRole="Diseases" />
+        </EntityType>
+        <EntityType Name="ScheduleTiming">
+          <Key>
+            <PropertyRef Name="DrTimingId" />
+          </Key>
+          <Property Name="DrTimingId" Type="Int32" Nullable="false" />
+          <Property Name="DrTimingSlotFrom" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="DrTimingSlotTo" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="WeekDayFk" Type="Byte" Nullable="false" />
+          <Property Name="DoctorFk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_ScheduleTimings" FromRole="ScheduleTimings" ToRole="Bookings" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_ScheduleTimings_Doctors" FromRole="ScheduleTimings" ToRole="Doctors" />
+          <NavigationProperty Name="WeekDay" Relationship="Self.FK_ScheduleTimings_WeekDays" FromRole="ScheduleTimings" ToRole="WeekDays" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="SpecialityId" />
+          </Key>
+          <Property Name="SpecialityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecialityName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpecialityDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialityImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialityIsActive" Type="Boolean" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Doctors_Specialities" FromRole="Specialities" ToRole="Doctors" />
+        </EntityType>
+        <EntityType Name="WeekDay">
+          <Key>
+            <PropertyRef Name="WeekDayId" />
+          </Key>
+          <Property Name="WeekDayId" Type="Byte" Nullable="false" />
+          <Property Name="WeekDayName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ScheduleTimings" Relationship="Self.FK_ScheduleTimings_WeekDays" FromRole="WeekDays" ToRole="ScheduleTimings" />
+        </EntityType>
+        <Association Name="FK_Areas_Cities">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="Areas" Type="Self.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Areas">
+              <PropertyRef Name="CityFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_BlodGroups">
+          <End Role="BlodGroups" Type="Self.BlodGroup" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlodGroups">
+              <PropertyRef Name="BlodGroupId" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="BlodGroupFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_BookingStatuses">
+          <End Role="BookingStatuses" Type="Self.BookingStatus" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookingStatuses">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="BookingStatusFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_Doctors">
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="DoctorFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_Patients">
+          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="PatientFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bookings_ScheduleTimings">
+          <End Role="ScheduleTimings" Type="Self.ScheduleTiming" Multiplicity="0..1" />
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleTimings">
+              <PropertyRef Name="DrTimingId" />
+            </Principal>
+            <Dependent Role="Bookings">
+              <PropertyRef Name="ScheduleTimingFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_Bookings">
+          <End Role="Bookings" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Prescriptions" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bookings">
+              <PropertyRef Name="BookingId" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="BookingFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cities_Countries">
+          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+          <End Role="Cities" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountryFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Countries">
+          <End Role="Countries" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="CountryFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prescriptions_Diseases">
+          <End Role="Diseases" Type="Self.Disease" Multiplicity="1" />
+          <End Role="Prescriptions" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diseases">
+              <PropertyRef Name="DiseaseId" />
+            </Principal>
+            <Dependent Role="Prescriptions">
+              <PropertyRef Name="DiseaseFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Specialities">
+          <End Role="Specialities" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialities">
+              <PropertyRef Name="SpecialityId" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="SpecialityFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleTimings_Doctors">
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="ScheduleTimings" Type="Self.ScheduleTiming" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="ScheduleTimings">
+              <PropertyRef Name="DoctorFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScheduleTimings_WeekDays">
+          <End Role="WeekDays" Type="Self.WeekDay" Multiplicity="1" />
+          <End Role="ScheduleTimings" Type="Self.ScheduleTiming" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeekDays">
+              <PropertyRef Name="WeekDayId" />
+            </Principal>
+            <Dependent Role="ScheduleTimings">
+              <PropertyRef Name="WeekDayFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OutpatientClinic_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="BlodGroups" EntityType="Self.BlodGroup" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="BookingStatuses" EntityType="Self.BookingStatus" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Diseases" EntityType="Self.Disease" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Medications" EntityType="Self.Medication" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Prescriptions" EntityType="Self.Prescription" />
+          <EntitySet Name="ScheduleTimings" EntityType="Self.ScheduleTiming" />
+          <EntitySet Name="Specialities" EntityType="Self.Speciality" />
+          <EntitySet Name="WeekDays" EntityType="Self.WeekDay" />
+          <AssociationSet Name="FK_Areas_Cities" Association="Self.FK_Areas_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Areas" EntitySet="Areas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_BlodGroups" Association="Self.FK_Patients_BlodGroups">
+            <End Role="BlodGroups" EntitySet="BlodGroups" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_BookingStatuses" Association="Self.FK_Bookings_BookingStatuses">
+            <End Role="BookingStatuses" EntitySet="BookingStatuses" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_Doctors" Association="Self.FK_Bookings_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_Patients" Association="Self.FK_Bookings_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bookings_ScheduleTimings" Association="Self.FK_Bookings_ScheduleTimings">
+            <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
+            <End Role="Bookings" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_Bookings" Association="Self.FK_Prescriptions_Bookings">
+            <End Role="Bookings" EntitySet="Bookings" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cities_Countries" Association="Self.FK_Cities_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Countries" Association="Self.FK_Doctors_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prescriptions_Diseases" Association="Self.FK_Prescriptions_Diseases">
+            <End Role="Diseases" EntitySet="Diseases" />
+            <End Role="Prescriptions" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Specialities" Association="Self.FK_Doctors_Specialities">
+            <End Role="Specialities" EntitySet="Specialities" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleTimings_Doctors" Association="Self.FK_ScheduleTimings_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScheduleTimings_WeekDays" Association="Self.FK_ScheduleTimings_WeekDays">
+            <End Role="WeekDays" EntitySet="WeekDays" />
+            <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OutpatientClinic_DBModelStoreContainer" CdmEntityContainer="OutpatientClinic_DBEntities">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Area">
+              <MappingFragment StoreEntitySet="Areas">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="CityFk" ColumnName="CityFk" />
+                <ScalarProperty Name="AreaIsActive" ColumnName="AreaIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlodGroups">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.BlodGroup">
+              <MappingFragment StoreEntitySet="BlodGroups">
+                <ScalarProperty Name="BlodGroupId" ColumnName="BlodGroupId" />
+                <ScalarProperty Name="BlodGroupName" ColumnName="BlodGroupName" />
+                <ScalarProperty Name="BlodGroupIsActive" ColumnName="BlodGroupIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Booking">
+              <MappingFragment StoreEntitySet="Bookings">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="BookingAmount" ColumnName="BookingAmount" />
+                <ScalarProperty Name="BookingFees" ColumnName="BookingFees" />
+                <ScalarProperty Name="BookingStatusFk" ColumnName="BookingStatusFk" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="DoctorFk" ColumnName="DoctorFk" />
+                <ScalarProperty Name="PatientFk" ColumnName="PatientFk" />
+                <ScalarProperty Name="ScheduleTimingFk" ColumnName="ScheduleTimingFk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingStatuses">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.BookingStatus">
+              <MappingFragment StoreEntitySet="BookingStatuses">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CountryFk" ColumnName="CountryFk" />
+                <ScalarProperty Name="CityIsActive" ColumnName="CityIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryIsActive" ColumnName="CountryIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diseases">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Disease">
+              <MappingFragment StoreEntitySet="Diseases">
+                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+                <ScalarProperty Name="DiseaseName" ColumnName="DiseaseName" />
+                <ScalarProperty Name="DiseaseIsActive" ColumnName="DiseaseIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorPhone" ColumnName="DoctorPhone" />
+                <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+                <ScalarProperty Name="DoctorDateOfBirth" ColumnName="DoctorDateOfBirth" />
+                <ScalarProperty Name="DoctorDegree" ColumnName="DoctorDegree" />
+                <ScalarProperty Name="DoctorCollege" ColumnName="DoctorCollege" />
+                <ScalarProperty Name="DoctorAwards" ColumnName="DoctorAwards" />
+                <ScalarProperty Name="DoctorProfileImage" ColumnName="DoctorProfileImage" />
+                <ScalarProperty Name="DoctorMemberSince" ColumnName="DoctorMemberSince" />
+                <ScalarProperty Name="DoctorGender" ColumnName="DoctorGender" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="DoctorAbout" ColumnName="DoctorAbout" />
+                <ScalarProperty Name="InsideServicePrice" ColumnName="InsideServicePrice" />
+                <ScalarProperty Name="OutsideServicePrice" ColumnName="OutsideServicePrice" />
+                <ScalarProperty Name="SpecialityFk" ColumnName="SpecialityFk" />
+                <ScalarProperty Name="CountryFk" ColumnName="CountryFk" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="DoctorIsActive" ColumnName="DoctorIsActive" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeePhone" ColumnName="EmployeePhone" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+                <ScalarProperty Name="EmployeeGender" ColumnName="EmployeeGender" />
+                <ScalarProperty Name="EmployeeDateOfBirth" ColumnName="EmployeeDateOfBirth" />
+                <ScalarProperty Name="EmployeeProfileImage" ColumnName="EmployeeProfileImage" />
+                <ScalarProperty Name="EmployeeAddress" ColumnName="EmployeeAddress" />
+                <ScalarProperty Name="EmployeeIsActive" ColumnName="EmployeeIsActive" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medications">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Medication">
+              <MappingFragment StoreEntitySet="Medications">
+                <ScalarProperty Name="MedicationId" ColumnName="MedicationId" />
+                <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+                <ScalarProperty Name="MedicationAbout" ColumnName="MedicationAbout" />
+                <ScalarProperty Name="MedicationImagePath" ColumnName="MedicationImagePath" />
+                <ScalarProperty Name="MedicationIsActive" ColumnName="MedicationIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Patient">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
+                <ScalarProperty Name="PatientDateOfBirth" ColumnName="PatientDateOfBirth" />
+                <ScalarProperty Name="PatientAddress" ColumnName="PatientAddress" />
+                <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="PatientWeight" ColumnName="PatientWeight" />
+                <ScalarProperty Name="PatientsHeight" ColumnName="PatientsHeight" />
+                <ScalarProperty Name="PatientProfileImage" ColumnName="PatientProfileImage" />
+                <ScalarProperty Name="BlodGroupFk" ColumnName="BlodGroupFk" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescriptions">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Prescription">
+              <MappingFragment StoreEntitySet="Prescriptions">
+                <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
+                <ScalarProperty Name="PrescriptionDate" ColumnName="PrescriptionDate" />
+                <ScalarProperty Name="PrescriptionNotes" ColumnName="PrescriptionNotes" />
+                <ScalarProperty Name="DoctorReport" ColumnName="DoctorReport" />
+                <ScalarProperty Name="DiseaseFk" ColumnName="DiseaseFk" />
+                <ScalarProperty Name="BookingFk" ColumnName="BookingFk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleTimings">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.ScheduleTiming">
+              <MappingFragment StoreEntitySet="ScheduleTimings">
+                <ScalarProperty Name="DrTimingId" ColumnName="DrTimingId" />
+                <ScalarProperty Name="DrTimingSlotFrom" ColumnName="DrTimingSlotFrom" />
+                <ScalarProperty Name="DrTimingSlotTo" ColumnName="DrTimingSlotTo" />
+                <ScalarProperty Name="WeekDayFk" ColumnName="WeekDayFk" />
+                <ScalarProperty Name="DoctorFk" ColumnName="DoctorFk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specialities">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Speciality">
+              <MappingFragment StoreEntitySet="Specialities">
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+                <ScalarProperty Name="SpecialityDescription" ColumnName="SpecialityDescription" />
+                <ScalarProperty Name="SpecialityImagePath" ColumnName="SpecialityImagePath" />
+                <ScalarProperty Name="SpecialityIsActive" ColumnName="SpecialityIsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeekDays">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.WeekDay">
+              <MappingFragment StoreEntitySet="WeekDays">
+                <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
+                <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

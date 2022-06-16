@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="29118c4e5a124a899d0e90fb25ad3a23" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Area" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.BlodGroup" Width="1.5" PointX="0.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Booking" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.BookingStatus" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.City" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Country" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Disease" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Doctor" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Employee" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Medication" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Patient" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Prescription" Width="1.5" PointX="10.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.ScheduleTiming" Width="1.5" PointX="8.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.Speciality" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.WeekDay" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Areas_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Patients_BlodGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Bookings_BookingStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Bookings_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Bookings_Patients" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Bookings_ScheduleTimings" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Prescriptions_Bookings" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Cities_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Doctors_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Prescriptions_Diseases" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Doctors_Specialities" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_ScheduleTimings_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_ScheduleTimings_WeekDays" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
