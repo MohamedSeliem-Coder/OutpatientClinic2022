@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace Clinic.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : DefaultController
     {
         
         public ActionResult Index()
         {
-            ViewBag.Name = "Seliem";
+
             return View();
         }
 

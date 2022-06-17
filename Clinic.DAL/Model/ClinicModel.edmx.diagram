@@ -33,6 +33,10 @@
         <AssociationConnector Association="OutpatientClinic_DBModel.FK_Doctors_Specialities" ManuallyRouted="false" />
         <AssociationConnector Association="OutpatientClinic_DBModel.FK_ScheduleTimings_Doctors" ManuallyRouted="false" />
         <AssociationConnector Association="OutpatientClinic_DBModel.FK_ScheduleTimings_WeekDays" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OutpatientClinic_DBModel.AspNetUser" Width="1.5" PointX="0.75" PointY="7.25" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Doctors_AspNetUsers" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Employees_AspNetUsers" />
+        <AssociationConnector Association="OutpatientClinic_DBModel.FK_Patients_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

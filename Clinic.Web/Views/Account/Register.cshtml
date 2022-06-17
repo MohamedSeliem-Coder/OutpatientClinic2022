@@ -3,38 +3,239 @@
     ViewBag.Title = "Register";
 }
 
-<h2>@ViewBag.Title.</h2>
+<style>
+    input.input-validation-error,
+    textarea.input-validation-error,
+    select.input-validation-error {
+        background: #FEF1EC;
+        border: 1px solid #CD0A0A !important;
+    }
+</style>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+@*<h2>@ViewBag.Title.</h2>
+
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }*@
+
+
+<!-- Page Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col-md-12">
+
+                <!-- Register Content -->
+                <div class="account-content">
+                    <div class="row  justify-content-center">
+                        <div class="col-md-5  login-left">
+                            <img src="~/assets/img/login-banner.png" class="img-fluid" alt="Doccure Register">
+                        </div>
+                        <div class="col-md-7 login-right">
+                            <div class="login-header">
+                                <h3>Patient Register</h3>
+                            </div>
+                            <form>
+
+                                @Html.AntiForgeryToken()
+
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                                <div class="row form-row">
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <div class="change-avatar">
+                                                <div class="profile-img">
+                                                    <img src="~/assets/img/patients/patient.jpg" alt="User Image">
+                                                </div>
+                                                <div class="upload-img">
+                                                    <div class="change-photo-btn">
+                                                        <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                                        <input type="file" class="upload">
+                                                    </div>
+                                                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Full Name</label>
+                                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @placeholder = "full name", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.FullName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>National ID</label>
+                                            @Html.TextBoxFor(m => m.NationalID, new { @class = "form-control", @placeholder = "28073111231233", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.NationalID, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "username", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "example@example.com", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Password)
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "......", autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.ConfirmPassword)
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "......", autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.ConfirmPassword, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Mobile</label>
+                                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @placeholder = "+2 102-555-0125", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.Mobile, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <div class="cal-icon">
+                                                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control datetimepicker", @value = "24-07-1983" })
+                                                @Html.ValidationMessageFor(e => e.DateOfBirth, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <select class="form-select form-control">
+                                                <option value="1">Male</option>
+                                                <option value="2">Female</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(e => e.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Blood Group</label>
+                                            <select class="form-select form-control">
+                                                <option>A-</option>
+                                                <option>A+</option>
+                                                <option>B-</option>
+                                                <option>B+</option>
+                                                <option>AB-</option>
+                                                <option>AB+</option>
+                                                <option>O-</option>
+                                                <option>O+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Your Weight </label>
+                                            <input type="text" value="" class="form-control" placeholder="75" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label>Your Height </label>
+                                            <input type="text" value="" class="form-control" placeholder="170" autocomplete="off">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "806 Twin Willow Lane", @autocomplete = "off" })
+                                            @Html.ValidationMessageFor(e => e.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text-end">
+                                    <a class="forgot-link" href="/Account/Login">Already have an account?</a>
+                                </div>
+                                <div class="submit-section">
+                                    <button type="submit" class="btn btn-primary submit-btn">Signup</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /Register Content -->
+
+            </div>
+
+
+            <div class="col-md-8 col-xl-8">
+                
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+
+</div>
+<!-- /Page Content -->
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

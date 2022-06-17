@@ -32,6 +32,7 @@ namespace Clinic.DAL.Model
         public int DoctorFk { get; set; }
         public int PatientFk { get; set; }
         public Nullable<int> ScheduleTimingFk { get; set; }
+        public Nullable<bool> IsOutService { get; set; }
     
         public virtual BookingStatus BookingStatus { get; set; }
         public virtual Doctor Doctor { get; set; }

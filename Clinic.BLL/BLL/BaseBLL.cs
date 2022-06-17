@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clinic.DAL.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Clinic.BLL.BLL
 {
     public class BaseBLL
     {
-        
+        public OutpatientClinic_DBEntities db = new OutpatientClinic_DBEntities();
     }
 }

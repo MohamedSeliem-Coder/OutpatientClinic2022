@@ -13,7 +13,7 @@ using Clinic.Web.Models;
 namespace Clinic.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : DefaultController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -73,13 +73,108 @@ namespace Clinic.Web.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var userobj = _comonBLL.Get_AspNetUsers_List()
+                .Where(a => a.UserName == model.Email || a.PhoneNumber == model.Email).FirstOrDefault();
+
+            if (userobj != null && userobj.Email != null)
+            {
+                model.Email = userobj.UserName;
+            }
+            else
+            {
+                userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.PhoneNumber == model.Email).FirstOrDefault();
+                if (userobj != null && userobj.Email != null)
+                {
+                    model.Email = userobj.UserName;
+                }
+                else
+                {
+                    var patient = _patientBLL.Get_Patient_List(null, model.Email, null, null, null).FirstOrDefault();
+                    if(patient !=null && !string.IsNullOrEmpty(patient.Patient_UserId))
+                    {
+                        userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == patient.Patient_UserId).FirstOrDefault();
+                        if (userobj != null && userobj.Email != null)
+                        {
+                            model.Email = userobj.UserName;
+                        }
+                    }
+                    else
+                    {
+                        var doctor = _doctorBLL.Get_Doctor_List(null, model.Email, null, null, null).FirstOrDefault();
+                        if (doctor != null && !string.IsNullOrEmpty(doctor.Doctor_UserId))
+                        {
+                            userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == doctor.Doctor_UserId).FirstOrDefault();
+                            if (userobj != null && userobj.Email != null)
+                            {
+                                model.Email = userobj.UserName;
+                            }
+                        }
+                        else
+                        {
+                            var employee = _adminBLL.Get_Employee_List(null, model.Email, null, null, null).FirstOrDefault();
+                            if(employee !=null && !string.IsNullOrEmpty(employee.Admin_UserId))
+                            {
+                                userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == employee.Admin_UserId).FirstOrDefault();
+                                if (userobj != null && userobj.Email != null)
+                                {
+                                    model.Email = userobj.UserName;
+                                }
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("", "Invalid Username .");
+                                return View(model);
+                            }
+                        }
+                    }
+                }
+
+            }
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+
+                    try
+                    {
+                        var user = await UserManager.FindAsync(model.Email, model.Password);
+
+                        var roles = UserManager.GetRoles(user.Id);
+                        if (roles.Count > 0)
+                        {
+                            string roleName = roles[0].ToString();
+
+                            if (roleName == "Patient")
+                            {
+                                return RedirectToLocal(Url.Action("Dashboard", "Patient"));
+                            }
+
+                            else if (roleName == "Doctor")
+                            {
+                                return RedirectToLocal(Url.Action("Dashboard", "Doctor"));
+                            }
+
+                            else if (roleName == "Employee")
+                            {
+                                return RedirectToLocal(Url.Action("Dashboard", "Admin"));
+                            }
+                            else
+                            {
+                                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                                return RedirectToLocal(returnUrl);
+                            }
+                        }
+                        else
+                        {
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            return RedirectToLocal(returnUrl);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -89,6 +184,7 @@ namespace Clinic.Web.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+
         }
 
         //
@@ -480,6 +576,20 @@ namespace Clinic.Web.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+        bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         #endregion
     }
 }

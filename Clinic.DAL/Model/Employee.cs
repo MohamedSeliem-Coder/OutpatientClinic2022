@@ -25,5 +25,7 @@ namespace Clinic.DAL.Model
         public bool EmployeeIsActive { get; set; }
         public string NationalID { get; set; }
         public string UserId { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

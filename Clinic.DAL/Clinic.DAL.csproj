@@ -53,6 +53,9 @@
     <Compile Include="Model\Area.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\AspNetUser.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\BlodGroup.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>

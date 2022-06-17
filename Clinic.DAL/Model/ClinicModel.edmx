@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OutpatientClinic_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OutpatientClinic_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Areas">
           <Key>
             <PropertyRef Name="AreaId" />
@@ -13,6 +13,23 @@
           <Property Name="AreaName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CityFk" Type="int" Nullable="false" />
           <Property Name="AreaIsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="BlodGroups">
           <Key>
@@ -38,6 +55,7 @@
           <Property Name="DoctorFk" Type="int" Nullable="false" />
           <Property Name="PatientFk" Type="int" Nullable="false" />
           <Property Name="ScheduleTimingFk" Type="int" />
+          <Property Name="IsOutService" Type="bit" />
         </EntityType>
         <EntityType Name="BookingStatuses">
           <Key>
@@ -253,6 +271,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Doctors_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctors">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Doctors_Countries">
           <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
           <End Role="Doctors" Type="Self.Doctors" Multiplicity="*" />
@@ -274,6 +304,30 @@
             </Principal>
             <Dependent Role="Doctors">
               <PropertyRef Name="SpecialityFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -339,6 +393,7 @@
         </Association>
         <EntityContainer Name="OutpatientClinic_DBModelStoreContainer">
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BlodGroups" EntityType="Self.BlodGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bookings" EntityType="Self.Bookings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BookingStatuses" EntityType="Self.BookingStatuses" Schema="dbo" store:Type="Tables" />
@@ -377,6 +432,10 @@
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Cities" EntitySet="Cities" />
           </AssociationSet>
+          <AssociationSet Name="FK_Doctors_AspNetUsers" Association="Self.FK_Doctors_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
           <AssociationSet Name="FK_Doctors_Countries" Association="Self.FK_Doctors_Countries">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Doctors" EntitySet="Doctors" />
@@ -384,6 +443,14 @@
           <AssociationSet Name="FK_Doctors_Specialities" Association="Self.FK_Doctors_Specialities">
             <End Role="Specialities" EntitySet="Specialities" />
             <End Role="Doctors" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_AspNetUsers" Association="Self.FK_Employees_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_AspNetUsers" Association="Self.FK_Patients_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Patients" EntitySet="Patients" />
           </AssociationSet>
           <AssociationSet Name="FK_Patients_BlodGroups" Association="Self.FK_Patients_BlodGroups">
             <End Role="BlodGroups" EntitySet="BlodGroups" />
@@ -406,8 +473,7 @@
             <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OutpatientClinic_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -451,6 +517,7 @@
           <NavigationProperty Name="Patient" Relationship="Self.FK_Bookings_Patients" FromRole="Bookings" ToRole="Patients" />
           <NavigationProperty Name="ScheduleTiming" Relationship="Self.FK_Bookings_ScheduleTimings" FromRole="Bookings" ToRole="ScheduleTimings" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescriptions_Bookings" FromRole="Bookings" ToRole="Prescriptions" />
+          <Property Name="IsOutService" Type="Boolean" />
         </EntityType>
         <EntityType Name="BookingStatus">
           <Key>
@@ -520,6 +587,7 @@
           <NavigationProperty Name="Country" Relationship="Self.FK_Doctors_Countries" FromRole="Doctors" ToRole="Countries" />
           <NavigationProperty Name="Speciality" Relationship="Self.FK_Doctors_Specialities" FromRole="Doctors" ToRole="Specialities" />
           <NavigationProperty Name="ScheduleTimings" Relationship="Self.FK_ScheduleTimings_Doctors" FromRole="Doctors" ToRole="ScheduleTimings" />
+          <NavigationProperty Name="AspNetUser" Relationship="OutpatientClinic_DBModel.FK_Doctors_AspNetUsers" FromRole="Doctor" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -536,6 +604,7 @@
           <Property Name="EmployeeIsActive" Type="Boolean" Nullable="false" />
           <Property Name="NationalID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="OutpatientClinic_DBModel.FK_Employees_AspNetUsers" FromRole="Employee" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Medication">
           <Key>
@@ -567,6 +636,7 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BlodGroup" Relationship="Self.FK_Patients_BlodGroups" FromRole="Patients" ToRole="BlodGroups" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_Patients" FromRole="Patients" ToRole="Bookings" />
+          <NavigationProperty Name="AspNetUser" Relationship="OutpatientClinic_DBModel.FK_Patients_AspNetUsers" FromRole="Patient" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Prescription">
           <Key>
@@ -837,7 +907,76 @@
             <End Role="WeekDays" EntitySet="WeekDays" />
             <End Role="ScheduleTimings" EntitySet="ScheduleTimings" />
           </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="OutpatientClinic_DBModel.AspNetUser" />
+          <AssociationSet Name="FK_Doctors_AspNetUsers" Association="OutpatientClinic_DBModel.FK_Doctors_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Doctor" EntitySet="Doctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_AspNetUsers" Association="OutpatientClinic_DBModel.FK_Employees_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_AspNetUsers" Association="OutpatientClinic_DBModel.FK_Patients_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Doctors" Relationship="OutpatientClinic_DBModel.FK_Doctors_AspNetUsers" FromRole="AspNetUser" ToRole="Doctor" />
+          <NavigationProperty Name="Employees" Relationship="OutpatientClinic_DBModel.FK_Employees_AspNetUsers" FromRole="AspNetUser" ToRole="Employee" />
+          <NavigationProperty Name="Patients" Relationship="OutpatientClinic_DBModel.FK_Patients_AspNetUsers" FromRole="AspNetUser" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_Doctors_AspNetUsers">
+          <End Type="OutpatientClinic_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="OutpatientClinic_DBModel.Doctor" Role="Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Doctor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_AspNetUsers">
+          <End Type="OutpatientClinic_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="OutpatientClinic_DBModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_AspNetUsers">
+          <End Type="OutpatientClinic_DBModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="OutpatientClinic_DBModel.Patient" Role="Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -866,6 +1005,7 @@
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="OutpatientClinic_DBModel.Booking">
               <MappingFragment StoreEntitySet="Bookings">
+                <ScalarProperty Name="IsOutService" ColumnName="IsOutService" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
                 <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
@@ -1032,6 +1172,24 @@
               <MappingFragment StoreEntitySet="WeekDays">
                 <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
                 <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="OutpatientClinic_DBModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

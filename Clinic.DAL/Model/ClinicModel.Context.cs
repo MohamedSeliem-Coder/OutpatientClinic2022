@@ -40,5 +40,6 @@ namespace Clinic.DAL.Model
         public virtual DbSet<ScheduleTiming> ScheduleTimings { get; set; }
         public virtual DbSet<Speciality> Specialities { get; set; }
         public virtual DbSet<WeekDay> WeekDays { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }
