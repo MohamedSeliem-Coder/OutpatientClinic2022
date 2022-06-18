@@ -110,6 +110,12 @@
     <Compile Include="Model\Speciality.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SP_BlodGroups_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Patient_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\WeekDay.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>

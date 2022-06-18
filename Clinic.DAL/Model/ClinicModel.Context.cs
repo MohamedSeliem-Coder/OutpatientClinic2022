@@ -12,6 +12,8 @@ namespace Clinic.DAL.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class OutpatientClinic_DBEntities : DbContext
     {
@@ -41,5 +43,117 @@ namespace Clinic.DAL.Model
         public virtual DbSet<Speciality> Specialities { get; set; }
         public virtual DbSet<WeekDay> WeekDays { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Patient_Save(Nullable<int> patientId, string patientName, string patientPhone, string patientEmail, Nullable<System.DateTime> patientDateOfBirth, string patientAddress, Nullable<byte> patientGender, string nationalID, Nullable<double> patientWeight, Nullable<double> patientsHeight, string patientProfileImage, Nullable<byte> blodGroupFk, string userId, string userName)
+        {
+            var patientIdParameter = patientId.HasValue ?
+                new ObjectParameter("PatientId", patientId) :
+                new ObjectParameter("PatientId", typeof(int));
+    
+            var patientNameParameter = patientName != null ?
+                new ObjectParameter("PatientName", patientName) :
+                new ObjectParameter("PatientName", typeof(string));
+    
+            var patientPhoneParameter = patientPhone != null ?
+                new ObjectParameter("PatientPhone", patientPhone) :
+                new ObjectParameter("PatientPhone", typeof(string));
+    
+            var patientEmailParameter = patientEmail != null ?
+                new ObjectParameter("PatientEmail", patientEmail) :
+                new ObjectParameter("PatientEmail", typeof(string));
+    
+            var patientDateOfBirthParameter = patientDateOfBirth.HasValue ?
+                new ObjectParameter("PatientDateOfBirth", patientDateOfBirth) :
+                new ObjectParameter("PatientDateOfBirth", typeof(System.DateTime));
+    
+            var patientAddressParameter = patientAddress != null ?
+                new ObjectParameter("PatientAddress", patientAddress) :
+                new ObjectParameter("PatientAddress", typeof(string));
+    
+            var patientGenderParameter = patientGender.HasValue ?
+                new ObjectParameter("PatientGender", patientGender) :
+                new ObjectParameter("PatientGender", typeof(byte));
+    
+            var nationalIDParameter = nationalID != null ?
+                new ObjectParameter("NationalID", nationalID) :
+                new ObjectParameter("NationalID", typeof(string));
+    
+            var patientWeightParameter = patientWeight.HasValue ?
+                new ObjectParameter("PatientWeight", patientWeight) :
+                new ObjectParameter("PatientWeight", typeof(double));
+    
+            var patientsHeightParameter = patientsHeight.HasValue ?
+                new ObjectParameter("PatientsHeight", patientsHeight) :
+                new ObjectParameter("PatientsHeight", typeof(double));
+    
+            var patientProfileImageParameter = patientProfileImage != null ?
+                new ObjectParameter("PatientProfileImage", patientProfileImage) :
+                new ObjectParameter("PatientProfileImage", typeof(string));
+    
+            var blodGroupFkParameter = blodGroupFk.HasValue ?
+                new ObjectParameter("BlodGroupFk", blodGroupFk) :
+                new ObjectParameter("BlodGroupFk", typeof(byte));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Patient_Save", patientIdParameter, patientNameParameter, patientPhoneParameter, patientEmailParameter, patientDateOfBirthParameter, patientAddressParameter, patientGenderParameter, nationalIDParameter, patientWeightParameter, patientsHeightParameter, patientProfileImageParameter, blodGroupFkParameter, userIdParameter, userNameParameter);
+        }
+    
+        public virtual int SP_GetPatientId_ByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetPatientId_ByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Patient_GetData_Result> SP_Patient_GetData(Nullable<int> patientId, string patientPhone, string patientEmail, Nullable<byte> patientGender, string nationalID, Nullable<byte> blodGroupId, string userId)
+        {
+            var patientIdParameter = patientId.HasValue ?
+                new ObjectParameter("PatientId", patientId) :
+                new ObjectParameter("PatientId", typeof(int));
+    
+            var patientPhoneParameter = patientPhone != null ?
+                new ObjectParameter("PatientPhone", patientPhone) :
+                new ObjectParameter("PatientPhone", typeof(string));
+    
+            var patientEmailParameter = patientEmail != null ?
+                new ObjectParameter("PatientEmail", patientEmail) :
+                new ObjectParameter("PatientEmail", typeof(string));
+    
+            var patientGenderParameter = patientGender.HasValue ?
+                new ObjectParameter("PatientGender", patientGender) :
+                new ObjectParameter("PatientGender", typeof(byte));
+    
+            var nationalIDParameter = nationalID != null ?
+                new ObjectParameter("NationalID", nationalID) :
+                new ObjectParameter("NationalID", typeof(string));
+    
+            var blodGroupIdParameter = blodGroupId.HasValue ?
+                new ObjectParameter("BlodGroupId", blodGroupId) :
+                new ObjectParameter("BlodGroupId", typeof(byte));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Patient_GetData_Result>("SP_Patient_GetData", patientIdParameter, patientPhoneParameter, patientEmailParameter, patientGenderParameter, nationalIDParameter, blodGroupIdParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_BlodGroups_GetData_Result> SP_BlodGroups_GetData(Nullable<byte> blodGroupId)
+        {
+            var blodGroupIdParameter = blodGroupId.HasValue ?
+                new ObjectParameter("BlodGroupId", blodGroupId) :
+                new ObjectParameter("BlodGroupId", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BlodGroups_GetData_Result>("SP_BlodGroups_GetData", blodGroupIdParameter);
+        }
     }
 }

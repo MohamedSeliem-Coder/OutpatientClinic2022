@@ -17,16 +17,38 @@ namespace Clinic.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+
 
             return View();
         }
+
+        public ActionResult Blog()
+        {
+
+            return View();
+        }
+
+        //Doctors
+
+        public ActionResult Doctors()
+        {
+
+            return View();
+        }
+
+        //Doctor Profile
+
+        public ActionResult DoctorProfile()
+        {
+            return View();
+        }
+
     }
 }

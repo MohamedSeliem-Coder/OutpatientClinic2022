@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace Clinic.Web.Models
 {
@@ -20,7 +21,6 @@ namespace Clinic.Web.Models
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(14, ErrorMessage = "The identity No must be 14 characters long", MinimumLength = 14)]
         [MinLength(10,ErrorMessage ="Invalid Phone Number")]
         [Display(Name = "Phone Number")]
         public string Mobile { get; set; }
@@ -29,6 +29,8 @@ namespace Clinic.Web.Models
 
         [Required]
         [Display(Name = "Date Of Birth")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
         public byte Gender { get; set; }
@@ -59,5 +61,10 @@ namespace Clinic.Web.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string ImagePath { get; set; }
+        public HttpPostedFileBase Image { get; set; }
+
+        public byte BlodGroupId { get; set; }
     }
 }

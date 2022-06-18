@@ -3,14 +3,21 @@
     ViewBag.Title = "Register";
 }
 
-<style>
-    input.input-validation-error,
-    textarea.input-validation-error,
-    select.input-validation-error {
-        background: #FEF1EC;
-        border: 1px solid #CD0A0A !important;
-    }
-</style>
+@section css {
+
+
+    <link href="~/assets/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <style>
+        input.input-validation-error,
+        textarea.input-validation-error,
+        select.input-validation-error {
+            background: #FEF1EC;
+            border: 1px solid #CD0A0A !important;
+        }
+    </style>
+
+}
+
 
 @*<h2>@ViewBag.Title.</h2>
 
@@ -64,7 +71,7 @@
                             <div class="login-header">
                                 <h3>Patient Register</h3>
                             </div>
-                            <form>
+                            <form method="post" action="Register" enctype="multipart/form-data">
 
                                 @Html.AntiForgeryToken()
 
@@ -74,15 +81,15 @@
                                     <div class="col-12 col-md-12">
                                         <div class="form-group">
                                             <div class="change-avatar">
-                                                <div class="profile-img">
+                                                <div class="profile-img" id="Image-Container">
                                                     <img src="~/assets/img/patients/patient.jpg" alt="User Image">
                                                 </div>
                                                 <div class="upload-img">
                                                     <div class="change-photo-btn">
                                                         <span><i class="fa fa-upload"></i> Upload Photo</span>
-                                                        <input type="file" class="upload">
+                                                        <input type="file" id="Image" name="Image" class="upload" accept="image/*">
                                                     </div>
-                                                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    <small class="form-text text-muted">Allowed JPG, jPEG or PNG. Max size of 2MB</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +158,11 @@
                                         <div class="form-group">
                                             <label>Date of Birth</label>
                                             <div class="cal-icon">
-                                                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control datetimepicker", @value = "24-07-1983" })
+                                                @Html.TextBoxFor(a => a.DateOfBirth, new
+                                                {
+                                                    @readonly = "true",@*value = Model.DateOfBirth.ToString("dd-MMM-yyyy"),*@@class = "form-control datepicker"
+})
+                                                @*@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control datetimepicker", @value = "24-07-1983" })*@
                                                 @Html.ValidationMessageFor(e => e.DateOfBirth, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -161,7 +172,7 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label>Gender</label>
-                                            <select class="form-select form-control">
+                                            <select class="form-select form-control" id="Gender" name="Gender">
                                                 <option value="1">Male</option>
                                                 <option value="2">Female</option>
                                             </select>
@@ -172,15 +183,11 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label>Blood Group</label>
-                                            <select class="form-select form-control">
-                                                <option>A-</option>
-                                                <option>A+</option>
-                                                <option>B-</option>
-                                                <option>B+</option>
-                                                <option>AB-</option>
-                                                <option>AB+</option>
-                                                <option>O-</option>
-                                                <option>O+</option>
+                                            <select class="form-select form-control" id="BlodGroupId" name="BlodGroupId">
+                                                @foreach (var item in ViewBag.BlodGroups as List<Clinic.DAL.Model.SP_BlodGroups_GetData_Result>)
+                                                {
+                                                    <option value="@item.BlodGroupId">@item.BlodGroupName</option>
+                                                }
                                             </select>
                                         </div>
                                     </div>
@@ -227,7 +234,7 @@
 
 
             <div class="col-md-8 col-xl-8">
-                
+
             </div>
         </div>
     </div>
@@ -239,4 +246,41 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            DateTimePicker();
+
+            $('#Image').on('change', function () {
+
+                var imageContainer = $('#Image-Container');
+                var image = window.URL.createObjectURL(this.files[0]);
+                imageContainer.find('img').attr('src', image);
+            });
+
+            //===================
+
+
+
+        });
+
+        function DateTimePicker() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-M-yy',
+                changeMonth: true,
+                changeYear: true,
+               /* showOn: 'button',*/
+                sideBySide: true,
+                controlType: 'select',
+               /*  buttonText: '<span class="fa fa-calendar"></span>',*/
+                maxDate: '-15y',
+                //minDate:new Date(),
+                /*minDate: '-3M',*/
+            });
+        }
+
+
+    </script>
 }

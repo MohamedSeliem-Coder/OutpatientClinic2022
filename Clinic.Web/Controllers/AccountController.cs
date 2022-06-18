@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Clinic.Web.Models;
+using System.IO;
+using Clinic.BLL.VM;
 
 namespace Clinic.Web.Controllers
 {
@@ -22,7 +24,7 @@ namespace Clinic.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +36,9 @@ namespace Clinic.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -89,8 +91,8 @@ namespace Clinic.Web.Controllers
                 }
                 else
                 {
-                    var patient = _patientBLL.Get_Patient_List(null, model.Email, null, null, null).FirstOrDefault();
-                    if(patient !=null && !string.IsNullOrEmpty(patient.Patient_UserId))
+                    var patient = _patientBLL.Get_Patient_List(null, model.Email, null, null, null,null,null).FirstOrDefault();
+                    if (patient != null && !string.IsNullOrEmpty(patient.Patient_UserId))
                     {
                         userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == patient.Patient_UserId).FirstOrDefault();
                         if (userobj != null && userobj.Email != null)
@@ -112,7 +114,7 @@ namespace Clinic.Web.Controllers
                         else
                         {
                             var employee = _adminBLL.Get_Employee_List(null, model.Email, null, null, null).FirstOrDefault();
-                            if(employee !=null && !string.IsNullOrEmpty(employee.Admin_UserId))
+                            if (employee != null && !string.IsNullOrEmpty(employee.Admin_UserId))
                             {
                                 userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == employee.Admin_UserId).FirstOrDefault();
                                 if (userobj != null && userobj.Email != null)
@@ -216,7 +218,7 @@ namespace Clinic.Web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -235,6 +237,7 @@ namespace Clinic.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
             return View();
         }
 
@@ -247,19 +250,91 @@ namespace Clinic.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                #region Validate user
+
+                var oldData = _patientBLL.Get_Patient_List(null, null, null, model.Email, null,null,null);
+                var oldUserData = _comonBLL.Get_AspNetUsers_List().FirstOrDefault(a => a.Email == model.Email);
+                if ((oldData != null && oldData.Count > 0) || oldUserData != null)
+                {
+                    ModelState.AddModelError("Email", "Email is taken.");
+                    ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
+                    return View(model);
+                }
+                else
+                {
+                    oldData = _patientBLL.Get_Patient_List(null, null, model.Mobile, null, null, null, null);
+                    oldUserData = _comonBLL.Get_AspNetUsers_List().FirstOrDefault(a => a.PhoneNumber == model.Mobile);
+                    if ((oldData != null && oldData.Count > 0) || oldUserData != null)
+                    {
+                        ModelState.AddModelError("Mobile", "Mobile is taken.");
+                        ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
+                        return View(model);
+                    }
+                    else
+                    {
+                        oldData = _patientBLL.Get_Patient_List(null, model.NationalID, null, null, null, null, null);
+                        if ((oldData != null && oldData.Count > 0))
+                        {
+                            ModelState.AddModelError("NationalID", "National ID is taken.");
+                            ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
+                            return View(model);
+                        }
+                    }
+                }
+
+                #endregion
+
+
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Mobile, LockoutEnabled = false };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    var resultRole = UserManager.AddToRole(user.Id, "Patient"); 
+
+                    #region Image
+
+                    if (model.Image != null)
+                    {
+                        string FileName = Path.GetFileNameWithoutExtension(model.Image.FileName);
+                        string Exten = Path.GetExtension(model.Image.FileName);
+                        FileName = FileName + Guid.NewGuid() + Exten;
+                        model.ImagePath = FileName;
+                        model.Image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/ProfileImage/Patient/"), FileName));
+                    }
+                    #endregion
+
+                    var newPatient = new PatientVM
+                    {
+                        BlodGroupId = model.BlodGroupId,
+                        PatientAddress = model.Address,
+                        PatientDateOfBirth = model.DateOfBirth,
+                        PatientEmail = model.Email,
+                        PatientGender = model.Gender,
+                        PatientHeight = model.Height,
+                        PatientName = model.FullName,
+                        PatientNationalID = model.NationalID,
+                        PatientPhone = model.Mobile,
+                        PatientProfileImage = model.ImagePath,
+                        PatientWeight = model.Weight,
+                        Patient_UserId = user.Id,
+                    };
+
+                    int? res = _patientBLL.Save_Patient_Data(newPatient);
+
+                    if(res == null || res.Value == 0)
+                    {
+                        var deletUserResult=await UserManager.DeleteAsync(user);
+                        ModelState.AddModelError("", "Something went wrong please try again");
+                        ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
+                        return View(model);
+                    }
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Dashboard", "Patient");
                 }
                 AddErrors(result);
             }

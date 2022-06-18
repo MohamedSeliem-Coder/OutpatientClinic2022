@@ -391,6 +391,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_BlodGroups_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BlodGroupId" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="SP_GetPatientId_ByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Patient_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PatientId" Type="int" Mode="In" />
+          <Parameter Name="PatientPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientGender" Type="tinyint" Mode="In" />
+          <Parameter Name="NationalID" Type="nvarchar" Mode="In" />
+          <Parameter Name="BlodGroupId" Type="tinyint" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Patient_Save" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PatientId" Type="int" Mode="In" />
+          <Parameter Name="PatientName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientDateOfBirth" Type="datetime" Mode="In" />
+          <Parameter Name="PatientAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientGender" Type="tinyint" Mode="In" />
+          <Parameter Name="NationalID" Type="nvarchar" Mode="In" />
+          <Parameter Name="PatientWeight" Type="float" Mode="In" />
+          <Parameter Name="PatientsHeight" Type="float" Mode="In" />
+          <Parameter Name="PatientProfileImage" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="BlodGroupFk" Type="tinyint" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="OutpatientClinic_DBModelStoreContainer">
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
@@ -920,6 +951,37 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Patient" EntitySet="Patients" />
           </AssociationSet>
+          <FunctionImport Name="SP_Patient_Save" ReturnType="Collection(Int32)">
+            <Parameter Name="PatientId" Mode="In" Type="Int32" />
+            <Parameter Name="PatientName" Mode="In" Type="String" />
+            <Parameter Name="PatientPhone" Mode="In" Type="String" />
+            <Parameter Name="PatientEmail" Mode="In" Type="String" />
+            <Parameter Name="PatientDateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="PatientAddress" Mode="In" Type="String" />
+            <Parameter Name="PatientGender" Mode="In" Type="Byte" />
+            <Parameter Name="NationalID" Mode="In" Type="String" />
+            <Parameter Name="PatientWeight" Mode="In" Type="Double" />
+            <Parameter Name="PatientsHeight" Mode="In" Type="Double" />
+            <Parameter Name="PatientProfileImage" Mode="In" Type="String" />
+            <Parameter Name="BlodGroupFk" Mode="In" Type="Byte" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetPatientId_ByUserId">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Patient_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Patient_GetData_Result)">
+            <Parameter Name="PatientId" Mode="In" Type="Int32" />
+            <Parameter Name="PatientPhone" Mode="In" Type="String" />
+            <Parameter Name="PatientEmail" Mode="In" Type="String" />
+            <Parameter Name="PatientGender" Mode="In" Type="Byte" />
+            <Parameter Name="NationalID" Mode="In" Type="String" />
+            <Parameter Name="BlodGroupId" Mode="In" Type="Byte" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_BlodGroups_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_BlodGroups_GetData_Result)">
+            <Parameter Name="BlodGroupId" Mode="In" Type="Byte" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="AspNetUser">
           <Key>
@@ -977,6 +1039,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_Patient_GetData_Result">
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="String" Name="PatientName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PatientPhone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="PatientEmail" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="PatientDateOfBirth" Nullable="false" Precision="23" />
+          <Property Type="String" Name="PatientAddress" Nullable="false" MaxLength="50" />
+          <Property Type="Byte" Name="PatientGender" Nullable="false" />
+          <Property Type="String" Name="PatientGenderName" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="NationalID" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="PatientWeight" Nullable="true" />
+          <Property Type="Double" Name="PatientsHeight" Nullable="true" />
+          <Property Type="String" Name="PatientProfileImage" Nullable="true" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="Byte" Name="BlodGroupId" Nullable="false" />
+          <Property Type="String" Name="BlodGroupName" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_BlodGroups_GetData_Result">
+          <Property Type="Byte" Name="BlodGroupId" Nullable="false" />
+          <Property Type="String" Name="BlodGroupName" Nullable="false" MaxLength="10" />
+          <Property Type="Boolean" Name="BlodGroupIsActive" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1193,6 +1279,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Patient_Save" FunctionName="OutpatientClinic_DBModel.Store.SP_Patient_Save" />
+          <FunctionImportMapping FunctionImportName="SP_GetPatientId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetPatientId_ByUserId" />
+          <FunctionImportMapping FunctionImportName="SP_Patient_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Patient_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Patient_GetData_Result">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
+                <ScalarProperty Name="PatientDateOfBirth" ColumnName="PatientDateOfBirth" />
+                <ScalarProperty Name="PatientAddress" ColumnName="PatientAddress" />
+                <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
+                <ScalarProperty Name="PatientGenderName" ColumnName="PatientGenderName" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="PatientWeight" ColumnName="PatientWeight" />
+                <ScalarProperty Name="PatientsHeight" ColumnName="PatientsHeight" />
+                <ScalarProperty Name="PatientProfileImage" ColumnName="PatientProfileImage" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BlodGroupId" ColumnName="BlodGroupId" />
+                <ScalarProperty Name="BlodGroupName" ColumnName="BlodGroupName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_BlodGroups_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_BlodGroups_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_BlodGroups_GetData_Result">
+                <ScalarProperty Name="BlodGroupId" ColumnName="BlodGroupId" />
+                <ScalarProperty Name="BlodGroupName" ColumnName="BlodGroupName" />
+                <ScalarProperty Name="BlodGroupIsActive" ColumnName="BlodGroupIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

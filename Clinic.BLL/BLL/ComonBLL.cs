@@ -14,5 +14,10 @@ namespace Clinic.BLL.BLL
             var result = db.AspNetUsers.ToList();
             return result;
         }
+
+        public List<SP_BlodGroups_GetData_Result> Get_BlodGroups_Data(byte? id)
+        {
+            return db.SP_BlodGroups_GetData(id).ToList();
+        }
     }
 }
