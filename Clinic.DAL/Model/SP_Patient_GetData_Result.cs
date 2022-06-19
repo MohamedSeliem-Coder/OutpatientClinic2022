@@ -30,5 +30,6 @@ namespace Clinic.DAL.Model
         public string BlodGroupName { get; set; }
         public string UserName { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<int> Age { get; set; }
     }
 }

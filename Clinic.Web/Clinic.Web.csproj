@@ -1172,6 +1172,31 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\Medications\Acetaminophen.jpg" />
+    <Content Include="Uploads\Medications\Benazepril.jpg" />
+    <Content Include="Uploads\Medications\Cardura XL.jpg" />
+    <Content Include="Uploads\Medications\Ketamine.jpg" />
+    <Content Include="Uploads\Medications\Zaleplon.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\4.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\8.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\DarrenElder.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\DeborahAngel.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\doctor-img.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\doctor-img1.png" />
+    <Content Include="Uploads\ProfileImage\Doctor\doctor-img2.png" />
+    <Content Include="Uploads\ProfileImage\Doctor\KatharineBerthold.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\LindaTobin.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\MarvinCampbell.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\patient-img1.png" />
+    <Content Include="Uploads\ProfileImage\Doctor\PaulRichard.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\RubyPerrin.jpg" />
+    <Content Include="Uploads\ProfileImage\Doctor\SofiaBrient.jpg" />
+    <Content Include="Uploads\ProfileImage\Patient\avatar-0172c63775-31ff-4b33-9269-d5065a157774.jpg" />
+    <Content Include="Uploads\Specialities\specialities-01.png" />
+    <Content Include="Uploads\Specialities\specialities-02.png" />
+    <Content Include="Uploads\Specialities\specialities-03.png" />
+    <Content Include="Uploads\Specialities\specialities-04.png" />
+    <Content Include="Uploads\Specialities\specialities-05.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1222,7 +1247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\ProfileImage\Patient\" />
+    <Folder Include="Uploads\ProfileImage\Employee\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>

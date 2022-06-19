@@ -391,11 +391,118 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_Areas_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AreaId" Type="int" Mode="In" />
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_BlodGroups_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BlodGroupId" Type="tinyint" Mode="In" />
         </Function>
+        <Function Name="SP_Booking_ChangeStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BookingId" Type="int" Mode="In" />
+          <Parameter Name="StatusId" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="SP_Booking_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BookingDate" Type="datetime" Mode="In" />
+          <Parameter Name="BookingAmount" Type="float" Mode="In" />
+          <Parameter Name="BookingFees" Type="float" Mode="In" />
+          <Parameter Name="BookingStatusId" Type="tinyint" Mode="In" />
+          <Parameter Name="IsPaid" Type="bit" Mode="In" />
+          <Parameter Name="PaidDate" Type="datetime" Mode="In" />
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="PatientId" Type="int" Mode="In" />
+          <Parameter Name="ScheduleTimingId" Type="int" Mode="In" />
+          <Parameter Name="IsOutService" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_Bookings_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BookingId" Type="int" Mode="In" />
+          <Parameter Name="BookingDateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="BookingDateTo" Type="datetime" Mode="In" />
+          <Parameter Name="BookingStatusId" Type="tinyint" Mode="In" />
+          <Parameter Name="IsPaid" Type="bit" Mode="In" />
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="PatientId" Type="int" Mode="In" />
+          <Parameter Name="IsOutService" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_BookingStatuses_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StatusId" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="SP_Cities_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CityId" Type="int" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Countries_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Diseases_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DiseaseId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Doctors_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="DoctorPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorGender" Type="tinyint" Mode="In" />
+          <Parameter Name="NationalId" Type="nvarchar" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="SpecialityId" Type="int" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Doctors_Save" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="DoctorName" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorPhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorDateOfBirth" Type="datetime" Mode="In" />
+          <Parameter Name="DoctorDegree" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorCollege" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorAwards" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DoctorProfileImage" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DoctorMemberSince" Type="datetime" Mode="In" />
+          <Parameter Name="DoctorGender" Type="tinyint" Mode="In" />
+          <Parameter Name="NationalId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoctorAbout" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="InsideServicePrice" Type="float" Mode="In" />
+          <Parameter Name="OutsideServicePrice" Type="float" Mode="In" />
+          <Parameter Name="CountryId" Type="int" Mode="In" />
+          <Parameter Name="SpecialityId" Type="int" Mode="In" />
+          <Parameter Name="DoctorIsActive" Type="bit" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Employees_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="EmployeePhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeeEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeeGender" Type="tinyint" Mode="In" />
+          <Parameter Name="NationalID" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Employees_Save" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+          <Parameter Name="EmployeeName" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeePhone" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeeEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmployeeGender" Type="tinyint" Mode="In" />
+          <Parameter Name="EmployeeDateOfPirth" Type="datetime" Mode="In" />
+          <Parameter Name="EmployeeProfileImage" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmployeeAddress" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EmployeeIsActive" Type="bit" Mode="In" />
+          <Parameter Name="NationalID" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetDoctorId_ByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GetEmployeeId_ByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="SP_GetPatientId_ByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Medications_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MedicationId" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_Patient_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PatientId" Type="int" Mode="In" />
@@ -421,6 +528,43 @@
           <Parameter Name="BlodGroupFk" Type="tinyint" Mode="In" />
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Prescription_Medications_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Prescription_Medications_Id" Type="int" Mode="In" />
+          <Parameter Name="PrescriptionId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Prescription_Medications_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PrescriptionId" Type="int" Mode="In" />
+          <Parameter Name="MedicationId" Type="int" Mode="In" />
+          <Parameter Name="Notes" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_Prescriptions_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PrescriptionId" Type="int" Mode="In" />
+          <Parameter Name="PrescriptionDateFrom" Type="datetime" Mode="In" />
+          <Parameter Name="PrescriptionDateTo" Type="datetime" Mode="In" />
+          <Parameter Name="BookingId" Type="int" Mode="In" />
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="PatientId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Prescriptions_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PrescriptionDate" Type="datetime" Mode="In" />
+          <Parameter Name="PrescriptionNotes" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DoctorReport" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DiseaseId" Type="int" Mode="In" />
+          <Parameter Name="BookingId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ScheduleTimings_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DrTimingId" Type="int" Mode="In" />
+          <Parameter Name="WeekDayId" Type="tinyint" Mode="In" />
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="DoctorUserId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Specialities_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SpecialityId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_WeekDays_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WeekDayId" Type="tinyint" Mode="In" />
+          <Parameter Name="WeekDayName" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="OutpatientClinic_DBModelStoreContainer">
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
@@ -980,7 +1124,151 @@
             <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_BlodGroups_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_BlodGroups_GetData_Result)">
-            <Parameter Name="BlodGroupId" Mode="In" Type="Byte" />
+          <Parameter Name="BlodGroupId" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Areas_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Areas_GetData_Result)">
+            <Parameter Name="AreaId" Mode="In" Type="Int32" />
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Booking_ChangeStatus">
+            <Parameter Name="BookingId" Mode="In" Type="Int32" />
+            <Parameter Name="StatusId" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Booking_Insert" ReturnType="Collection(Int32)">
+            <Parameter Name="BookingDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BookingAmount" Mode="In" Type="Double" />
+            <Parameter Name="BookingFees" Mode="In" Type="Double" />
+            <Parameter Name="BookingStatusId" Mode="In" Type="Byte" />
+            <Parameter Name="IsPaid" Mode="In" Type="Boolean" />
+            <Parameter Name="PaidDate" Mode="In" Type="DateTime" />
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="PatientId" Mode="In" Type="Int32" />
+            <Parameter Name="ScheduleTimingId" Mode="In" Type="Int32" />
+            <Parameter Name="IsOutService" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Bookings_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Bookings_GetData_Result)">
+            <Parameter Name="BookingId" Mode="In" Type="Int32" />
+            <Parameter Name="BookingDateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="BookingDateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="BookingStatusId" Mode="In" Type="Byte" />
+            <Parameter Name="IsPaid" Mode="In" Type="Boolean" />
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="PatientId" Mode="In" Type="Int32" />
+            <Parameter Name="IsOutService" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_BookingStatuses_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_BookingStatuses_GetData_Result)">
+            <Parameter Name="StatusId" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Cities_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Cities_GetData_Result)">
+            <Parameter Name="CityId" Mode="In" Type="Int32" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Countries_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Countries_GetData_Result)">
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Diseases_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Diseases_GetData_Result)">
+            <Parameter Name="DiseaseId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Doctors_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Doctors_GetData_Result)">
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="DoctorPhone" Mode="In" Type="String" />
+            <Parameter Name="DoctorEmail" Mode="In" Type="String" />
+            <Parameter Name="DoctorGender" Mode="In" Type="Byte" />
+            <Parameter Name="NationalId" Mode="In" Type="String" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="SpecialityId" Mode="In" Type="Int32" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Doctors_Save" ReturnType="Collection(Int32)">
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="DoctorName" Mode="In" Type="String" />
+            <Parameter Name="DoctorPhone" Mode="In" Type="String" />
+            <Parameter Name="DoctorEmail" Mode="In" Type="String" />
+            <Parameter Name="DoctorDateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="DoctorDegree" Mode="In" Type="String" />
+            <Parameter Name="DoctorCollege" Mode="In" Type="String" />
+            <Parameter Name="DoctorAwards" Mode="In" Type="String" />
+            <Parameter Name="DoctorProfileImage" Mode="In" Type="String" />
+            <Parameter Name="DoctorMemberSince" Mode="In" Type="DateTime" />
+            <Parameter Name="DoctorGender" Mode="In" Type="Byte" />
+            <Parameter Name="NationalId" Mode="In" Type="String" />
+            <Parameter Name="DoctorAbout" Mode="In" Type="String" />
+            <Parameter Name="InsideServicePrice" Mode="In" Type="Double" />
+            <Parameter Name="OutsideServicePrice" Mode="In" Type="Double" />
+            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+            <Parameter Name="SpecialityId" Mode="In" Type="Int32" />
+            <Parameter Name="DoctorIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Employees_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Employees_GetData_Result)">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeePhone" Mode="In" Type="String" />
+            <Parameter Name="EmployeeEmail" Mode="In" Type="String" />
+            <Parameter Name="EmployeeGender" Mode="In" Type="Byte" />
+            <Parameter Name="NationalID" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Employees_Save" ReturnType="Collection(Int32)">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeName" Mode="In" Type="String" />
+            <Parameter Name="EmployeePhone" Mode="In" Type="String" />
+            <Parameter Name="EmployeeEmail" Mode="In" Type="String" />
+            <Parameter Name="EmployeeGender" Mode="In" Type="Byte" />
+            <Parameter Name="EmployeeDateOfPirth" Mode="In" Type="DateTime" />
+            <Parameter Name="EmployeeProfileImage" Mode="In" Type="String" />
+            <Parameter Name="EmployeeAddress" Mode="In" Type="String" />
+            <Parameter Name="EmployeeIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="NationalID" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetDoctorId_ByUserId">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetEmployeeId_ByUserId">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Medications_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Medications_GetData_Result)">
+            <Parameter Name="MedicationId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Prescription_Medications_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Prescription_Medications_GetData_Result)">
+            <Parameter Name="Prescription_Medications_Id" Mode="In" Type="Int32" />
+            <Parameter Name="PrescriptionId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Prescription_Medications_Insert" ReturnType="Collection(Int32)">
+            <Parameter Name="PrescriptionId" Mode="In" Type="Int32" />
+            <Parameter Name="MedicationId" Mode="In" Type="Int32" />
+            <Parameter Name="Notes" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Prescriptions_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Prescriptions_GetData_Result)">
+            <Parameter Name="PrescriptionId" Mode="In" Type="Int32" />
+            <Parameter Name="PrescriptionDateFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="PrescriptionDateTo" Mode="In" Type="DateTime" />
+            <Parameter Name="BookingId" Mode="In" Type="Int32" />
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="PatientId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Prescriptions_Insert" ReturnType="Collection(Int32)">
+            <Parameter Name="PrescriptionDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PrescriptionNotes" Mode="In" Type="String" />
+            <Parameter Name="DoctorReport" Mode="In" Type="String" />
+            <Parameter Name="DiseaseId" Mode="In" Type="Int32" />
+            <Parameter Name="BookingId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ScheduleTimings_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_ScheduleTimings_GetData_Result)">
+            <Parameter Name="DrTimingId" Mode="In" Type="Int32" />
+            <Parameter Name="WeekDayId" Mode="In" Type="Byte" />
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="DoctorUserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Specialities_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Specialities_GetData_Result)">
+            <Parameter Name="SpecialityId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_WeekDays_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_WeekDays_GetData_Result)">
+            <Parameter Name="WeekDayId" Mode="In" Type="Byte" />
+            <Parameter Name="WeekDayName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="AspNetUser">
@@ -1057,11 +1345,195 @@
           <Property Type="String" Name="BlodGroupName" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
           <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_BlodGroups_GetData_Result">
           <Property Type="Byte" Name="BlodGroupId" Nullable="false" />
           <Property Type="String" Name="BlodGroupName" Nullable="false" MaxLength="10" />
           <Property Type="Boolean" Name="BlodGroupIsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Areas_GetData_Result">
+          <Property Type="Int32" Name="AreaId" Nullable="false" />
+          <Property Type="String" Name="AreaName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="AreaIsActive" Nullable="true" />
+          <Property Type="Int32" Name="CityId" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="CityIsActive" Nullable="true" />
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryShortName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="CountryIsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Bookings_GetData_Result">
+          <Property Type="Int32" Name="BookingId" Nullable="false" />
+          <Property Type="Int32" Name="BookingNo" Nullable="false" />
+          <Property Type="DateTime" Name="BookingDate" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="BookingAmount" Nullable="false" />
+          <Property Type="Double" Name="BookingFees" Nullable="false" />
+          <Property Type="DateTime" Name="BookingCreationDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsPaid" Nullable="true" />
+          <Property Type="DateTime" Name="PaidDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsOutService" Nullable="true" />
+          <Property Type="Byte" Name="StatusId" Nullable="false" />
+          <Property Type="String" Name="StatusName" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="DoctorId" Nullable="false" />
+          <Property Type="String" Name="DoctorName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DoctorPhone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="DoctorProfileImage" Nullable="true" />
+          <Property Type="String" Name="DoctorAbout" Nullable="true" />
+          <Property Type="Int32" Name="SpecialityId" Nullable="false" />
+          <Property Type="String" Name="SpecialityName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="SpecialityImagePath" Nullable="true" />
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryShortName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="String" Name="PatientName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PatientPhone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="PatientEmail" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PatientProfileImage" Nullable="true" />
+          <Property Type="String" Name="PatientAddress" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="DrTimingId" Nullable="false" />
+          <Property Type="Time" Name="DrTimingSlotFrom" Nullable="false" />
+          <Property Type="Time" Name="DrTimingSlotTo" Nullable="false" />
+          <Property Type="Byte" Name="WeekDayId" Nullable="false" />
+          <Property Type="String" Name="WeekDayName" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SP_BookingStatuses_GetData_Result">
+          <Property Type="Byte" Name="StatusId" Nullable="false" />
+          <Property Type="String" Name="StatusName" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="SP_Cities_GetData_Result">
+          <Property Type="Int32" Name="CityId" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="CityIsActive" Nullable="true" />
+          <Property Type="Int32" Name="CountryFk" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryShortName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SP_Countries_GetData_Result">
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryShortName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="CountryIsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Diseases_GetData_Result">
+          <Property Type="Int32" Name="DiseaseId" Nullable="false" />
+          <Property Type="String" Name="DiseaseName" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="DiseaseIsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Doctors_GetData_Result">
+          <Property Type="Int32" Name="DoctorId" Nullable="false" />
+          <Property Type="String" Name="DoctorName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DoctorPhone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="DoctorEmail" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DoctorDateOfBirth" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="String" Name="DoctorDegree" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="DoctorCollege" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DoctorAwards" Nullable="true" />
+          <Property Type="String" Name="DoctorProfileImage" Nullable="true" />
+          <Property Type="Byte" Name="DoctorGender" Nullable="false" />
+          <Property Type="String" Name="DoctorGenderName" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="NationalID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DoctorAbout" Nullable="true" />
+          <Property Type="DateTime" Name="DoctorMemberSince" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="InsideServicePrice" Nullable="true" />
+          <Property Type="Double" Name="OutsideServicePrice" Nullable="true" />
+          <Property Type="Boolean" Name="DoctorIsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="SpecialityId" Nullable="false" />
+          <Property Type="String" Name="SpecialityName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="SpecialityDescription" Nullable="true" />
+          <Property Type="String" Name="SpecialityImagePath" Nullable="true" />
+          <Property Type="Int32" Name="CountryId" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryShortName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CountryCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="SP_Employees_GetData_Result">
+          <Property Type="Int32" Name="EmployeeId" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="EmployeePhone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="EmployeeEmail" Nullable="false" MaxLength="100" />
+          <Property Type="Byte" Name="EmployeeGender" Nullable="false" />
+          <Property Type="String" Name="EmployeeGenderName" Nullable="false" MaxLength="6" />
+          <Property Type="DateTime" Name="EmployeeDateOfBirth" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="String" Name="EmployeeProfileImage" Nullable="true" />
+          <Property Type="String" Name="EmployeeAddress" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="EmployeeIsActive" Nullable="false" />
+          <Property Type="String" Name="NationalID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="SP_Medications_GetData_Result">
+          <Property Type="Int32" Name="MedicationId" Nullable="false" />
+          <Property Type="String" Name="MedicationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MedicationAbout" Nullable="false" />
+          <Property Type="String" Name="MedicationImagePath" Nullable="true" />
+          <Property Type="Boolean" Name="MedicationIsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Prescription_Medications_GetData_Result">
+          <Property Type="Int32" Name="Prescription_Medications_Id" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="DateTime" Name="CreationDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="PrescriptionId" Nullable="false" />
+          <Property Type="DateTime" Name="PrescriptionDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="MedicationId" Nullable="false" />
+          <Property Type="String" Name="MedicationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MedicationImagePath" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Prescriptions_GetData_Result">
+          <Property Type="Int32" Name="PrescriptionId" Nullable="false" />
+          <Property Type="DateTime" Name="PrescriptionDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="PrescriptionNotes" Nullable="true" />
+          <Property Type="String" Name="DoctorReport" Nullable="true" />
+          <Property Type="Int32" Name="DiseaseId" Nullable="false" />
+          <Property Type="String" Name="DiseaseName" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="BookingId" Nullable="false" />
+          <Property Type="Int32" Name="BookingNo" Nullable="false" />
+          <Property Type="DateTime" Name="BookingDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="DoctorId" Nullable="false" />
+          <Property Type="String" Name="DoctorName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DoctorPhone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="DoctorEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DoctorProfileImage" Nullable="true" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="String" Name="PatientName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="PatientPhone" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="PatientAddress" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PatientProfileImage" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ScheduleTimings_GetData_Result">
+          <Property Type="Int32" Name="DrTimingId" Nullable="false" />
+          <Property Type="Time" Name="DrTimingSlotFrom" Nullable="false" />
+          <Property Type="Time" Name="DrTimingSlotTo" Nullable="false" />
+          <Property Type="Byte" Name="WeekDayId" Nullable="false" />
+          <Property Type="String" Name="WeekDayName" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="DoctorId" Nullable="false" />
+          <Property Type="String" Name="DoctorName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DoctorPhone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="DoctorEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DoctorAbout" Nullable="true" />
+          <Property Type="String" Name="DoctorUserId" Nullable="true" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="SP_Specialities_GetData_Result">
+          <Property Type="Int32" Name="SpecialityId" Nullable="false" />
+          <Property Type="String" Name="SpecialityName" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="SpecialityDescription" Nullable="true" />
+          <Property Type="String" Name="SpecialityImagePath" Nullable="true" />
+          <Property Type="Boolean" Name="SpecialityIsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_WeekDays_GetData_Result">
+          <Property Type="Byte" Name="WeekDayId" Nullable="false" />
+          <Property Type="String" Name="WeekDayName" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1301,6 +1773,7 @@
                 <ScalarProperty Name="BlodGroupName" ColumnName="BlodGroupName" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1310,6 +1783,253 @@
                 <ScalarProperty Name="BlodGroupId" ColumnName="BlodGroupId" />
                 <ScalarProperty Name="BlodGroupName" ColumnName="BlodGroupName" />
                 <ScalarProperty Name="BlodGroupIsActive" ColumnName="BlodGroupIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Areas_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Areas_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Areas_GetData_Result">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="AreaIsActive" ColumnName="AreaIsActive" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityIsActive" ColumnName="CityIsActive" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryIsActive" ColumnName="CountryIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Booking_ChangeStatus" FunctionName="OutpatientClinic_DBModel.Store.SP_Booking_ChangeStatus" />
+          <FunctionImportMapping FunctionImportName="SP_Booking_Insert" FunctionName="OutpatientClinic_DBModel.Store.SP_Booking_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_Bookings_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Bookings_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Bookings_GetData_Result">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="BookingAmount" ColumnName="BookingAmount" />
+                <ScalarProperty Name="BookingFees" ColumnName="BookingFees" />
+                <ScalarProperty Name="BookingCreationDate" ColumnName="BookingCreationDate" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="PaidDate" ColumnName="PaidDate" />
+                <ScalarProperty Name="IsOutService" ColumnName="IsOutService" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorPhone" ColumnName="DoctorPhone" />
+                <ScalarProperty Name="DoctorProfileImage" ColumnName="DoctorProfileImage" />
+                <ScalarProperty Name="DoctorAbout" ColumnName="DoctorAbout" />
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+                <ScalarProperty Name="SpecialityImagePath" ColumnName="SpecialityImagePath" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="PatientEmail" ColumnName="PatientEmail" />
+                <ScalarProperty Name="PatientProfileImage" ColumnName="PatientProfileImage" />
+                <ScalarProperty Name="PatientAddress" ColumnName="PatientAddress" />
+                <ScalarProperty Name="DrTimingId" ColumnName="DrTimingId" />
+                <ScalarProperty Name="DrTimingSlotFrom" ColumnName="DrTimingSlotFrom" />
+                <ScalarProperty Name="DrTimingSlotTo" ColumnName="DrTimingSlotTo" />
+                <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
+                <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_BookingStatuses_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_BookingStatuses_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_BookingStatuses_GetData_Result">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Cities_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Cities_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Cities_GetData_Result">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityIsActive" ColumnName="CityIsActive" />
+                <ScalarProperty Name="CountryFk" ColumnName="CountryFk" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Countries_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Countries_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Countries_GetData_Result">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="CountryIsActive" ColumnName="CountryIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Diseases_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Diseases_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Diseases_GetData_Result">
+                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+                <ScalarProperty Name="DiseaseName" ColumnName="DiseaseName" />
+                <ScalarProperty Name="DiseaseIsActive" ColumnName="DiseaseIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Doctors_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Doctors_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Doctors_GetData_Result">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorPhone" ColumnName="DoctorPhone" />
+                <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+                <ScalarProperty Name="DoctorDateOfBirth" ColumnName="DoctorDateOfBirth" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="DoctorDegree" ColumnName="DoctorDegree" />
+                <ScalarProperty Name="DoctorCollege" ColumnName="DoctorCollege" />
+                <ScalarProperty Name="DoctorAwards" ColumnName="DoctorAwards" />
+                <ScalarProperty Name="DoctorProfileImage" ColumnName="DoctorProfileImage" />
+                <ScalarProperty Name="DoctorGender" ColumnName="DoctorGender" />
+                <ScalarProperty Name="DoctorGenderName" ColumnName="DoctorGenderName" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="DoctorAbout" ColumnName="DoctorAbout" />
+                <ScalarProperty Name="DoctorMemberSince" ColumnName="DoctorMemberSince" />
+                <ScalarProperty Name="InsideServicePrice" ColumnName="InsideServicePrice" />
+                <ScalarProperty Name="OutsideServicePrice" ColumnName="OutsideServicePrice" />
+                <ScalarProperty Name="DoctorIsActive" ColumnName="DoctorIsActive" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+                <ScalarProperty Name="SpecialityDescription" ColumnName="SpecialityDescription" />
+                <ScalarProperty Name="SpecialityImagePath" ColumnName="SpecialityImagePath" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryShortName" ColumnName="CountryShortName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Doctors_Save" FunctionName="OutpatientClinic_DBModel.Store.SP_Doctors_Save" />
+          <FunctionImportMapping FunctionImportName="SP_Employees_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Employees_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Employees_GetData_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeePhone" ColumnName="EmployeePhone" />
+                <ScalarProperty Name="EmployeeEmail" ColumnName="EmployeeEmail" />
+                <ScalarProperty Name="EmployeeGender" ColumnName="EmployeeGender" />
+                <ScalarProperty Name="EmployeeGenderName" ColumnName="EmployeeGenderName" />
+                <ScalarProperty Name="EmployeeDateOfBirth" ColumnName="EmployeeDateOfBirth" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="EmployeeProfileImage" ColumnName="EmployeeProfileImage" />
+                <ScalarProperty Name="EmployeeAddress" ColumnName="EmployeeAddress" />
+                <ScalarProperty Name="EmployeeIsActive" ColumnName="EmployeeIsActive" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Employees_Save" FunctionName="OutpatientClinic_DBModel.Store.SP_Employees_Save" />
+          <FunctionImportMapping FunctionImportName="SP_GetDoctorId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetDoctorId_ByUserId" />
+          <FunctionImportMapping FunctionImportName="SP_GetEmployeeId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetEmployeeId_ByUserId" />
+          <FunctionImportMapping FunctionImportName="SP_Medications_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Medications_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Medications_GetData_Result">
+                <ScalarProperty Name="MedicationId" ColumnName="MedicationId" />
+                <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+                <ScalarProperty Name="MedicationAbout" ColumnName="MedicationAbout" />
+                <ScalarProperty Name="MedicationImagePath" ColumnName="MedicationImagePath" />
+                <ScalarProperty Name="MedicationIsActive" ColumnName="MedicationIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Prescription_Medications_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Prescription_Medications_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Prescription_Medications_GetData_Result">
+                <ScalarProperty Name="Prescription_Medications_Id" ColumnName="Prescription_Medications_Id" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
+                <ScalarProperty Name="PrescriptionDate" ColumnName="PrescriptionDate" />
+                <ScalarProperty Name="MedicationId" ColumnName="MedicationId" />
+                <ScalarProperty Name="MedicationName" ColumnName="MedicationName" />
+                <ScalarProperty Name="MedicationImagePath" ColumnName="MedicationImagePath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Prescription_Medications_Insert" FunctionName="OutpatientClinic_DBModel.Store.SP_Prescription_Medications_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_Prescriptions_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Prescriptions_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Prescriptions_GetData_Result">
+                <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
+                <ScalarProperty Name="PrescriptionDate" ColumnName="PrescriptionDate" />
+                <ScalarProperty Name="PrescriptionNotes" ColumnName="PrescriptionNotes" />
+                <ScalarProperty Name="DoctorReport" ColumnName="DoctorReport" />
+                <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+                <ScalarProperty Name="DiseaseName" ColumnName="DiseaseName" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorPhone" ColumnName="DoctorPhone" />
+                <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+                <ScalarProperty Name="DoctorProfileImage" ColumnName="DoctorProfileImage" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="PatientAddress" ColumnName="PatientAddress" />
+                <ScalarProperty Name="PatientProfileImage" ColumnName="PatientProfileImage" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Prescriptions_Insert" FunctionName="OutpatientClinic_DBModel.Store.SP_Prescriptions_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_ScheduleTimings_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_ScheduleTimings_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_ScheduleTimings_GetData_Result">
+                <ScalarProperty Name="DrTimingId" ColumnName="DrTimingId" />
+                <ScalarProperty Name="DrTimingSlotFrom" ColumnName="DrTimingSlotFrom" />
+                <ScalarProperty Name="DrTimingSlotTo" ColumnName="DrTimingSlotTo" />
+                <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
+                <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorPhone" ColumnName="DoctorPhone" />
+                <ScalarProperty Name="DoctorEmail" ColumnName="DoctorEmail" />
+                <ScalarProperty Name="DoctorAbout" ColumnName="DoctorAbout" />
+                <ScalarProperty Name="DoctorUserId" ColumnName="DoctorUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Specialities_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Specialities_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Specialities_GetData_Result">
+                <ScalarProperty Name="SpecialityId" ColumnName="SpecialityId" />
+                <ScalarProperty Name="SpecialityName" ColumnName="SpecialityName" />
+                <ScalarProperty Name="SpecialityDescription" ColumnName="SpecialityDescription" />
+                <ScalarProperty Name="SpecialityImagePath" ColumnName="SpecialityImagePath" />
+                <ScalarProperty Name="SpecialityIsActive" ColumnName="SpecialityIsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_WeekDays_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_WeekDays_GetData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_WeekDays_GetData_Result">
+                <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
+                <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

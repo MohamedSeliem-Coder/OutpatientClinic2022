@@ -110,10 +110,52 @@
     <Compile Include="Model\Speciality.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SP_Areas_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SP_BlodGroups_GetData_Result.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SP_BookingStatuses_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Bookings_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Cities_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Countries_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Diseases_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Doctors_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Employees_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Medications_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SP_Patient_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Prescriptions_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Prescription_Medications_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_ScheduleTimings_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_Specialities_GetData_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_WeekDays_GetData_Result.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\WeekDay.cs">

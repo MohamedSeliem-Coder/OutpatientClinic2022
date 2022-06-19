@@ -76,7 +76,7 @@ namespace Clinic.Web.Controllers
             }
 
             var userobj = _comonBLL.Get_AspNetUsers_List()
-                .Where(a => a.UserName == model.Email || a.PhoneNumber == model.Email).FirstOrDefault();
+                .Where(a => a.UserName == model.Email || a.PhoneNumber == model.Email || a.Email == model.Email).FirstOrDefault();
 
             if (userobj != null && userobj.Email != null)
             {
@@ -102,7 +102,7 @@ namespace Clinic.Web.Controllers
                     }
                     else
                     {
-                        var doctor = _doctorBLL.Get_Doctor_List(null, model.Email, null, null, null).FirstOrDefault();
+                        var doctor = _doctorBLL.Get_Doctor_List(null, model.Email, null, null, null,null,null,null).FirstOrDefault();
                         if (doctor != null && !string.IsNullOrEmpty(doctor.Doctor_UserId))
                         {
                             userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == doctor.Doctor_UserId).FirstOrDefault();

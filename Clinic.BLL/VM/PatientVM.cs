@@ -23,9 +23,12 @@ namespace Clinic.BLL.VM
         public DateTime? CreationDate { get; set; }
         public string Patient_UserId { get; set; }
 
+
+
         public string PatientGenderName { get; set; }
         public string PatientBlodGroupName { get; set; }
         public string Username { get; set; }
+        public int? Age { get; set; }
 
     }
 }

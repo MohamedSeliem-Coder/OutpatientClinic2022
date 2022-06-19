@@ -55,7 +55,8 @@ namespace Clinic.BLL.BLL
                     PatientNationalID = obj.NationalID,
                     PatientProfileImage = PatientProfileImagePath + obj.PatientProfileImage,
                     Patient_UserId = obj.UserId,
-                    Username = obj.UserName
+                    Username = obj.UserName,
+                    Age = obj.Age
                 }).ToList();
 
                 return result;
@@ -90,7 +91,8 @@ namespace Clinic.BLL.BLL
                     PatientNationalID = obj.NationalID,
                     PatientProfileImage = PatientProfileImagePath+ obj.PatientProfileImage,
                     Patient_UserId = obj.UserId,
-                    Username = obj.UserName
+                    Username = obj.UserName,
+                    Age = obj.Age
                 }).FirstOrDefault();
 
                 return result;

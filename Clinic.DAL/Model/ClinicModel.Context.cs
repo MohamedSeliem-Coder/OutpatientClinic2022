@@ -155,5 +155,515 @@ namespace Clinic.DAL.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BlodGroups_GetData_Result>("SP_BlodGroups_GetData", blodGroupIdParameter);
         }
+    
+        public virtual ObjectResult<SP_Areas_GetData_Result> SP_Areas_GetData(Nullable<int> areaId, Nullable<int> cityId, Nullable<int> countryId)
+        {
+            var areaIdParameter = areaId.HasValue ?
+                new ObjectParameter("AreaId", areaId) :
+                new ObjectParameter("AreaId", typeof(int));
+    
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("CityId", cityId) :
+                new ObjectParameter("CityId", typeof(int));
+    
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Areas_GetData_Result>("SP_Areas_GetData", areaIdParameter, cityIdParameter, countryIdParameter);
+        }
+    
+        public virtual int SP_Booking_ChangeStatus(Nullable<int> bookingId, Nullable<byte> statusId)
+        {
+            var bookingIdParameter = bookingId.HasValue ?
+                new ObjectParameter("BookingId", bookingId) :
+                new ObjectParameter("BookingId", typeof(int));
+    
+            var statusIdParameter = statusId.HasValue ?
+                new ObjectParameter("StatusId", statusId) :
+                new ObjectParameter("StatusId", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Booking_ChangeStatus", bookingIdParameter, statusIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Booking_Insert(Nullable<System.DateTime> bookingDate, Nullable<double> bookingAmount, Nullable<double> bookingFees, Nullable<byte> bookingStatusId, Nullable<bool> isPaid, Nullable<System.DateTime> paidDate, Nullable<int> doctorId, Nullable<int> patientId, Nullable<int> scheduleTimingId, Nullable<bool> isOutService)
+        {
+            var bookingDateParameter = bookingDate.HasValue ?
+                new ObjectParameter("BookingDate", bookingDate) :
+                new ObjectParameter("BookingDate", typeof(System.DateTime));
+    
+            var bookingAmountParameter = bookingAmount.HasValue ?
+                new ObjectParameter("BookingAmount", bookingAmount) :
+                new ObjectParameter("BookingAmount", typeof(double));
+    
+            var bookingFeesParameter = bookingFees.HasValue ?
+                new ObjectParameter("BookingFees", bookingFees) :
+                new ObjectParameter("BookingFees", typeof(double));
+    
+            var bookingStatusIdParameter = bookingStatusId.HasValue ?
+                new ObjectParameter("BookingStatusId", bookingStatusId) :
+                new ObjectParameter("BookingStatusId", typeof(byte));
+    
+            var isPaidParameter = isPaid.HasValue ?
+                new ObjectParameter("IsPaid", isPaid) :
+                new ObjectParameter("IsPaid", typeof(bool));
+    
+            var paidDateParameter = paidDate.HasValue ?
+                new ObjectParameter("PaidDate", paidDate) :
+                new ObjectParameter("PaidDate", typeof(System.DateTime));
+    
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var patientIdParameter = patientId.HasValue ?
+                new ObjectParameter("PatientId", patientId) :
+                new ObjectParameter("PatientId", typeof(int));
+    
+            var scheduleTimingIdParameter = scheduleTimingId.HasValue ?
+                new ObjectParameter("ScheduleTimingId", scheduleTimingId) :
+                new ObjectParameter("ScheduleTimingId", typeof(int));
+    
+            var isOutServiceParameter = isOutService.HasValue ?
+                new ObjectParameter("IsOutService", isOutService) :
+                new ObjectParameter("IsOutService", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Booking_Insert", bookingDateParameter, bookingAmountParameter, bookingFeesParameter, bookingStatusIdParameter, isPaidParameter, paidDateParameter, doctorIdParameter, patientIdParameter, scheduleTimingIdParameter, isOutServiceParameter);
+        }
+    
+        public virtual ObjectResult<SP_Bookings_GetData_Result> SP_Bookings_GetData(Nullable<int> bookingId, Nullable<System.DateTime> bookingDateFrom, Nullable<System.DateTime> bookingDateTo, Nullable<byte> bookingStatusId, Nullable<bool> isPaid, Nullable<int> doctorId, Nullable<int> patientId, Nullable<bool> isOutService)
+        {
+            var bookingIdParameter = bookingId.HasValue ?
+                new ObjectParameter("BookingId", bookingId) :
+                new ObjectParameter("BookingId", typeof(int));
+    
+            var bookingDateFromParameter = bookingDateFrom.HasValue ?
+                new ObjectParameter("BookingDateFrom", bookingDateFrom) :
+                new ObjectParameter("BookingDateFrom", typeof(System.DateTime));
+    
+            var bookingDateToParameter = bookingDateTo.HasValue ?
+                new ObjectParameter("BookingDateTo", bookingDateTo) :
+                new ObjectParameter("BookingDateTo", typeof(System.DateTime));
+    
+            var bookingStatusIdParameter = bookingStatusId.HasValue ?
+                new ObjectParameter("BookingStatusId", bookingStatusId) :
+                new ObjectParameter("BookingStatusId", typeof(byte));
+    
+            var isPaidParameter = isPaid.HasValue ?
+                new ObjectParameter("IsPaid", isPaid) :
+                new ObjectParameter("IsPaid", typeof(bool));
+    
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var patientIdParameter = patientId.HasValue ?
+                new ObjectParameter("PatientId", patientId) :
+                new ObjectParameter("PatientId", typeof(int));
+    
+            var isOutServiceParameter = isOutService.HasValue ?
+                new ObjectParameter("IsOutService", isOutService) :
+                new ObjectParameter("IsOutService", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Bookings_GetData_Result>("SP_Bookings_GetData", bookingIdParameter, bookingDateFromParameter, bookingDateToParameter, bookingStatusIdParameter, isPaidParameter, doctorIdParameter, patientIdParameter, isOutServiceParameter);
+        }
+    
+        public virtual ObjectResult<SP_BookingStatuses_GetData_Result> SP_BookingStatuses_GetData(Nullable<byte> statusId)
+        {
+            var statusIdParameter = statusId.HasValue ?
+                new ObjectParameter("StatusId", statusId) :
+                new ObjectParameter("StatusId", typeof(byte));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BookingStatuses_GetData_Result>("SP_BookingStatuses_GetData", statusIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Cities_GetData_Result> SP_Cities_GetData(Nullable<int> cityId, Nullable<int> countryId)
+        {
+            var cityIdParameter = cityId.HasValue ?
+                new ObjectParameter("CityId", cityId) :
+                new ObjectParameter("CityId", typeof(int));
+    
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Cities_GetData_Result>("SP_Cities_GetData", cityIdParameter, countryIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Countries_GetData_Result> SP_Countries_GetData(Nullable<int> countryId)
+        {
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Countries_GetData_Result>("SP_Countries_GetData", countryIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Diseases_GetData_Result> SP_Diseases_GetData(Nullable<int> diseaseId)
+        {
+            var diseaseIdParameter = diseaseId.HasValue ?
+                new ObjectParameter("DiseaseId", diseaseId) :
+                new ObjectParameter("DiseaseId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Diseases_GetData_Result>("SP_Diseases_GetData", diseaseIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Doctors_GetData_Result> SP_Doctors_GetData(Nullable<int> doctorId, string doctorPhone, string doctorEmail, Nullable<byte> doctorGender, string nationalId, Nullable<int> countryId, Nullable<int> specialityId, string userId)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var doctorPhoneParameter = doctorPhone != null ?
+                new ObjectParameter("DoctorPhone", doctorPhone) :
+                new ObjectParameter("DoctorPhone", typeof(string));
+    
+            var doctorEmailParameter = doctorEmail != null ?
+                new ObjectParameter("DoctorEmail", doctorEmail) :
+                new ObjectParameter("DoctorEmail", typeof(string));
+    
+            var doctorGenderParameter = doctorGender.HasValue ?
+                new ObjectParameter("DoctorGender", doctorGender) :
+                new ObjectParameter("DoctorGender", typeof(byte));
+    
+            var nationalIdParameter = nationalId != null ?
+                new ObjectParameter("NationalId", nationalId) :
+                new ObjectParameter("NationalId", typeof(string));
+    
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
+    
+            var specialityIdParameter = specialityId.HasValue ?
+                new ObjectParameter("SpecialityId", specialityId) :
+                new ObjectParameter("SpecialityId", typeof(int));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Doctors_GetData_Result>("SP_Doctors_GetData", doctorIdParameter, doctorPhoneParameter, doctorEmailParameter, doctorGenderParameter, nationalIdParameter, countryIdParameter, specialityIdParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Doctors_Save(Nullable<int> doctorId, string doctorName, string doctorPhone, string doctorEmail, Nullable<System.DateTime> doctorDateOfBirth, string doctorDegree, string doctorCollege, string doctorAwards, string doctorProfileImage, Nullable<System.DateTime> doctorMemberSince, Nullable<byte> doctorGender, string nationalId, string doctorAbout, Nullable<double> insideServicePrice, Nullable<double> outsideServicePrice, Nullable<int> countryId, Nullable<int> specialityId, Nullable<bool> doctorIsActive, string userId, string userName)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var doctorNameParameter = doctorName != null ?
+                new ObjectParameter("DoctorName", doctorName) :
+                new ObjectParameter("DoctorName", typeof(string));
+    
+            var doctorPhoneParameter = doctorPhone != null ?
+                new ObjectParameter("DoctorPhone", doctorPhone) :
+                new ObjectParameter("DoctorPhone", typeof(string));
+    
+            var doctorEmailParameter = doctorEmail != null ?
+                new ObjectParameter("DoctorEmail", doctorEmail) :
+                new ObjectParameter("DoctorEmail", typeof(string));
+    
+            var doctorDateOfBirthParameter = doctorDateOfBirth.HasValue ?
+                new ObjectParameter("DoctorDateOfBirth", doctorDateOfBirth) :
+                new ObjectParameter("DoctorDateOfBirth", typeof(System.DateTime));
+    
+            var doctorDegreeParameter = doctorDegree != null ?
+                new ObjectParameter("DoctorDegree", doctorDegree) :
+                new ObjectParameter("DoctorDegree", typeof(string));
+    
+            var doctorCollegeParameter = doctorCollege != null ?
+                new ObjectParameter("DoctorCollege", doctorCollege) :
+                new ObjectParameter("DoctorCollege", typeof(string));
+    
+            var doctorAwardsParameter = doctorAwards != null ?
+                new ObjectParameter("DoctorAwards", doctorAwards) :
+                new ObjectParameter("DoctorAwards", typeof(string));
+    
+            var doctorProfileImageParameter = doctorProfileImage != null ?
+                new ObjectParameter("DoctorProfileImage", doctorProfileImage) :
+                new ObjectParameter("DoctorProfileImage", typeof(string));
+    
+            var doctorMemberSinceParameter = doctorMemberSince.HasValue ?
+                new ObjectParameter("DoctorMemberSince", doctorMemberSince) :
+                new ObjectParameter("DoctorMemberSince", typeof(System.DateTime));
+    
+            var doctorGenderParameter = doctorGender.HasValue ?
+                new ObjectParameter("DoctorGender", doctorGender) :
+                new ObjectParameter("DoctorGender", typeof(byte));
+    
+            var nationalIdParameter = nationalId != null ?
+                new ObjectParameter("NationalId", nationalId) :
+                new ObjectParameter("NationalId", typeof(string));
+    
+            var doctorAboutParameter = doctorAbout != null ?
+                new ObjectParameter("DoctorAbout", doctorAbout) :
+                new ObjectParameter("DoctorAbout", typeof(string));
+    
+            var insideServicePriceParameter = insideServicePrice.HasValue ?
+                new ObjectParameter("InsideServicePrice", insideServicePrice) :
+                new ObjectParameter("InsideServicePrice", typeof(double));
+    
+            var outsideServicePriceParameter = outsideServicePrice.HasValue ?
+                new ObjectParameter("OutsideServicePrice", outsideServicePrice) :
+                new ObjectParameter("OutsideServicePrice", typeof(double));
+    
+            var countryIdParameter = countryId.HasValue ?
+                new ObjectParameter("CountryId", countryId) :
+                new ObjectParameter("CountryId", typeof(int));
+    
+            var specialityIdParameter = specialityId.HasValue ?
+                new ObjectParameter("SpecialityId", specialityId) :
+                new ObjectParameter("SpecialityId", typeof(int));
+    
+            var doctorIsActiveParameter = doctorIsActive.HasValue ?
+                new ObjectParameter("DoctorIsActive", doctorIsActive) :
+                new ObjectParameter("DoctorIsActive", typeof(bool));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Doctors_Save", doctorIdParameter, doctorNameParameter, doctorPhoneParameter, doctorEmailParameter, doctorDateOfBirthParameter, doctorDegreeParameter, doctorCollegeParameter, doctorAwardsParameter, doctorProfileImageParameter, doctorMemberSinceParameter, doctorGenderParameter, nationalIdParameter, doctorAboutParameter, insideServicePriceParameter, outsideServicePriceParameter, countryIdParameter, specialityIdParameter, doctorIsActiveParameter, userIdParameter, userNameParameter);
+        }
+    
+        public virtual ObjectResult<SP_Employees_GetData_Result> SP_Employees_GetData(Nullable<int> employeeId, string employeePhone, string employeeEmail, Nullable<byte> employeeGender, string nationalID, string userId)
+        {
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var employeePhoneParameter = employeePhone != null ?
+                new ObjectParameter("EmployeePhone", employeePhone) :
+                new ObjectParameter("EmployeePhone", typeof(string));
+    
+            var employeeEmailParameter = employeeEmail != null ?
+                new ObjectParameter("EmployeeEmail", employeeEmail) :
+                new ObjectParameter("EmployeeEmail", typeof(string));
+    
+            var employeeGenderParameter = employeeGender.HasValue ?
+                new ObjectParameter("EmployeeGender", employeeGender) :
+                new ObjectParameter("EmployeeGender", typeof(byte));
+    
+            var nationalIDParameter = nationalID != null ?
+                new ObjectParameter("NationalID", nationalID) :
+                new ObjectParameter("NationalID", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Employees_GetData_Result>("SP_Employees_GetData", employeeIdParameter, employeePhoneParameter, employeeEmailParameter, employeeGenderParameter, nationalIDParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Employees_Save(Nullable<int> employeeId, string employeeName, string employeePhone, string employeeEmail, Nullable<byte> employeeGender, Nullable<System.DateTime> employeeDateOfPirth, string employeeProfileImage, string employeeAddress, Nullable<bool> employeeIsActive, string nationalID, string userId, string userName)
+        {
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            var employeeNameParameter = employeeName != null ?
+                new ObjectParameter("EmployeeName", employeeName) :
+                new ObjectParameter("EmployeeName", typeof(string));
+    
+            var employeePhoneParameter = employeePhone != null ?
+                new ObjectParameter("EmployeePhone", employeePhone) :
+                new ObjectParameter("EmployeePhone", typeof(string));
+    
+            var employeeEmailParameter = employeeEmail != null ?
+                new ObjectParameter("EmployeeEmail", employeeEmail) :
+                new ObjectParameter("EmployeeEmail", typeof(string));
+    
+            var employeeGenderParameter = employeeGender.HasValue ?
+                new ObjectParameter("EmployeeGender", employeeGender) :
+                new ObjectParameter("EmployeeGender", typeof(byte));
+    
+            var employeeDateOfPirthParameter = employeeDateOfPirth.HasValue ?
+                new ObjectParameter("EmployeeDateOfPirth", employeeDateOfPirth) :
+                new ObjectParameter("EmployeeDateOfPirth", typeof(System.DateTime));
+    
+            var employeeProfileImageParameter = employeeProfileImage != null ?
+                new ObjectParameter("EmployeeProfileImage", employeeProfileImage) :
+                new ObjectParameter("EmployeeProfileImage", typeof(string));
+    
+            var employeeAddressParameter = employeeAddress != null ?
+                new ObjectParameter("EmployeeAddress", employeeAddress) :
+                new ObjectParameter("EmployeeAddress", typeof(string));
+    
+            var employeeIsActiveParameter = employeeIsActive.HasValue ?
+                new ObjectParameter("EmployeeIsActive", employeeIsActive) :
+                new ObjectParameter("EmployeeIsActive", typeof(bool));
+    
+            var nationalIDParameter = nationalID != null ?
+                new ObjectParameter("NationalID", nationalID) :
+                new ObjectParameter("NationalID", typeof(string));
+    
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Employees_Save", employeeIdParameter, employeeNameParameter, employeePhoneParameter, employeeEmailParameter, employeeGenderParameter, employeeDateOfPirthParameter, employeeProfileImageParameter, employeeAddressParameter, employeeIsActiveParameter, nationalIDParameter, userIdParameter, userNameParameter);
+        }
+    
+        public virtual int SP_GetDoctorId_ByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetDoctorId_ByUserId", userIdParameter);
+        }
+    
+        public virtual int SP_GetEmployeeId_ByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetEmployeeId_ByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Medications_GetData_Result> SP_Medications_GetData(Nullable<int> medicationId)
+        {
+            var medicationIdParameter = medicationId.HasValue ?
+                new ObjectParameter("MedicationId", medicationId) :
+                new ObjectParameter("MedicationId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Medications_GetData_Result>("SP_Medications_GetData", medicationIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Prescription_Medications_GetData_Result> SP_Prescription_Medications_GetData(Nullable<int> prescription_Medications_Id, Nullable<int> prescriptionId)
+        {
+            var prescription_Medications_IdParameter = prescription_Medications_Id.HasValue ?
+                new ObjectParameter("Prescription_Medications_Id", prescription_Medications_Id) :
+                new ObjectParameter("Prescription_Medications_Id", typeof(int));
+    
+            var prescriptionIdParameter = prescriptionId.HasValue ?
+                new ObjectParameter("PrescriptionId", prescriptionId) :
+                new ObjectParameter("PrescriptionId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Prescription_Medications_GetData_Result>("SP_Prescription_Medications_GetData", prescription_Medications_IdParameter, prescriptionIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Prescription_Medications_Insert(Nullable<int> prescriptionId, Nullable<int> medicationId, string notes)
+        {
+            var prescriptionIdParameter = prescriptionId.HasValue ?
+                new ObjectParameter("PrescriptionId", prescriptionId) :
+                new ObjectParameter("PrescriptionId", typeof(int));
+    
+            var medicationIdParameter = medicationId.HasValue ?
+                new ObjectParameter("MedicationId", medicationId) :
+                new ObjectParameter("MedicationId", typeof(int));
+    
+            var notesParameter = notes != null ?
+                new ObjectParameter("Notes", notes) :
+                new ObjectParameter("Notes", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Prescription_Medications_Insert", prescriptionIdParameter, medicationIdParameter, notesParameter);
+        }
+    
+        public virtual ObjectResult<SP_Prescriptions_GetData_Result> SP_Prescriptions_GetData(Nullable<int> prescriptionId, Nullable<System.DateTime> prescriptionDateFrom, Nullable<System.DateTime> prescriptionDateTo, Nullable<int> bookingId, Nullable<int> doctorId, Nullable<int> patientId)
+        {
+            var prescriptionIdParameter = prescriptionId.HasValue ?
+                new ObjectParameter("PrescriptionId", prescriptionId) :
+                new ObjectParameter("PrescriptionId", typeof(int));
+    
+            var prescriptionDateFromParameter = prescriptionDateFrom.HasValue ?
+                new ObjectParameter("PrescriptionDateFrom", prescriptionDateFrom) :
+                new ObjectParameter("PrescriptionDateFrom", typeof(System.DateTime));
+    
+            var prescriptionDateToParameter = prescriptionDateTo.HasValue ?
+                new ObjectParameter("PrescriptionDateTo", prescriptionDateTo) :
+                new ObjectParameter("PrescriptionDateTo", typeof(System.DateTime));
+    
+            var bookingIdParameter = bookingId.HasValue ?
+                new ObjectParameter("BookingId", bookingId) :
+                new ObjectParameter("BookingId", typeof(int));
+    
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var patientIdParameter = patientId.HasValue ?
+                new ObjectParameter("PatientId", patientId) :
+                new ObjectParameter("PatientId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Prescriptions_GetData_Result>("SP_Prescriptions_GetData", prescriptionIdParameter, prescriptionDateFromParameter, prescriptionDateToParameter, bookingIdParameter, doctorIdParameter, patientIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Prescriptions_Insert(Nullable<System.DateTime> prescriptionDate, string prescriptionNotes, string doctorReport, Nullable<int> diseaseId, Nullable<int> bookingId)
+        {
+            var prescriptionDateParameter = prescriptionDate.HasValue ?
+                new ObjectParameter("PrescriptionDate", prescriptionDate) :
+                new ObjectParameter("PrescriptionDate", typeof(System.DateTime));
+    
+            var prescriptionNotesParameter = prescriptionNotes != null ?
+                new ObjectParameter("PrescriptionNotes", prescriptionNotes) :
+                new ObjectParameter("PrescriptionNotes", typeof(string));
+    
+            var doctorReportParameter = doctorReport != null ?
+                new ObjectParameter("DoctorReport", doctorReport) :
+                new ObjectParameter("DoctorReport", typeof(string));
+    
+            var diseaseIdParameter = diseaseId.HasValue ?
+                new ObjectParameter("DiseaseId", diseaseId) :
+                new ObjectParameter("DiseaseId", typeof(int));
+    
+            var bookingIdParameter = bookingId.HasValue ?
+                new ObjectParameter("BookingId", bookingId) :
+                new ObjectParameter("BookingId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Prescriptions_Insert", prescriptionDateParameter, prescriptionNotesParameter, doctorReportParameter, diseaseIdParameter, bookingIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_ScheduleTimings_GetData_Result> SP_ScheduleTimings_GetData(Nullable<int> drTimingId, Nullable<byte> weekDayId, Nullable<int> doctorId, string doctorUserId)
+        {
+            var drTimingIdParameter = drTimingId.HasValue ?
+                new ObjectParameter("DrTimingId", drTimingId) :
+                new ObjectParameter("DrTimingId", typeof(int));
+    
+            var weekDayIdParameter = weekDayId.HasValue ?
+                new ObjectParameter("WeekDayId", weekDayId) :
+                new ObjectParameter("WeekDayId", typeof(byte));
+    
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var doctorUserIdParameter = doctorUserId != null ?
+                new ObjectParameter("DoctorUserId", doctorUserId) :
+                new ObjectParameter("DoctorUserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ScheduleTimings_GetData_Result>("SP_ScheduleTimings_GetData", drTimingIdParameter, weekDayIdParameter, doctorIdParameter, doctorUserIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_Specialities_GetData_Result> SP_Specialities_GetData(Nullable<int> specialityId)
+        {
+            var specialityIdParameter = specialityId.HasValue ?
+                new ObjectParameter("SpecialityId", specialityId) :
+                new ObjectParameter("SpecialityId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Specialities_GetData_Result>("SP_Specialities_GetData", specialityIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_WeekDays_GetData_Result> SP_WeekDays_GetData(Nullable<byte> weekDayId, string weekDayName)
+        {
+            var weekDayIdParameter = weekDayId.HasValue ?
+                new ObjectParameter("WeekDayId", weekDayId) :
+                new ObjectParameter("WeekDayId", typeof(byte));
+    
+            var weekDayNameParameter = weekDayName != null ?
+                new ObjectParameter("WeekDayName", weekDayName) :
+                new ObjectParameter("WeekDayName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_WeekDays_GetData_Result>("SP_WeekDays_GetData", weekDayIdParameter, weekDayNameParameter);
+        }
     }
 }
