@@ -76,7 +76,8 @@ namespace Clinic.Web.Controllers
             }
 
             var userobj = _comonBLL.Get_AspNetUsers_List()
-                .Where(a => a.UserName == model.Email || a.PhoneNumber == model.Email || a.Email == model.Email).FirstOrDefault();
+                .Where(a => a.UserName == model.Email || a.PhoneNumber == model.Email || a.Email == model.Email)
+                .FirstOrDefault();
 
             if (userobj != null && userobj.Email != null)
             {
