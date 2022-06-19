@@ -32,7 +32,6 @@ namespace Clinic.BLL.BLL
 
         #endregion
 
-
         #region Get Data
         public List<DoctorVM> Get_Doctor_List(int? doctorId, string nationalID, string phone, string email,
             string userId, byte? gender, int? countryId, int? specialityId)

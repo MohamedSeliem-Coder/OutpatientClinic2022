@@ -113,7 +113,7 @@ namespace Clinic.Web.Controllers
                         }
                         else
                         {
-                            var employee = _adminBLL.Get_Employee_List(null, model.Email, null, null, null).FirstOrDefault();
+                            var employee = _adminBLL.Get_Employee_List(null, model.Email, null, null, null,null).FirstOrDefault();
                             if (employee != null && !string.IsNullOrEmpty(employee.Admin_UserId))
                             {
                                 userobj = _comonBLL.Get_AspNetUsers_List().Where(a => a.Id == employee.Admin_UserId).FirstOrDefault();
@@ -253,6 +253,14 @@ namespace Clinic.Web.Controllers
 
                 #region Validate user
 
+                //var oldUserName = _comonBLL.Get_AspNetUsers_List().Where(a => a.UserName == model.UserName).FirstOrDefault();
+                //if(oldUserName != null)
+                //{
+                //    ModelState.AddModelError("UserName", "Username is taken.");
+                //    ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
+                //    return View(model);
+                //}
+
                 var oldData = _patientBLL.Get_Patient_List(null, null, null, model.Email, null,null,null);
                 var oldUserData = _comonBLL.Get_AspNetUsers_List().FirstOrDefault(a => a.Email == model.Email);
                 if ((oldData != null && oldData.Count > 0) || oldUserData != null)
@@ -336,10 +344,12 @@ namespace Clinic.Web.Controllers
 
                     return RedirectToAction("Dashboard", "Patient");
                 }
+
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.BlodGroups = _comonBLL.Get_BlodGroups_Data(null);
             return View(model);
         }
 
