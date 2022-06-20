@@ -1,0 +1,102 @@
+﻿@model List<Clinic.BLL.VM.DoctorVM>
+
+@{ 
+    int rating = 13;
+
+    int Feedback = 14;
+
+    int like = 85;
+}
+
+@foreach (var doctor in Model)
+{
+    
+    <!-- Doctor Widget -->
+    <div class="card">
+        <div class="card-body">
+            <div class="doctor-widget">
+                <div class="doc-info-left">
+                    <div class="doctor-img">
+                        <a href="/Home/DoctorProfile/@doctor.DoctorId">
+                            @*<img src="~/assets/img/doctors/doctor-thumb-01.jpg" class="img-fluid" alt="User Image">*@
+                            <img src="@doctor.DoctorProfileImage" class="img-fluid" alt="User Image">
+
+                        </a>
+                    </div>
+                    <div class="doc-info-cont">
+                        <h4 class="doc-name"><a href="doctor-profile.html">Dr. @doctor.DoctorName</a></h4>
+                        <p class="doc-speciality">@doctor.DoctorAbout</p>
+                        <h5 class="doc-department">
+                            @*<img src="~/assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">*@
+                            <img src="@doctor.SpecialityImagePath" class="img-fluid" alt="Speciality">
+                            @doctor.SpecialityName
+                        </h5>
+                        <div class="rating">
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star filled"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="d-inline-block average-rating">(@(rating+=3))</span>
+                        </div>
+                        <div class="clinic-details">
+                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> @doctor.CountryName, Cairo</p>
+                            <ul class="clinic-gallery">
+                                <li>
+                                    <a href="#" data-fancybox="gallery">
+                                        @*<img src="~/assets/img/features/feature-01.jpg" alt="Feature">*@
+                                        <img src="/Uploads/icu.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-fancybox="gallery">
+                                        @*<img src="~/assets/img/features/feature-02.jpg" alt="Feature">*@
+                                        <img src="/Uploads/test room.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-fancybox="gallery">
+                                        @*<img src="~/assets/img/features/feature-03.jpg" alt="Feature">*@
+                                        <img src="/Uploads/laboratory.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-fancybox="gallery">
+                                        @*<img src="~/assets/img/features/feature-04.jpg" alt="Feature">*@
+                                        <img src="/Uploads/patient ward.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        @*<div class="clinic-services">
+                            <span>Dental Fillings</span>
+                            <span> Whitneing</span>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="doc-info-right">
+                    <div class="clini-infos">
+                        <ul>
+                            <li><i class="far fa-thumbs-up"></i> @(like+=2)%</li>
+                            <li><i class="far fa-comment"></i> @(Feedback +=3) Feedback</li>
+                            <li><i class="fas fa-map-marker-alt"></i> @doctor.CountryName, Cairo</li>
+                            <li><i class="far fa-money-bill-alt"></i> EGP @doctor.InsideServicePrice - EGP @doctor.OutsideServicePrice <i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Lorem Ipsum"></i> </li>
+                        </ul>
+                    </div>
+                    <div class="clinic-booking">
+
+                        <a class="view-pro-btn" href="/Home/DoctorProfile/@doctor.DoctorId">View Profile</a>
+                        <a class="apt-btn" href="/Appointment/BookAppointment/@doctor.DoctorId">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Doctor Widget -->
+
+}
+
+
+@*<div class="load-more text-center">
+    <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+</div>*@

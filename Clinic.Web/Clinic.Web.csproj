@@ -1172,11 +1172,35 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\about.jpg" />
+    <Content Include="Uploads\about2.jpg" />
+    <Content Include="Uploads\avatar-03.jpg" />
+    <Content Include="Uploads\avatar-06.jpg" />
+    <Content Include="Uploads\avatar-07.jpg" />
+    <Content Include="Uploads\avatar-13.jpg" />
+    <Content Include="Uploads\Blogs\blog-01.jpg" />
+    <Content Include="Uploads\Blogs\blog-02.jpg" />
+    <Content Include="Uploads\Blogs\blog-03.jpg" />
+    <Content Include="Uploads\Blogs\blog-04.jpg" />
+    <Content Include="Uploads\Blogs\blog-06.jpg" />
+    <Content Include="Uploads\Blogs\blog-07.jpg" />
+    <Content Include="Uploads\Blogs\blog-08.jpg" />
+    <Content Include="Uploads\Blogs\blog-09.jpg" />
+    <Content Include="Uploads\bookonline.jpg" />
+    <Content Include="Uploads\bookonline2.jpg" />
+    <Content Include="Uploads\bookonline3.jpg" />
+    <Content Include="Uploads\icu.jpg" />
+    <Content Include="Uploads\lab.jpg" />
+    <Content Include="Uploads\laboratory.jpg" />
+    <Content Include="Uploads\medical.jpg" />
     <Content Include="Uploads\Medications\Acetaminophen.jpg" />
     <Content Include="Uploads\Medications\Benazepril.jpg" />
     <Content Include="Uploads\Medications\Cardura XL.jpg" />
     <Content Include="Uploads\Medications\Ketamine.jpg" />
     <Content Include="Uploads\Medications\Zaleplon.jpg" />
+    <Content Include="Uploads\operation.jpg" />
+    <Content Include="Uploads\patient ward.jpg" />
+    <Content Include="Uploads\Pharmacy.jpg" />
     <Content Include="Uploads\ProfileImage\Doctor\4.jpg" />
     <Content Include="Uploads\ProfileImage\Doctor\8.jpg" />
     <Content Include="Uploads\ProfileImage\Doctor\DarrenElder.jpg" />
@@ -1192,11 +1216,17 @@
     <Content Include="Uploads\ProfileImage\Doctor\RubyPerrin.jpg" />
     <Content Include="Uploads\ProfileImage\Doctor\SofiaBrient.jpg" />
     <Content Include="Uploads\ProfileImage\Patient\avatar-0172c63775-31ff-4b33-9269-d5065a157774.jpg" />
+    <Content Include="Uploads\ProfileImage\Patient\avatar-02b787dc77-8dca-4528-bcfb-8747e4e938c5.jpg" />
+    <Content Include="Uploads\ProfileImage\Patient\avatar-0720b0a9f4-ebe3-4dca-90ed-6297eaf17434.jpg" />
+    <Content Include="Uploads\ProfileImage\Patient\avatar-13e5e53baf-2ae3-4fad-a0dc-e46049740540.jpg" />
+    <Content Include="Uploads\ProfileImage\Patient\doctor-img1ecb847ad-e82e-4c99-b8cb-f037415373b8.png" />
     <Content Include="Uploads\Specialities\specialities-01.png" />
     <Content Include="Uploads\Specialities\specialities-02.png" />
     <Content Include="Uploads\Specialities\specialities-03.png" />
     <Content Include="Uploads\Specialities\specialities-04.png" />
     <Content Include="Uploads\Specialities\specialities-05.png" />
+    <Content Include="Uploads\test room.jpg" />
+    <Content Include="Uploads\visit.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1244,6 +1274,7 @@
     <Content Include="Views\Shared\_LayoutDoctor.cshtml" />
     <Content Include="Views\Appointment\BookAppointment.cshtml" />
     <Content Include="Views\Appointment\Checkout.cshtml" />
+    <Content Include="Views\Home\_Doctors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

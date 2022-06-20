@@ -14,14 +14,21 @@ namespace Clinic.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Patient")]
-        public ActionResult BookAppointment()
+       // [Authorize(Roles = "Patient")]
+        public ActionResult BookAppointment(int id)
         {
+            var doctor = _doctorBLL.Get_Doctor_ById(id);
+
+            ViewBag.Doctor = doctor;
+
+           // int patientId = _patientBLL.GetPatientId(UserID);
+           // var patient = _patientBLL.Get_Patient_ById(patientId);
+
             return View();
         }
 
 
-        [Authorize(Roles = "Patient")]
+       // [Authorize(Roles = "Patient")]
         public ActionResult Checkout()
         {
             return View();

@@ -19,5 +19,10 @@ namespace Clinic.BLL.BLL
         {
             return db.SP_BlodGroups_GetData(id).ToList();
         }
+
+        public List<SP_Specialities_GetData_Result> Get_Specialities_Data(int? specialityId)
+        {
+            return db.SP_Specialities_GetData(specialityId).ToList();
+        }
     }
 }
