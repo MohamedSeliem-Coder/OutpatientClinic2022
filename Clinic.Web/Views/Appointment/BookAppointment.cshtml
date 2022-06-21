@@ -6,6 +6,11 @@
     var doctor = ViewBag.Doctor as Clinic.BLL.VM.DoctorVM;
 }
 
+@section css {
+
+    <link href="~/assets/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+}
+
 <!-- Breadcrumb -->
 <div class="breadcrumb-bar">
     <div class="container-fluid">
@@ -53,175 +58,71 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-sm-4 col-md-6">
+                    <div class="col-12 col-sm-4 col-md-8">
                         @*<h4 class="mb-1">11 November 2019</h4>*@
                         <h4 class="mb-1">@DateTime.Now.ToString("dd MMMM yyyy")</h4>
                         <p class="text-muted">@DateTime.Now.ToString("dddd")</p>
                     </div>
-                    <div class="col-12 col-sm-8 col-md-6 text-sm-end">
-                        <div class="bookingrange btn btn-white btn-sm mb-3">
-                            <i class="far fa-calendar-alt me-2"></i>
-                            <span></span>
-                            <i class="fas fa-chevron-down ms-2"></i>
+                    <div class="col-12 col-sm-8 col-md-4 ">
+                        <div>
+                            <label class="custom_check">
+                                <input type="checkbox" id="IsOutService">
+                                <span class="checkmark"></span> Service From Home
+                            </label>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Select from date</label>
+                            <div class="cal-icon">
+                                <input class="form-control datepicker" placeholder="Date From" readonly id="StartDate" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Select to date</label>
+                            <div class="cal-icon">
+                                <input class="form-control datepicker" placeholder="Date To" readonly id="EndDate" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-primary" style=" margin-top: 30px !important;" id="btnSearch">
+                            <i class="fas fa-search"></i>
+                            @*<span>Search</span>*@
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+
+                <br />
                 <!-- Schedule Widget -->
-                <div class="card booking-schedule schedule-widget">
+                <div class="card booking-schedule schedule-widget" id="ScheduleContainer">
 
-                    <!-- Schedule Header -->
-                    <div class="schedule-header">
-                        <div class="row">
-                            <div class="col-md-12">
 
-                                <!-- Day Slot -->
-                                <div class="day-slot">
-                                    <ul>
-                                        <li class="left-arrow">
-                                            <a href="">
-                                                <i class="fa fa-chevron-left"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <span>Mon</span>
-                                            <span class="slot-date">11 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li>
-                                            <span>Tue</span>
-                                            <span class="slot-date">12 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li>
-                                            <span>Wed</span>
-                                            <span class="slot-date">13 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li>
-                                            <span>Thu</span>
-                                            <span class="slot-date">14 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li>
-                                            <span>Fri</span>
-                                            <span class="slot-date">15 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li>
-                                            <span>Sat</span>
-                                            <span class="slot-date">16 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li>
-                                            <span>Sun</span>
-                                            <span class="slot-date">17 Nov <small class="slot-year">2019</small></span>
-                                        </li>
-                                        <li class="right-arrow">
-                                            <a href="">
-                                                <i class="fa fa-chevron-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- /Day Slot -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Schedule Header -->
-                    <!-- Schedule Content -->
-                    <div class="schedule-cont">
-                        <div class="row">
-                            <div class="col-md-12">
-
-                                <!-- Time Slot -->
-                                <div class="time-slot">
-                                    <ul class="clearfix">
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing selected" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="timing" href="#">
-                                                <span>9:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>10:00</span> <span>AM</span>
-                                            </a>
-                                            <a class="timing" href="#">
-                                                <span>11:00</span> <span>AM</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- /Time Slot -->
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Schedule Content -->
 
                 </div>
                 <!-- /Schedule Widget -->
                 <!-- Submit Section -->
                 <div class="submit-section proceed-btn text-end">
-                    <a href="/Appointment/Checkout" class="btn btn-primary submit-btn">Proceed to Pay</a>
+
+                    <button type="button" class="btn btn-primary submit-btn" onclick="SaveBooking(this, 1);">Book</button>
+
+                    <button type="button" class="btn btn-primary submit-btn" onclick="SaveBooking(this, 2);">Confirm by Pay</button>
+
+                    @*<a href="/Appointment/Checkout" class="btn btn-primary submit-btn">Proceed to Pay</a>*@
                 </div>
                 <!-- /Submit Section -->
 
@@ -231,3 +132,144 @@
 
 </div>
 <!-- /Page Content -->
+
+<input type="hidden" id="DrTimingId" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+
+        $(function () {
+            GetSchedule();
+
+            DateTimePicker();
+
+        });
+
+        $("#btnSearch").on('click', function () {
+
+            let startDate = $("#StartDate").val();
+            if (startDate == "" || startDate == undefined || startDate == null) {
+                toastr["warning"]( "Select date from", "Book Appointment");
+                return;
+            }
+            let endDate = $("#EndDate").val();
+            if (endDate == "" || endDate == undefined || endDate == null) {
+                toastr["warning"]( "Select date to", "Book Appointment");
+                return;
+            }
+
+            GetSchedule();
+
+        });
+
+        function GetSchedule() {
+
+
+            let doctorId = '@doctor.DoctorId';
+            let startDate = null;
+            let endDate = null;
+
+            if ($("#StartDate").val() != "") {
+                startDate = $("#StartDate").val();
+            }
+
+            if ($("#EndDate").val() != "") {
+                endDate = $("#EndDate").val();
+            }
+
+            $.ajax({
+                url: "/Appointment/GetScheduleTimings",
+                type: "GET",
+                data: { DoctorId: doctorId, StartDate: startDate, EndDate: endDate },
+                success: function (result) {
+                    $("#ScheduleContainer").html(result);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+            });
+
+        }
+
+        function DateTimePicker() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-M-yy',
+                changeMonth: true,
+                changeYear: true,
+                sideBySide: true,
+                controlType: 'select',
+                minDate:new Date(),
+            });
+        }
+
+        function SelectTime(ele, drTimingId) {
+
+            $(".timing").each(function () {
+
+                $(this).removeClass('selected');
+            });
+
+            $(ele).addClass("selected");
+
+            $("#DrTimingId").val(drTimingId);
+
+        }
+
+        function SaveBooking(ele, type) {
+
+            debugger;
+
+            $(ele).attr("disabled", "disabled");
+
+            let doctorId = '@doctor.DoctorId';
+            let isOutService = $("#IsOutService").prop("checked");
+            let scheduleTimingId = $("#DrTimingId").val();
+            if (scheduleTimingId == "" || scheduleTimingId == undefined || scheduleTimingId == null) {
+                toastr["warning"]("Select time", "Book Appointment");
+                $(ele).removeAttr("disabled");
+                return;
+            }
+
+            let booking = {};
+
+            booking.DoctorId = doctorId;
+            booking.IsOutService = isOutService;
+            booking.ScheduleTimingId = scheduleTimingId;
+
+            $.ajax({
+                url: "/Appointment/SaveBookingData",
+                async: true,
+                type: 'POST',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(booking),
+                success: function (data) {
+
+                    debugger;
+
+                    if (data.Message == 'success') {
+                        toastr["success"]("Your Booking Saved Successfuly", "Book Appointment");
+                        $(ele).removeAttr("disabled");
+                        if (type == 2) {
+                            let url = "/Appointment/Checkout/" + data.BookingId;
+                            setTimeout(function () {
+                                window.location.href = url;
+                            }, 2000);
+                        }
+                    }
+                    else {
+                        toastr["error"](data.Message, "Book Appointment");
+                        $(ele).removeAttr("disabled");
+                    }
+                }
+            });
+
+        }
+
+    </script>
+
+}

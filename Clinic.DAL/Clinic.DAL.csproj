@@ -137,6 +137,9 @@
     <Compile Include="Model\SP_Employees_GetData_Result.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SP_GetScheduleTimings_ByDate_Result.cs">
+      <DependentUpon>ClinicModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SP_Medications_GetData_Result.cs">
       <DependentUpon>ClinicModel.tt</DependentUpon>
     </Compile>

@@ -97,7 +97,7 @@ namespace Clinic.BLL.BLL
 
         public int GetEmployeeId(string userId)
         {
-            return db.SP_GetEmployeeId_ByUserId(userId);
+            return db.SP_GetEmployeeId_ByUserId(userId).FirstOrDefault().Value;
         }
         #endregion
     }

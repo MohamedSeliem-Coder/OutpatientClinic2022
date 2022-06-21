@@ -501,6 +501,11 @@
         <Function Name="SP_GetPatientId_ByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SP_GetScheduleTimings_ByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DoctorId" Type="int" Mode="In" />
+          <Parameter Name="From" Type="date" Mode="In" />
+          <Parameter Name="To" Type="date" Mode="In" />
+        </Function>
         <Function Name="SP_Medications_GetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MedicationId" Type="int" Mode="In" />
         </Function>
@@ -1111,9 +1116,6 @@
             <Parameter Name="UserId" Mode="In" Type="String" />
             <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SP_GetPatientId_ByUserId">
-          <Parameter Name="UserId" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SP_Patient_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Patient_GetData_Result)">
             <Parameter Name="PatientId" Mode="In" Type="Int32" />
             <Parameter Name="PatientPhone" Mode="In" Type="String" />
@@ -1158,17 +1160,17 @@
             <Parameter Name="IsOutService" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_BookingStatuses_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_BookingStatuses_GetData_Result)">
-            <Parameter Name="StatusId" Mode="In" Type="Byte" />
+          <Parameter Name="StatusId" Mode="In" Type="Byte" />
           </FunctionImport>
           <FunctionImport Name="SP_Cities_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Cities_GetData_Result)">
             <Parameter Name="CityId" Mode="In" Type="Int32" />
             <Parameter Name="CountryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Countries_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Countries_GetData_Result)">
-            <Parameter Name="CountryId" Mode="In" Type="Int32" />
+          <Parameter Name="CountryId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Diseases_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Diseases_GetData_Result)">
-            <Parameter Name="DiseaseId" Mode="In" Type="Int32" />
+          <Parameter Name="DiseaseId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Doctors_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Doctors_GetData_Result)">
             <Parameter Name="DoctorId" Mode="In" Type="Int32" />
@@ -1224,14 +1226,8 @@
             <Parameter Name="UserId" Mode="In" Type="String" />
             <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SP_GetDoctorId_ByUserId">
-            <Parameter Name="UserId" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SP_GetEmployeeId_ByUserId">
-            <Parameter Name="UserId" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SP_Medications_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Medications_GetData_Result)">
-            <Parameter Name="MedicationId" Mode="In" Type="Int32" />
+          <Parameter Name="MedicationId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Prescription_Medications_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Prescription_Medications_GetData_Result)">
             <Parameter Name="Prescription_Medications_Id" Mode="In" Type="Int32" />
@@ -1264,11 +1260,25 @@
             <Parameter Name="DoctorUserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Specialities_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_Specialities_GetData_Result)">
-            <Parameter Name="SpecialityId" Mode="In" Type="Int32" />
+          <Parameter Name="SpecialityId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_WeekDays_GetData" ReturnType="Collection(OutpatientClinic_DBModel.SP_WeekDays_GetData_Result)">
             <Parameter Name="WeekDayId" Mode="In" Type="Byte" />
             <Parameter Name="WeekDayName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetScheduleTimings_ByDate" ReturnType="Collection(OutpatientClinic_DBModel.SP_GetScheduleTimings_ByDate_Result)">
+            <Parameter Name="DoctorId" Mode="In" Type="Int32" />
+            <Parameter Name="From" Mode="In" Type="DateTime" />
+            <Parameter Name="To" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetDoctorId_ByUserId" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetEmployeeId_ByUserId" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetPatientId_ByUserId" ReturnType="Collection(Int32)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="AspNetUser">
@@ -1535,6 +1545,15 @@
           <Property Type="Byte" Name="WeekDayId" Nullable="false" />
           <Property Type="String" Name="WeekDayName" Nullable="true" MaxLength="10" />
         </ComplexType>
+        <ComplexType Name="SP_GetScheduleTimings_ByDate_Result">
+          <Property Type="Int32" Name="DrTimingId" Nullable="false" />
+          <Property Type="Time" Name="DrTimingSlotFrom" Nullable="false" />
+          <Property Type="Time" Name="DrTimingSlotTo" Nullable="false" />
+          <Property Type="Byte" Name="WeekDayId" Nullable="false" />
+          <Property Type="String" Name="WeekDayName" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="Day_Date" Nullable="true" />
+          <Property Type="String" Name="Day_Name" Nullable="true" MaxLength="15" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1752,7 +1771,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_Patient_Save" FunctionName="OutpatientClinic_DBModel.Store.SP_Patient_Save" />
-          <FunctionImportMapping FunctionImportName="SP_GetPatientId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetPatientId_ByUserId" />
           <FunctionImportMapping FunctionImportName="SP_Patient_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Patient_GetData">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Patient_GetData_Result">
@@ -1943,8 +1961,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_Employees_Save" FunctionName="OutpatientClinic_DBModel.Store.SP_Employees_Save" />
-          <FunctionImportMapping FunctionImportName="SP_GetDoctorId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetDoctorId_ByUserId" />
-          <FunctionImportMapping FunctionImportName="SP_GetEmployeeId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetEmployeeId_ByUserId" />
           <FunctionImportMapping FunctionImportName="SP_Medications_GetData" FunctionName="OutpatientClinic_DBModel.Store.SP_Medications_GetData">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_Medications_GetData_Result">
@@ -2033,6 +2049,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetScheduleTimings_ByDate" FunctionName="OutpatientClinic_DBModel.Store.SP_GetScheduleTimings_ByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OutpatientClinic_DBModel.SP_GetScheduleTimings_ByDate_Result">
+                <ScalarProperty Name="DrTimingId" ColumnName="DrTimingId" />
+                <ScalarProperty Name="DrTimingSlotFrom" ColumnName="DrTimingSlotFrom" />
+                <ScalarProperty Name="DrTimingSlotTo" ColumnName="DrTimingSlotTo" />
+                <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
+                <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+                <ScalarProperty Name="Day_Date" ColumnName="Day_Date" />
+                <ScalarProperty Name="Day_Name" ColumnName="Day_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetDoctorId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetDoctorId_ByUserId" />
+          <FunctionImportMapping FunctionImportName="SP_GetEmployeeId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetEmployeeId_ByUserId" />
+          <FunctionImportMapping FunctionImportName="SP_GetPatientId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetPatientId_ByUserId" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

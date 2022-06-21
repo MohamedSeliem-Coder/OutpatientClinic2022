@@ -569,6 +569,13 @@
     <Content Include="admin\assets\plugins\select2\js\select2.min.js" />
     <Content Include="admin\assets\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="admin\assets\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="assets\bootstrap-toastr\toastr-rtl.css" />
+    <Content Include="assets\bootstrap-toastr\toastr-rtl.min.css" />
+    <Content Include="assets\bootstrap-toastr\toastr.css" />
+    <Content Include="assets\bootstrap-toastr\toastr.js" />
+    <Content Include="assets\bootstrap-toastr\toastr.min.css" />
+    <Content Include="assets\bootstrap-toastr\toastr.min.js" />
+    <Content Include="assets\bootstrap-toastr\ui-toastr.min.js" />
     <Content Include="assets\css\aos.css" />
     <Content Include="assets\css\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\css\bootstrap.css" />
@@ -1160,6 +1167,8 @@
     <Content Include="admin\assets\plugins\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="admin\assets\plugins\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="admin\assets\plugins\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="assets\bootstrap-toastr\README.md" />
+    <Content Include="assets\bootstrap-toastr\toastr.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1275,6 +1284,7 @@
     <Content Include="Views\Appointment\BookAppointment.cshtml" />
     <Content Include="Views\Appointment\Checkout.cshtml" />
     <Content Include="Views\Home\_Doctors.cshtml" />
+    <Content Include="Views\Appointment\_DoctorScheduleTimings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

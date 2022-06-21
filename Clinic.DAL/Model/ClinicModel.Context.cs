@@ -105,15 +105,6 @@ namespace Clinic.DAL.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Patient_Save", patientIdParameter, patientNameParameter, patientPhoneParameter, patientEmailParameter, patientDateOfBirthParameter, patientAddressParameter, patientGenderParameter, nationalIDParameter, patientWeightParameter, patientsHeightParameter, patientProfileImageParameter, blodGroupFkParameter, userIdParameter, userNameParameter);
         }
     
-        public virtual int SP_GetPatientId_ByUserId(string userId)
-        {
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetPatientId_ByUserId", userIdParameter);
-        }
-    
         public virtual ObjectResult<SP_Patient_GetData_Result> SP_Patient_GetData(Nullable<int> patientId, string patientPhone, string patientEmail, Nullable<byte> patientGender, string nationalID, Nullable<byte> blodGroupId, string userId)
         {
             var patientIdParameter = patientId.HasValue ?
@@ -512,24 +503,6 @@ namespace Clinic.DAL.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Employees_Save", employeeIdParameter, employeeNameParameter, employeePhoneParameter, employeeEmailParameter, employeeGenderParameter, employeeDateOfPirthParameter, employeeProfileImageParameter, employeeAddressParameter, employeeIsActiveParameter, nationalIDParameter, userIdParameter, userNameParameter);
         }
     
-        public virtual int SP_GetDoctorId_ByUserId(string userId)
-        {
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetDoctorId_ByUserId", userIdParameter);
-        }
-    
-        public virtual int SP_GetEmployeeId_ByUserId(string userId)
-        {
-            var userIdParameter = userId != null ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetEmployeeId_ByUserId", userIdParameter);
-        }
-    
         public virtual ObjectResult<SP_Medications_GetData_Result> SP_Medications_GetData(Nullable<int> medicationId)
         {
             var medicationIdParameter = medicationId.HasValue ?
@@ -664,6 +637,50 @@ namespace Clinic.DAL.Model
                 new ObjectParameter("WeekDayName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_WeekDays_GetData_Result>("SP_WeekDays_GetData", weekDayIdParameter, weekDayNameParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetScheduleTimings_ByDate_Result> SP_GetScheduleTimings_ByDate(Nullable<int> doctorId, Nullable<System.DateTime> from, Nullable<System.DateTime> to)
+        {
+            var doctorIdParameter = doctorId.HasValue ?
+                new ObjectParameter("DoctorId", doctorId) :
+                new ObjectParameter("DoctorId", typeof(int));
+    
+            var fromParameter = from.HasValue ?
+                new ObjectParameter("From", from) :
+                new ObjectParameter("From", typeof(System.DateTime));
+    
+            var toParameter = to.HasValue ?
+                new ObjectParameter("To", to) :
+                new ObjectParameter("To", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetScheduleTimings_ByDate_Result>("SP_GetScheduleTimings_ByDate", doctorIdParameter, fromParameter, toParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_GetDoctorId_ByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_GetDoctorId_ByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_GetEmployeeId_ByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_GetEmployeeId_ByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_GetPatientId_ByUserId(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_GetPatientId_ByUserId", userIdParameter);
         }
     }
 }

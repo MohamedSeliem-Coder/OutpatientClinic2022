@@ -1,4 +1,5 @@
 ﻿using Clinic.BLL.VM;
+using Clinic.DAL.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,10 +125,22 @@ namespace Clinic.BLL.BLL
 
         public int GetDoctorId(string userId)
         {
-            return db.SP_GetDoctorId_ByUserId(userId);
+            return db.SP_GetDoctorId_ByUserId(userId).FirstOrDefault().Value;
         }
 
         #endregion
 
+
+        #region Schedule Timings
+
+        public List<SP_GetScheduleTimings_ByDate_Result> Get_ScheduleTimings(int doctorId , DateTime? from , DateTime ? to)
+        {
+            from = from == null ? DateTime.Now : from;
+            to = to == null ? from.HasValue ? from.Value.AddDays(15) : DateTime.Now.AddDays(15) : to;
+
+            return db.SP_GetScheduleTimings_ByDate(doctorId, from, to).ToList();
+        }
+
+        #endregion
     }
 }

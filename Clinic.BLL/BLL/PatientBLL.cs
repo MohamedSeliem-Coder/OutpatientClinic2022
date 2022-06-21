@@ -105,7 +105,7 @@ namespace Clinic.BLL.BLL
 
         public int GetPatientId(string userId)
         {
-            return db.SP_GetPatientId_ByUserId(userId);
+            return db.SP_GetPatientId_ByUserId(userId).FirstOrDefault().Value;
         }
 
         #endregion

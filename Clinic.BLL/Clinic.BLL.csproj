@@ -44,11 +44,13 @@
   <ItemGroup>
     <Compile Include="BLL\AdminBLL.cs" />
     <Compile Include="BLL\BaseBLL.cs" />
+    <Compile Include="BLL\BookingBLL.cs" />
     <Compile Include="BLL\ComonBLL.cs" />
     <Compile Include="BLL\DoctorBLL.cs" />
     <Compile Include="BLL\PatientBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VM\AdminVM.cs" />
+    <Compile Include="VM\BookingVM.cs" />
     <Compile Include="VM\DoctorVM.cs" />
     <Compile Include="VM\PatientVM.cs" />
   </ItemGroup>

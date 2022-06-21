@@ -16,6 +16,7 @@ namespace Clinic.Web.Controllers
         public PatientBLL _patientBLL = new PatientBLL();
         public DoctorBLL _doctorBLL = new DoctorBLL();
         public AdminBLL _adminBLL = new AdminBLL();
+        public BookingBLL _bookingBLL = new BookingBLL();
 
 
     }
