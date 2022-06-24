@@ -571,6 +571,11 @@
           <Parameter Name="WeekDayId" Type="tinyint" Mode="In" />
           <Parameter Name="WeekDayName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="Users_UpdatePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="securitystamp" Type="nvarchar(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="OutpatientClinic_DBModelStoreContainer">
           <EntitySet Name="Areas" EntityType="Self.Areas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
@@ -1272,13 +1277,18 @@
             <Parameter Name="To" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="SP_GetDoctorId_ByUserId" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GetEmployeeId_ByUserId" ReturnType="Collection(Int32)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GetPatientId_ByUserId" ReturnType="Collection(Int32)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Users_UpdatePassword">
             <Parameter Name="UserId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="securitystamp" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="AspNetUser">
@@ -2065,6 +2075,7 @@
           <FunctionImportMapping FunctionImportName="SP_GetDoctorId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetDoctorId_ByUserId" />
           <FunctionImportMapping FunctionImportName="SP_GetEmployeeId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetEmployeeId_ByUserId" />
           <FunctionImportMapping FunctionImportName="SP_GetPatientId_ByUserId" FunctionName="OutpatientClinic_DBModel.Store.SP_GetPatientId_ByUserId" />
+          <FunctionImportMapping FunctionImportName="Users_UpdatePassword" FunctionName="OutpatientClinic_DBModel.Store.Users_UpdatePassword" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

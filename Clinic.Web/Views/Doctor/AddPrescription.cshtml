@@ -1,0 +1,316 @@
+﻿@using Clinic.BLL.VM
+
+@model BookingVM
+@{
+    ViewBag.Title = "AddPrescription";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+
+    PatientVM Patient = ViewBag.Patient;
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title mb-0">Add Prescription</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="biller-info">
+                    <h4 class="d-block">@Model.PatientName</h4>
+                    <span class="d-block text-sm text-muted"><b>Patient ID :</b> @Model.PatientId</span>
+                    <span class="d-block text-sm text-muted">@Model.PatientAddress</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="biller-info">
+                    <h4 class="d-block">Phone :  <span>@Model.PatientPhone</span></h4>
+                    <span class="d-block text-sm text-muted">Age <span>@Patient.Age Years, @Patient.PatientGenderName</span></span>
+                    <span class="d-block text-sm text-muted">Blood Group <span>@Patient.PatientBlodGroupName</span></span>
+                </div>
+            </div>
+            <div class="col-sm-4 text-sm-end">
+                <div class="billing-info">
+                    <h4 class="d-block">@DateTime.Now.ToString("dd MMMM yyyy")</h4>
+                    @*<span class="d-block text-muted">#INV0001</span>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Doctor Report</h4>
+
+                        <div class="form-group mb-0 col-md-6">
+                            <label>Disease</label>
+                            <select class="form-select form-control" id="Diseases">
+                                <option value="">Select Disease</option>
+                                @foreach (var item in ViewBag.Diseases as List<Clinic.DAL.Model.SP_Diseases_GetData_Result>)
+                                {
+                                    <option value="@item.DiseaseId">@item.DiseaseName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <br />
+                        <div class="form-group mb-0">
+                            <label>Diagnosis</label>
+                            <textarea class="form-control" rows="3" id="DoctorReport"></textarea>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /About Me -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Medications</h4>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-0">
+                                <label>Medication</label>
+                                <select class="form-select form-control" id="Medications">
+                                    <option value="">Select Medication</option>
+                                    @foreach (var item in ViewBag.Medications as List<Clinic.DAL.Model.SP_Medications_GetData_Result>)
+                                    {
+                                        <option value="@item.MedicationId">@item.MedicationName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-1">
+                            <button class="btn btn-success" onclick="AddMedication()"><i class="far fa-plus-square"></i></button>
+                        </div>
+
+
+
+                        <br />
+                        <!-- Prescription Item -->
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center">
+                                        <thead>
+                                            <tr>
+                                                <th hidden></th>
+                                                <th>Medication</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="MedicationsBody">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Prescription Item -->
+
+                    </div>
+                </div>
+                <!-- /About Me -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Prescription Notes</h4>
+
+                        <div class="form-group mb-0">
+                            <label>Notes</label>
+                            <textarea class="form-control" rows="2" id="PrescriptionNotes"></textarea>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /About Me -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-end">
+                <div class="signature-wrap">
+                    <div class="sign-name">
+                        <p class="mb-0">( Dr. @Model.DoctorName )</p>
+                        <span class="text-muted">Signature</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Signature -->
+        <!-- Submit Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="submit-section">
+                    <button type="button" class="btn btn-primary submit-btn" onclick="SaveData(this);">Save</button>
+                    <button type="button" class="btn btn-secondary submit-btn" onclick="ClearData();">Clear</button>
+                </div>
+            </div>
+        </div>
+        <!-- /Submit Section -->
+
+    </div>
+</div>
+
+
+<!-- Appointment Details Modal -->
+<div class="modal fade custom-modal" id="appt_details">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Appointment Details</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Appointment Details Modal -->
+
+
+@section scripts{
+    
+    <script>
+
+        function AddMedication() {
+            let medicationId = $("#Medications").val();
+            if (medicationId == "" || medicationId == undefined || medicationId == null) {
+                toastr["warning"]("Select Medication", "Add Prescription");
+                return;
+            }
+
+            let medicationBody = $("#MedicationsBody");
+
+            let isExists = false;
+
+            $(medicationBody.find(".MedicationId")).each(function () {
+
+                let oldMedicationId = $(this).text();
+
+                if (medicationId == oldMedicationId) {
+                    toastr["warning"]("This Medication Exists Before", "Medications");
+
+                    isExists = true;
+                    return;
+                }
+
+            });
+
+            if (!isExists) {
+                $.ajax({
+                    url: "/Doctor/GetMedicationRow",
+                    type: 'GET',
+                    data: { MedicationId: medicationId },
+                    success: function (data) {
+                        debugger;
+                        $("#MedicationsBody").append(data);
+                    }
+                });
+                $("#Medications").val("");
+            }
+        }
+
+        function Delete(ele) {
+            let tr = $(ele).closest('tr');
+
+            $(tr).remove();
+        }
+
+        function ClearData() {
+            $("#Diseases").val("");
+            $("#DoctorReport").val("");
+            $("#MedicationsBody tr").remove();
+            $("#PrescriptionNotes").val("");
+        }
+
+        function SaveData(ele) {
+
+            debugger;
+            $(ele).attr("disabled", "disabled");
+
+            let bookingId = '@Model.BookingId';
+
+            let diseaseId = $("#Diseases").val();
+            if (diseaseId == "" || diseaseId == undefined || diseaseId == null) {
+                toastr["warning"]("Select Disease", "Add Prescription");
+                $(ele).removeAttr("disabled");
+                return false;
+            }
+
+            let doctorReport = $("#DoctorReport").val();
+            if (doctorReport == "" || doctorReport == undefined || doctorReport == null) {
+                toastr["warning"]("Enter Doctor Report", "Add Prescription");
+                $(ele).removeAttr("disabled");
+                return false;
+            }
+
+            let medicationsIds = [];
+
+            $("#MedicationsBody tr").each(function () {
+                let medicationId = $(this).find(".MedicationId").text();
+                medicationsIds.push(medicationId);
+            });
+
+            if (medicationsIds.length == 0) {
+                toastr["warning"]("Please Add one medication at least", "Add Prescription");
+                $(ele).removeAttr("disabled");
+                return false;
+            }
+
+            let prescriptionNotes = $("#PrescriptionNotes").val();
+
+            let prescription = {};
+            prescription.DoctorReport = doctorReport;
+            prescription.PrescriptionNotes = prescriptionNotes;
+            prescription.DiseaseId = diseaseId;
+            prescription.BookingId = bookingId;
+
+            $.ajax({
+                url: "/Doctor/SavePrescriptionData",
+                async: true,
+                type: 'POST',
+                data: { Prescription: prescription, MedicationsIds: medicationsIds},
+                success: function (data) {
+
+                    debugger;
+
+                    if (data== 'success') {
+
+                        toastr["success"]("Add Prescription Saved Successfuly", "Add Prescription");
+                        $(ele).removeAttr("disabled");
+
+                        let url = "/Doctor/Appointments";
+                        setTimeout(function () {
+                            window.location.href = url;
+                        }, 2000);
+
+                    }
+                    else {
+                        toastr["error"](data, "Add Prescription");
+                        $(ele).removeAttr("disabled");
+                    }
+                }
+            });
+
+        }
+
+    </script>
+    }

@@ -31,6 +31,11 @@
     <!-- Apex Css -->
     <link rel="stylesheet" href="~/assets/plugins/apex/apexcharts.css">
 
+    <link href="~/alert/css/alert.min.css" rel="stylesheet" />
+    <link href="~/alert/themes/dark/theme.css" rel="stylesheet" />
+
+    <link href="~/assets/bootstrap-toastr/toastr.min.css" rel="stylesheet" />
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css">
 
@@ -258,23 +263,12 @@
                                         </li>
                                         <li>
                                             @*<a href="change-password.html">*@
-                                            <a href="#">
+                                            <a href="/Patient/ChangePassword">
                                                 <i class="fas fa-lock"></i>
                                                 <span>Change Password</span>
                                             </a>
                                         </li>
-                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                                        {
-                                            @Html.AntiForgeryToken()
 
-                                            <li>
-                                                <a href="javascript:document.getElementById('logoutForm').submit()" title="Logout" data-action="userLogout" data-logout-msg="Logout">
-                                                    <i class="fas fa-sign-out-alt"></i>
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-
-                                        }
 
                                     </ul>
                                 </nav>
@@ -516,6 +510,12 @@
 
     <!-- Apex JS -->
     <script src="~/assets/plugins/apex/apexcharts.min.js"></script>
+
+    <script src="~/alert/js/alert.min.js"></script>
+
+    <!-- toastr JS -->
+    <script src="~/assets/bootstrap-toastr/toastr.min.js"></script>
+    <script src="~/assets/bootstrap-toastr/ui-toastr.min.js"></script>
 
     <!-- Custom JS -->
     <script src="~/assets/js/script.js"></script>

@@ -38,6 +38,12 @@
     <!-- Apex Chart -->
     <link rel="stylesheet" href="~/assets/plugins/apex/apexcharts.css">
 
+    <link href="~/alert/css/alert.min.css" rel="stylesheet" />
+    <link href="~/alert/themes/dark/theme.css" rel="stylesheet" />
+
+
+    <link href="~/assets/bootstrap-toastr/toastr.min.css" rel="stylesheet" />
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css">
 
@@ -285,8 +291,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            @*<a href="doctor-change-password.html">*@
-                                            <a href="#">
+                                            <a href="/Doctor/ChangePassword">
                                                 <i class="fas fa-lock"></i>
                                                 <span>Change Password</span>
                                             </a>
@@ -473,7 +478,14 @@
     <!-- Custom Apex Chart -->
     <script src="~/assets/plugins/apex/chart-data.js"></script>
 
+    <script src="~/alert/js/alert.min.js"></script>
+
+    <!-- toastr JS -->
+    <script src="~/assets/bootstrap-toastr/toastr.min.js"></script>
+    <script src="~/assets/bootstrap-toastr/ui-toastr.min.js"></script>
+
     <!-- Custom JS -->
     <script src="~/assets/js/script.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

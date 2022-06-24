@@ -240,14 +240,24 @@
                                                 }
                                             </td>
                                             <td class="text-end">
+
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="javascript:;" onclick="CancelBooking('@item.BookingId')">Cancel</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Separated link</a>
+                                                    </div>
+                                                </div>
+
                                                 @*<div class="table-action">
-                                                        <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                                                            <i class="fas fa-print"></i> Print
-                                                        </a>
-                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                                            <i class="far fa-eye"></i> View
-                                                        </a>
-                                                    </div>*@
+            <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
+                <i class="fas fa-print"></i> Print
+            </a>
+            <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                <i class="far fa-eye"></i> View
+            </a>
+        </div>*@
                                             </td>
                                         </tr>
                                     }
@@ -1048,9 +1058,9 @@
 
     <script>
 
-         function GetBooking() {
+        function GetBooking() {
 
-             let statusId = $("#Status").val() == -1 ? null : $("#Status").val() ;
+            let statusId = $("#Status").val() == -1 ? null : $("#Status").val();
 
             $.ajax({
                 url: "/Patient/GetBooking",
@@ -1062,9 +1072,38 @@
                 error: function (error) {
                     console.log(error);
                 }
-
             });
+        }
+        //CancelBooking
 
+        function CancelBooking(id) {
+            $.alert.open({
+                type: 'confirm',
+                title: 'Booking Cancelation !',
+                content: 'Are You Sure To Cancel Your Booking ?',
+                callback: function (button) {
+                    if (button === 'yes') {
+                        $.ajax({
+                            url: "/Patient/CancelBooking",
+                            type: 'POST',
+                            data: { Id: id },
+                            success: function (data) {
+
+                                if (data == 'success') {
+
+                                    toastr["success"]("Booking Canceled Successfuly", "Booking Cancelation");
+
+                                    GetBooking();
+                                }
+                                else {
+                                    toastr["error"](data, "Booking Cancelation");
+
+                                }
+                            }
+                        });
+                    }
+                }
+            });
         }
 
     </script>

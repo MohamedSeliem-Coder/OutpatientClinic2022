@@ -117,7 +117,6 @@ namespace Clinic.BLL.BLL
 
         #endregion
 
-
         #region Payment
 
         public int ChangePaidStatus(int BookingId)
@@ -143,6 +142,38 @@ namespace Clinic.BLL.BLL
         public int ChangeBookingStatus(int bookingId, byte statusId)
         {
             return db.SP_Booking_ChangeStatus(bookingId, statusId);
+        }
+
+        #endregion
+
+
+        #region Prescription
+
+        public int? Save_Prescription_Data(PrescriptionVM obj,List<int> medicationsIds)
+        {
+            try
+            {
+
+                var result = db.SP_Prescriptions_Insert(obj.PrescriptionDate, obj.PrescriptionNotes, obj.DoctorReport, obj.DiseaseId, obj.BookingId)
+                    .FirstOrDefault();
+
+                if(result !=null && result > 0)
+                {
+                    if(medicationsIds !=null && medicationsIds.Count > 0)
+                    {
+                        foreach (var item in medicationsIds)
+                        {
+                            var res = db.SP_Prescription_Medications_Insert(result, item,null).FirstOrDefault();
+                        }
+                    }
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion

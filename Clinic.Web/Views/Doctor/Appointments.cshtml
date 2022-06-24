@@ -36,15 +36,16 @@
                 </div>
             </div>
             <div class="appointment-action">
-                <a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details">
-                    <i class="far fa-eye"></i> View
+                @*<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details">*@
+                <a href="/Doctor/AddPrescription/@item.BookingId" class="btn btn-sm bg-info-light">
+                    <i class="far fa-edit"></i> Add Prescription
                 </a>
-                <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                @*<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
                     <i class="fas fa-check"></i> Accept
                 </a>
                 <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
                     <i class="fas fa-times"></i> Cancel
-                </a>
+                </a>*@
             </div>
         </div>
         <!-- /Appointment List -->

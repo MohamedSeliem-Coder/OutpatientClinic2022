@@ -1,0 +1,17 @@
+﻿@model  Clinic.DAL.Model.SP_Medications_GetData_Result
+
+<tr>
+    <td hidden class="MedicationId">@Model.MedicationId</td>
+    <td>
+        <h2 class="table-avatar">
+            <a href="#" class="avatar avatar-sm me-2">
+                <img class="avatar-img rounded-circle" src="@Model.MedicationImagePath" alt="@Model.MedicationName">
+            </a>
+        </h2>
+    </td>
+    <td> @Model.MedicationName</td>
+
+    <td>
+        <button  class="btn bg-danger-light trash" onclick="Delete(this);"><i class="far fa-trash-alt"></i></button>
+    </td>
+</tr>

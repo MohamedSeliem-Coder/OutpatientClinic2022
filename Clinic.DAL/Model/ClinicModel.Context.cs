@@ -682,5 +682,22 @@ namespace Clinic.DAL.Model
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_GetPatientId_ByUserId", userIdParameter);
         }
+    
+        public virtual int Users_UpdatePassword(string userId, string password, string securitystamp)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var securitystampParameter = securitystamp != null ?
+                new ObjectParameter("securitystamp", securitystamp) :
+                new ObjectParameter("securitystamp", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Users_UpdatePassword", userIdParameter, passwordParameter, securitystampParameter);
+        }
     }
 }
