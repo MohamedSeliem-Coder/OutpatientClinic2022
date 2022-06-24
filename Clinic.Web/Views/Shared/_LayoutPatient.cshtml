@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+
+
+@{ 
+    var _patientBLL = new Clinic.BLL.BLL.PatientBLL();
+
+    var patientId = _patientBLL.GetPatientId(User.Identity.GetUserId());
+    var patient = _patientBLL.Get_Patient_ById(patientId);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -104,16 +114,16 @@
                     <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img class="rounded-circle" src="~/assets/img/patients/patient.jpg" width="31" alt="Ryan Taylor">
+                                <img class="rounded-circle" src="@patient.PatientProfileImage" width="31" alt="@patient.PatientName">
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
-                                    <img src="~/assets/img/patients/patient.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    <img src="@patient.PatientProfileImage" alt="User Image" class="avatar-img rounded-circle">
                                 </div>
                                 <div class="user-text">
-                                    <h6>Richard Wilson</h6>
+                                    <h6>@patient.PatientName</h6>
                                     <p class="text-muted mb-0">Patient</p>
                                 </div>
                             </div>
@@ -168,13 +178,13 @@
                             <div class="widget-profile pro-widget-content">
                                 <div class="profile-info-widget">
                                     <a href="#" class="booking-doc-img">
-                                        <img src="~/assets/img/patients/patient.jpg" alt="User Image">
+                                        <img src="@patient.PatientProfileImage" alt="User Image">
                                     </a>
                                     <div class="profile-det-info">
-                                        <h3>Richard Wilson</h3>
+                                        <h3>@patient.PatientName</h3>
                                         <div class="patient-details">
-                                            <h5><i class="fas fa-birthday-cake"></i> 24 Jul 1983, 38 years</h5>
-                                            <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</h5>
+                                            <h5><i class="fas fa-birthday-cake"></i> @patient.PatientDateOfBirth.ToString("dd MMM yyyy"), @patient.Age years</h5>
+                                            <h5 class="mb-0"><i class="fas fa-map-marker-alt"></i>@patient.PatientAddress</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -330,11 +340,11 @@
                             <div class="footer-widget footer-menu">
                                 <h2 class="footer-title">For Patients</h2>
                                 <ul>
-                                    <li><a href="search.html">Search for Doctors</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="booking.html">Booking</a></li>
-                                    <li><a href="patient-dashboard.html">Patient Dashboard</a></li>
+                                    <li><a href="/Home/Doctors">Search for Doctors</a></li>
+                                    <li><a href="/Account/Login">Login</a></li>
+                                    <li><a href="/Account/Register">Register</a></li>
+                                    <li><a href="/Home/Blog">Blog</a></li>
+                                    <li><a href="/Home/About">About</a></li>
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->
@@ -347,11 +357,11 @@
                             <div class="footer-widget footer-menu">
                                 <h2 class="footer-title">For Doctors</h2>
                                 <ul>
-                                    <li><a href="appointments.html">Appointments</a></li>
-                                    <li><a href="chat.html">Chat</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="doctor-register.html">Register</a></li>
-                                    <li><a href="doctor-dashboard.html">Doctor Dashboard</a></li>
+                                    <li><a href="#">Appointments</a></li>
+                                    <li><a href="#">Chat</a></li>
+                                    <li><a href="/Account/Login">Login</a></li>
+                                    <li><a href="/Account/Register">Register</a></li>
+                                    <li><a href="#">Doctor Dashboard</a></li>
                                 </ul>
                             </div>
                             <!-- /Footer Widget -->

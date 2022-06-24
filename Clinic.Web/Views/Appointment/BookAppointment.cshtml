@@ -134,6 +134,7 @@
 <!-- /Page Content -->
 
 <input type="hidden" id="DrTimingId" />
+<input type="hidden" id="BookingDate" />
 
 @section scripts{
 
@@ -206,7 +207,7 @@
             });
         }
 
-        function SelectTime(ele, drTimingId) {
+        function SelectTime(ele, drTimingId,date) {
 
             $(".timing").each(function () {
 
@@ -216,7 +217,7 @@
             $(ele).addClass("selected");
 
             $("#DrTimingId").val(drTimingId);
-
+            $("#BookingDate").val(date);
         }
 
         function SaveBooking(ele, type) {
@@ -234,11 +235,14 @@
                 return;
             }
 
+            let bookingDate = $("#BookingDate").val();
+
             let booking = {};
 
             booking.DoctorId = doctorId;
             booking.IsOutService = isOutService;
             booking.ScheduleTimingId = scheduleTimingId;
+            booking.BookingDate = bookingDate;
 
             $.ajax({
                 url: "/Appointment/SaveBookingData",
@@ -252,8 +256,14 @@
                     debugger;
 
                     if (data.Message == 'success') {
+
                         toastr["success"]("Your Booking Saved Successfuly", "Book Appointment");
                         $(ele).removeAttr("disabled");
+
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+
                         if (type == 2) {
                             let url = "/Appointment/Checkout/" + data.BookingId;
                             setTimeout(function () {

@@ -42,6 +42,31 @@ namespace Clinic.Web.Controllers
             return View(booking);
         }
 
+        public JsonResult SavePayment(int BookingId)
+        {
+            string result = "success";
+            try
+            {
+                _bookingBLL.ChangeBookingStatus(BookingId, 3); // Confirmed
+
+                _bookingBLL.ChangePaidStatus(BookingId);   // Paid
+
+                return Json(new { Message = result, BookingId = BookingId }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { Message = e.Message, BookingId = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult BookingSuccess(int Id)
+        {
+            var booking = _bookingBLL.Get_Booking_ById(Id);
+            return View(booking);
+        }
+
+
 
         #region Save Booking
 
@@ -64,8 +89,6 @@ namespace Clinic.Web.Controllers
                 obj.BookingFees = (obj.BookingAmount * 10) / 100; 
 
                 obj.PatientId = _patientBLL.GetPatientId(UserID);
-                obj.BookingDate = DateTime.Now;
-
                 obj.BookingStatusId = 1;
                 obj.CreationDate = DateTime.Now;
 

@@ -24,5 +24,10 @@ namespace Clinic.BLL.BLL
         {
             return db.SP_Specialities_GetData(specialityId).ToList();
         }
+
+        public List<SP_BookingStatuses_GetData_Result> Get_BookingStatuses_Data(byte? statusId)
+        {
+            return db.SP_BookingStatuses_GetData(statusId).ToList();
+        }
     }
 }

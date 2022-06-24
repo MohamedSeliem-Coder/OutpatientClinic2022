@@ -359,6 +359,12 @@ namespace Clinic.Web.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
+
+        #region ChangePassword
+
+        #endregion
+
+
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]

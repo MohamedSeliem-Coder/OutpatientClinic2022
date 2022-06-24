@@ -4,6 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+
+    input.error{
+        border: 1px solid red;
+    }
+
+    label.error{
+        color:red;
+    }
+
+</style>
+
 <!-- Breadcrumb -->
 <div class="breadcrumb-bar">
     <div class="container-fluid">
@@ -31,7 +43,7 @@
                     <div class="card-body">
 
                         <!-- Checkout Form -->
-                        <form action="booking-success.html">
+                        <form id="BookingForm">
 
                             <!-- Personal Information -->
                             <div class="info-widget">
@@ -40,25 +52,25 @@
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group card-label">
                                             <label>Full Name</label>
-                                            <input class="form-control" type="text" value="@Model.PatientName">
+                                            <input class="form-control" type="text" value="@Model.PatientName" id="PatientName" name="PatientName">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group card-label">
                                             <label>Address</label>
-                                            <input class="form-control" type="text" value="@Model.PatientAddress">
+                                            <input class="form-control" type="text" value="@Model.PatientAddress" id="PatientAddress" name="PatientAddress">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group card-label">
                                             <label>Email</label>
-                                            <input class="form-control" type="email" value="@Model.PatientEmail">
+                                            <input class="form-control" type="email" value="@Model.PatientEmail" id="PatientEmail" name="PatientEmail">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group card-label">
                                             <label>Phone</label>
-                                            <input class="form-control" type="text" value="@Model.PatientPhone">
+                                            <input class="form-control" type="text" value="@Model.PatientPhone" id="PatientPhone" name="PatientPhone">
                                         </div>
                                     </div>
                                 </div>
@@ -80,31 +92,31 @@
                                         <div class="col-md-6">
                                             <div class="form-group card-label">
                                                 <label for="card_name">Name on Card</label>
-                                                <input class="form-control" id="card_name" type="text">
+                                                <input class="form-control" id="card_name"  name="card_name" type="text">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group card-label">
                                                 <label for="card_number">Card Number</label>
-                                                <input class="form-control" id="card_number" placeholder="1234  5678  9876  5432" type="text">
+                                                <input class="form-control" id="card_number" name="card_number" placeholder="1234  5678  9876  5432" type="text">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group card-label">
                                                 <label for="expiry_month">Expiry Month</label>
-                                                <input class="form-control" id="expiry_month" placeholder="MM" type="text">
+                                                <input class="form-control" id="expiry_month" name="expiry_month" placeholder="MM" type="text">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group card-label">
                                                 <label for="expiry_year">Expiry Year</label>
-                                                <input class="form-control" id="expiry_year" placeholder="YY" type="text">
+                                                <input class="form-control" id="expiry_year" name="expiry_year" placeholder="YY" type="text">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group card-label">
                                                 <label for="cvv">CVV</label>
-                                                <input class="form-control" id="cvv" type="text">
+                                                <input class="form-control" id="cvv" name="cvv" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -119,10 +131,9 @@
                                     </label>
                                 </div>
                                 <!-- /Paypal Payment -->
-
                                 <!-- Submit Section -->
                                 <div class="submit-section mt-4">
-                                    <button type="button" class="btn btn-primary submit-btn">Confirm and Pay</button>
+                                    <button type="button" class="btn btn-primary submit-btn" onclick="SavePayment(this)">Confirm and Pay</button>
                                 </div>
                                 <!-- /Submit Section -->
 
@@ -199,3 +210,123 @@
 
 </div>
 <!-- /Page Content -->
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script>
+
+       //============== Validate ===================
+        $("#BookingForm").validate({
+            ignore: null,
+            rules: {
+
+                PatientName: {
+                    required: true
+                },
+                PatientAddress: {
+                    required: true
+                },
+                PatientEmail: {
+                    required: true
+                },
+                PatientPhone: {
+                    required: true
+                },
+                card_name: {
+                    required: true
+                },
+                card_number: {
+                    required: true
+                },
+                expiry_month: {
+                    required: true
+                },
+                expiry_year: {
+                    required: true
+                },
+                cvv: {
+                    required: true
+                }
+
+            },
+            messages: {
+                PatientName:
+                {
+                    required: "Required"
+                },
+                PatientAddress:
+                {
+                    required: "Required"
+                },
+                PatientEmail:
+                {
+                    required: "Required"
+                },
+                PatientPhone: {
+                    required: "Required"
+                },
+                card_name: {
+                    required: "Required"
+                },
+                card_number: {
+                    required: "Required"
+                },
+                expiry_month: {
+                    required: "Required"
+                },
+                expiry_year: {
+                    required: "Required"
+                },
+                cvv: {
+                    required: "Required"
+                },
+            },
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            }
+        });
+
+
+        function SavePayment(ele) {
+
+            debugger;
+
+            $(ele).attr("disabled", true);
+
+            if (!$("#BookingForm").valid()) {
+                $(ele).attr("disabled", false);
+                return false;
+            }
+
+            $.ajax({
+                url: "/Appointment/SavePayment",
+                type: 'POST',
+                data: { BookingId: '@Model.BookingId' },
+                success: function (data) {
+                    debugger;
+
+                    if (data.Message == 'success') {
+
+                        $(ele).removeAttr("disabled");
+
+                        let url = "/Appointment/BookingSuccess/" + data.BookingId;
+                        setTimeout(function () {
+                            window.location.href = url;
+                        }, 1000);
+
+                    }
+                    else {
+                        toastr["error"](data.Message, "Book Appointment");
+                        $(ele).removeAttr("disabled");
+                    }
+                }
+            });
+
+        }
+    </script>
+
+
+} 

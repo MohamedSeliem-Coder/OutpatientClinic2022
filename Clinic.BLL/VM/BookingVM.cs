@@ -25,7 +25,7 @@ namespace Clinic.BLL.VM
         //=============
         public string DoctorName { get; set; }
         public string DoctorProfileImage { get; set; }
-
+        public string SpecialityName { get; set; }
         public string CountryName { get; set; }
 
         //=============
@@ -33,6 +33,13 @@ namespace Clinic.BLL.VM
         public string PatientPhone { get; set; }
         public string PatientEmail { get; set; }
         public string PatientAddress { get; set; }
+        public string PatientProfileImage { get; set; }
 
+        //==============
+
+        public TimeSpan DrTimingSlotFrom { get; set; }
+        public TimeSpan DrTimingSlotTo { get; set; }
+
+        public string StatusName { get; set; }
     }
 }

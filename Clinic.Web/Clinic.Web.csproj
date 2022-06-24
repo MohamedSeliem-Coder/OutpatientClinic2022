@@ -1195,6 +1195,9 @@
     <Content Include="Uploads\Blogs\blog-07.jpg" />
     <Content Include="Uploads\Blogs\blog-08.jpg" />
     <Content Include="Uploads\Blogs\blog-09.jpg" />
+    <Content Include="Uploads\Blogs\bloglist-1.jpg" />
+    <Content Include="Uploads\Blogs\bloglist-2.jpg" />
+    <Content Include="Uploads\Blogs\bloglist-3.jpg" />
     <Content Include="Uploads\bookonline.jpg" />
     <Content Include="Uploads\bookonline2.jpg" />
     <Content Include="Uploads\bookonline3.jpg" />
@@ -1285,6 +1288,9 @@
     <Content Include="Views\Appointment\Checkout.cshtml" />
     <Content Include="Views\Home\_Doctors.cshtml" />
     <Content Include="Views\Appointment\_DoctorScheduleTimings.cshtml" />
+    <Content Include="Views\Appointment\BookingSuccess.cshtml" />
+    <Content Include="Views\Patient\_PatientBookingList.cshtml" />
+    <Content Include="Views\Doctor\Appointments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
