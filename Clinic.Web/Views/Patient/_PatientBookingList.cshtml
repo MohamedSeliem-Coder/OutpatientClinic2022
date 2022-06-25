@@ -79,24 +79,22 @@
                     </td>
                     <td class="text-end">
 
-
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:;" onclick="CancelBooking('@item.BookingId')">Cancel</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
+                                @if (item.BookingStatusId != 4 && item.BookingStatusId != 5)
+                                {
+
+                                    <a class="dropdown-item" href="javascript:;" onclick="CancelBooking('@item.BookingId')"> Cancel</a>
+                                }
+
+                                @if (item.PrescriptionId != null)
+                                {
+                                    <a class="dropdown-item" href="/Patient/ShowPrescription/@item.PrescriptionId"><i class="far fa-eye"></i> Prescription</a>
+                                }
+
                             </div>
                         </div>
-
-                        @*<div class="table-action">
-            <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                <i class="fas fa-print"></i> Print
-            </a>
-            <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-                <i class="far fa-eye"></i> View
-            </a>
-        </div>*@
                     </td>
                 </tr>
             }

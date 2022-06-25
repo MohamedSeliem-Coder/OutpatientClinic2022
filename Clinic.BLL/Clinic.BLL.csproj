@@ -34,6 +34,7 @@
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
     <Compile Include="VM\AdminVM.cs" />
     <Compile Include="VM\BookingVM.cs" />
     <Compile Include="VM\DoctorVM.cs" />
+    <Compile Include="VM\PrescriptionMedicationVM.cs" />
     <Compile Include="VM\PatientVM.cs" />
     <Compile Include="VM\PrescriptionVM.cs" />
   </ItemGroup>

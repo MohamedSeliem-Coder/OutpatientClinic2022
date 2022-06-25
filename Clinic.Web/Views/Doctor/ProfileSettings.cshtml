@@ -1,0 +1,363 @@
+﻿@model Clinic.BLL.VM.DoctorVM
+@{
+    ViewBag.Title = "Profile Settings";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+}
+
+
+
+<link href="~/assets/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<style>
+    input.error {
+        border: 1px solid red;
+    }
+
+    label.error {
+        color: red;
+    }
+</style>
+
+
+<form id="DoctorForm" method="post" role="form" enctype="multipart/form-data">
+
+
+    <input type="hidden" value="@Model.DoctorId" id="DoctorId" name="DoctorId" />
+    <input type="hidden" value="@Model.Doctor_UserId" id="Doctor_UserId" name="Doctor_UserId" />
+
+    <!-- Basic Information -->
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Basic Information</h4>
+            <div class="row form-row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="change-avatar">
+                            <div class="profile-img" id="Image-Container">
+                                <img src="@Model.DoctorProfileImage" alt="User Image">
+                            </div>
+                            <div class="upload-img">
+                                <div class="change-photo-btn">
+                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                    <input type="file" id="Image" name="Image" class="upload" accept="image/*">
+                                </div>
+                                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly value="@Model.Username" id="Username" name="Username">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" readonly value="@Model.DoctorEmail" id="DoctorEmail" name="DoctorEmail">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Phone Number <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly value="@Model.DoctorPhone" id="DoctorPhone" name="DoctorPhone">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>National ID <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly value="@Model.NationalID" id="NationalID" name="NationalID">
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="@Model.DoctorName" id="DoctorName" name="DoctorName">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Gender <span class="text-danger">*</span></label>
+                        <select class="select form-control" id="DoctorGender" name="DoctorGender">
+                            <option value="1" @(Model.DoctorGender == 1 ? "selected" : string.Empty)>Male</option>
+                            <option value="2" @(Model.DoctorGender == 2 ? "selected" : string.Empty)>Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Date of Birth <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control datepicker" readonly value="@(Model.DoctorDateOfBirth.HasValue? Model.DoctorDateOfBirth.Value.ToString("dd-MMM-yyyy") : string.Empty)" id="DoctorDateOfBirth" name="DoctorDateOfBirth">
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Doctor MemberSince <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control datepicker" readonly value="@(Model.DoctorMemberSince.HasValue? Model.DoctorMemberSince.Value.ToString("dd-MMM-yyyy") : string.Empty)" id="DoctorMemberSince" name="DoctorMemberSince">
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Inside Service Price <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" value="@Model.InsideServicePrice" id="InsideServicePrice" name="InsideServicePrice">
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Outside Service Price <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" value="@Model.OutsideServicePrice" id="OutsideServicePrice" name="OutsideServicePrice">
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Speciality <span class="text-danger">*</span></label>
+                        <select class="select form-control" id="SpecialityId" name="SpecialityId">
+                            <option value="">Select</option>
+                            @foreach (var item in ViewBag.Specialities as List<Clinic.DAL.Model.SP_Specialities_GetData_Result>)
+                            {
+                                <option value="@item.SpecialityId" @(Model.SpecialityId == item.SpecialityId ? "selected" : "")>@item.SpecialityName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Country <span class="text-danger">*</span></label>
+                        <select class="select form-control" id="CountryId" name="CountryId">
+                            <option value="">Select</option>
+                            @foreach (var item in ViewBag.Countries as List<Clinic.DAL.Model.SP_Countries_GetData_Result>)
+                            {
+                                <option value="@item.CountryId" @(Model.CountryId == item.CountryId ? "selected" : "")>@item.CountryName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 mb-0">
+                    <div class="form-group">
+                        <label>Doctor Degree</label>
+                        <input type="text" class="form-control" value="@Model.DoctorDegree" id="DoctorDegree" name="DoctorDegree">
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-0">
+                    <div class="form-group">
+                        <label>Doctor College</label>
+                        <input type="text" class="form-control" value="@Model.DoctorCollege" id="DoctorCollege" name="DoctorCollege">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Basic Information -->
+    <!-- About Me -->
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">About Me</h4>
+            <div class="form-group mb-0">
+                <label>Biography</label>
+                <textarea class="form-control" rows="3" id="DoctorAbout" name="DoctorAbout">@Model.DoctorAbout</textarea>
+            </div>
+        </div>
+    </div>
+    <!-- /About Me -->
+    <!-- Awards -->
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Awards</h4>
+            <div class="form-group mb-0">
+                <label>Awards</label>
+                <textarea class="form-control" rows="3" id="DoctorAwards" name="DoctorAwards">@Model.DoctorAwards</textarea>
+            </div>
+        </div>
+    </div>
+    <!-- /Awards -->
+
+
+    <div class="submit-section submit-btn-bottom">
+        <button type="button" onclick="SaveData(this)" class="btn btn-primary submit-btn">Save Changes</button>
+    </div>
+
+</form>
+
+
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            DateTimePicker();
+
+            $('#Image').on('change', function () {
+
+                var imageContainer = $('#Image-Container');
+                var image = window.URL.createObjectURL(this.files[0]);
+                imageContainer.find('img').attr('src', image);
+            });
+
+            //===================
+        });
+
+        function DateTimePicker() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-M-yy',
+                changeMonth: true,
+                changeYear: true,
+                sideBySide: true,
+                controlType: 'select',
+                maxDate: '-15y',
+
+            });
+        }
+
+
+        $("#DoctorForm").validate({
+            ignore: null,
+            rules: {
+
+                DoctorName: {
+                    required: true
+                },
+                DoctorDateOfBirth: {
+                    required: true
+                },
+                DoctorMemberSince: {
+                    required: true
+                },
+                InsideServicePrice: {
+                    required: true
+                },
+                OutsideServicePrice: {
+                    required: true
+                },
+                SpecialityId: {
+                    required: true
+                },
+                CountryId: {
+                    required: true
+                }
+            },
+            messages: {
+                DoctorName:
+                {
+                    required: "Required"
+                },
+                DoctorDateOfBirth:
+                {
+                    required: "Required"
+                },
+                DoctorMemberSince:
+                {
+                    required: "Required"
+                },
+                InsideServicePrice: {
+                    required: "Required"
+
+                },
+                OutsideServicePrice: {
+                    required: "Required"
+                },
+                SpecialityId: {
+                    required: "Required"
+                },
+                CountryId: {
+                    required: "Required"
+                }
+            },
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            }
+        });
+
+        function SaveData(ele) {
+            debugger;
+
+            $(ele).attr("disabled", true);
+
+            if (!$("#DoctorForm").valid()) {
+                $(ele).attr("disabled", false);
+                return false;
+            }
+
+            //  var PostData = $("#BasicForm").serialize();
+
+
+            var formData = new FormData;
+
+            formData.append("DoctorId", $("#DoctorId").val());
+            formData.append("Doctor_UserId", $("#Doctor_UserId").val());
+            formData.append("DoctorName", $("#DoctorName").val());
+            formData.append("DoctorGender", $("#DoctorGender").val());
+            formData.append("DoctorDateOfBirth", $("#DoctorDateOfBirth").val());
+            formData.append("DoctorMemberSince", $("#DoctorMemberSince").val());
+            formData.append("InsideServicePrice", $("#InsideServicePrice").val());
+            formData.append("OutsideServicePrice", $("#OutsideServicePrice").val());
+            formData.append("SpecialityId", $("#SpecialityId").val());
+            formData.append("CountryId", $("#CountryId").val());
+            formData.append("DoctorDegree", $("#DoctorDegree").val());
+            formData.append("DoctorCollege", $("#DoctorCollege").val());
+            formData.append("DoctorAbout", $("#DoctorAbout").val());
+            formData.append("DoctorAwards", $("#DoctorAwards").val());
+
+            formData.append("Image", $("#Image").get(0).files[0]);
+
+
+            $.ajax({
+                url: "/Doctor/SaveData",
+                async: true,
+                type: "Post",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    debugger;
+
+                    if (data == 'success') {
+
+                        toastr["success"]("Your Info Saved Successfuly !", "Profile Settings");
+
+                        $(ele).removeAttr("disabled");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+
+                    }
+                    else {
+                        toastr["error"](data, "Profile Settings");
+                        $(ele).removeAttr("disabled");
+                    }
+                }
+            });
+
+
+        }
+
+
+    </script>
+}

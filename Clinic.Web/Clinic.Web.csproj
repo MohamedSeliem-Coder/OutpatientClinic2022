@@ -1343,6 +1343,12 @@
     <Content Include="Views\Shared\_ChangePasswordForm.cshtml" />
     <Content Include="Views\Patient\ChangePassword.cshtml" />
     <Content Include="Views\Doctor\ChangePassword.cshtml" />
+    <Content Include="Views\Doctor\ProfileSettings.cshtml" />
+    <Content Include="Views\Patient\ProfileSettings.cshtml" />
+    <Content Include="Views\Patient\Appointments.cshtml" />
+    <Content Include="Views\Patient\Favourites.cshtml" />
+    <Content Include="Views\Patient\Prescriptions.cshtml" />
+    <Content Include="Views\Patient\ShowPrescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

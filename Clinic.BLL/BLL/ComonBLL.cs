@@ -52,6 +52,14 @@ namespace Clinic.BLL.BLL
                 .ToList();
         }
 
+
+        //SP_Countries_GetData_Result
+        public List<SP_Countries_GetData_Result> Get_Countries_Data(int? countryId)
+        {
+            return db.SP_Countries_GetData(countryId).ToList();
+        }
+
+
         public void ChangePassword(string UserID,string HashedPassword,string SecurityStamp)
         {
             try

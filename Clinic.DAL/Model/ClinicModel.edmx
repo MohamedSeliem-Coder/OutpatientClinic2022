@@ -1388,7 +1388,7 @@
         <ComplexType Name="SP_Bookings_GetData_Result">
           <Property Type="Int32" Name="BookingId" Nullable="false" />
           <Property Type="Int32" Name="BookingNo" Nullable="false" />
-          <Property Type="DateTime" Name="BookingDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="BookingDate" Nullable="true" />
           <Property Type="Double" Name="BookingAmount" Nullable="false" />
           <Property Type="Double" Name="BookingFees" Nullable="false" />
           <Property Type="DateTime" Name="BookingCreationDate" Nullable="false" Precision="23" />
@@ -1420,6 +1420,7 @@
           <Property Type="Time" Name="DrTimingSlotTo" Nullable="false" />
           <Property Type="Byte" Name="WeekDayId" Nullable="false" />
           <Property Type="String" Name="WeekDayName" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="PrescriptionId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_BookingStatuses_GetData_Result">
           <Property Type="Byte" Name="StatusId" Nullable="false" />
@@ -1870,6 +1871,7 @@
                 <ScalarProperty Name="DrTimingSlotTo" ColumnName="DrTimingSlotTo" />
                 <ScalarProperty Name="WeekDayId" ColumnName="WeekDayId" />
                 <ScalarProperty Name="WeekDayName" ColumnName="WeekDayName" />
+                <ScalarProperty Name="PrescriptionId" ColumnName="PrescriptionId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -1,0 +1,306 @@
+﻿@model Clinic.BLL.VM.PatientVM
+@{
+    ViewBag.Title = "Profile Settings";
+    Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+}
+
+
+<link href="~/assets/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" />
+<style>
+    input.error {
+        border: 1px solid red;
+    }
+
+    label.error {
+        color: red;
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+
+        <!-- Profile Settings Form -->
+        <form id="PatientForm" method="post" role="form" enctype="multipart/form-data">
+
+            <input type="hidden" value="@Model.PatientId" id="PatientId" name="PatientId" />
+            <input type="hidden" value="@Model.Patient_UserId" id="Patient_UserId" name="Patient_UserId" />
+
+            <div class="row form-row">
+                <div class="col-12 col-md-12">
+                    <div class="form-group">
+                        <div class="change-avatar">
+                            <div class="profile-img" id="Image-Container">
+                                <img src="@Model.PatientProfileImage" alt="User Image">
+                            </div>
+                            <div class="upload-img">
+                                <div class="change-photo-btn">
+                                    <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                    <input type="file" id="Image" name="Image" class="upload" accept="image/*">
+                                </div>
+                                <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Username <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly value="@Model.Username" id="Username" name="Username">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" readonly value="@Model.PatientEmail" id="PatientEmail" name="PatientEmail">
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Phone Number <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly value="@Model.PatientPhone" id="PatientPhone" name="PatientPhone">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>National ID <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" readonly value="@Model.PatientNationalID" id="PatientNationalID" name="PatientNationalID">
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" value="@Model.PatientName" id="PatientName" name="PatientName">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Gender <span class="text-danger">*</span></label>
+                        <select class="select form-control" id="PatientGender" name="PatientGender">
+                            <option value="1" @(Model.PatientGender == 1 ? "selected" : string.Empty)>Male</option>
+                            <option value="2" @(Model.PatientGender == 2 ? "selected" : string.Empty)>Female</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Date of Birth <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control datepicker" readonly value="@(Model.PatientDateOfBirth.ToString("dd-MMM-yyyy"))" id="PatientDateOfBirth" name="PatientDateOfBirth">
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Blood Group</label>
+                        <select class="form-select form-control" id="BlodGroupId" name="BlodGroupId">
+                            @foreach (var item in ViewBag.BlodGroups as List<Clinic.DAL.Model.SP_BlodGroups_GetData_Result>)
+                            {
+                                <option value="@item.BlodGroupId" @(Model.BlodGroupId == item.BlodGroupId ? "selected" : "")>@item.BlodGroupName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Your Weight </label>
+                        <input type="text" value="@Model.PatientWeight" class="form-control" id="PatientWeight" name="PatientWeight"
+                               placeholder="75" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Your Height </label>
+                        <input type="text" value="@Model.PatientHeight" class="form-control" id="PatientHeight" name="PatientHeight"
+                               placeholder="170" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" value="@Model.PatientAddress" id="PatientAddress" name="PatientAddress">
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="submit-section">
+                <button type="button" onclick="SaveData(this)" class="btn btn-primary submit-btn">Save Changes</button>
+            </div>
+        </form>
+        <!-- /Profile Settings Form -->
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            DateTimePicker();
+
+            $('#Image').on('change', function () {
+
+                var imageContainer = $('#Image-Container');
+                var image = window.URL.createObjectURL(this.files[0]);
+                imageContainer.find('img').attr('src', image);
+            });
+
+            //===================
+        });
+
+        function DateTimePicker() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-M-yy',
+                changeMonth: true,
+                changeYear: true,
+                sideBySide: true,
+                controlType: 'select',
+                maxDate: '-15y',
+
+            });
+        }
+
+
+        $("#PatientForm").validate({
+            ignore: null,
+            rules: {
+
+                PatientName: {
+                    required: true
+                },
+                PatientGender: {
+                    required: true
+                },
+                PatientDateOfBirth: {
+                    required: true
+                },
+                BlodGroupId: {
+                    required: true
+                },
+                PatientWeight: {
+                    required: true
+                },
+                PatientHeight: {
+                    required: true
+                },
+                PatientAddress: {
+                    required: true
+                }
+            },
+            messages: {
+                PatientName:
+                {
+                    required: "Required"
+                },
+                PatientGender:
+                {
+                    required: "Required"
+                },
+                PatientDateOfBirth:
+                {
+                    required: "Required"
+                },
+                BlodGroupId: {
+                    required: "Required"
+
+                },
+                PatientWeight: {
+                    required: "Required"
+                },
+                PatientHeight: {
+                    required: "Required"
+                },
+                PatientAddress: {
+                    required: "Required"
+                }
+            },
+            errorPlacement: function (error, element) {
+                error.insertAfter(element);
+            }
+        });
+
+        function SaveData(ele) {
+            debugger;
+
+            $(ele).attr("disabled", true);
+
+            if (!$("#PatientForm").valid()) {
+                $(ele).attr("disabled", false);
+                return false;
+            }
+
+
+            var formData = new FormData;
+
+            formData.append("PatientId", $("#PatientId").val());
+            formData.append("Patient_UserId", $("#Patient_UserId").val());
+            formData.append("PatientName", $("#PatientName").val());
+            formData.append("PatientGender", $("#PatientGender").val());
+            formData.append("PatientDateOfBirth", $("#PatientDateOfBirth").val());
+            formData.append("BlodGroupId", $("#BlodGroupId").val());
+            formData.append("PatientWeight", $("#PatientWeight").val());
+            formData.append("PatientHeight", $("#PatientHeight").val());
+            formData.append("PatientAddress", $("#PatientAddress").val());
+
+            formData.append("Image", $("#Image").get(0).files[0]);
+
+
+            $.ajax({
+                url: "/Patient/SaveData",
+                async: true,
+                type: "Post",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    debugger;
+
+                    if (data == 'success') {
+
+                        toastr["success"]("Your Info Saved Successfuly !", "Profile Settings");
+
+                        $(ele).removeAttr("disabled");
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1500);
+
+                    }
+                    else {
+                        toastr["error"](data, "Profile Settings");
+                        $(ele).removeAttr("disabled");
+                    }
+                }
+            });
+
+
+        }
+
+
+    </script>
+}
+
+

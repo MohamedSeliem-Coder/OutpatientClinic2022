@@ -1,6 +1,7 @@
 ﻿using Clinic.BLL.VM;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -87,5 +88,56 @@ namespace Clinic.Web.Controllers
 
         #endregion
 
+
+        #region Profile Setting
+
+        [Authorize(Roles = "Doctor")]
+        public ActionResult ProfileSettings()
+        {
+            int doctorId = _doctorBLL.GetDoctorId(UserID);
+
+            var Doctor = _doctorBLL.Get_Doctor_ById(doctorId);
+
+            ViewBag.Specialities = _comonBLL.Get_Specialities_Data(null);
+
+            ViewBag.Countries = _comonBLL.Get_Countries_Data(null);
+            return View(Doctor);
+        }
+
+
+        public JsonResult SaveData(DoctorVM obj)
+        {
+            string result = "success";
+            try
+            {
+                #region Image
+
+                if (obj.Image != null)
+                {
+                    string FileName = Path.GetFileNameWithoutExtension(obj.Image.FileName);
+                    string Exten = Path.GetExtension(obj.Image.FileName);
+                    FileName = FileName + Guid.NewGuid() + Exten;
+                    obj.DoctorProfileImage = FileName;
+                    obj.Image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/ProfileImage/Doctor/"), FileName));
+                }
+                #endregion
+
+
+                var res = _doctorBLL.Save_Doctor_Data(obj);
+                if(res == null || res == 0)
+                {
+                    result = "Your Info Not Saved !";
+                }
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
     }
 }

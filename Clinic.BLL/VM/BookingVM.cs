@@ -41,5 +41,8 @@ namespace Clinic.BLL.VM
         public TimeSpan DrTimingSlotTo { get; set; }
 
         public string StatusName { get; set; }
+
+        //=================
+        public int? PrescriptionId { get; set; }
     }
 }

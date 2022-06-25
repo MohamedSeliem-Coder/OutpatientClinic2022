@@ -1,0 +1,202 @@
+﻿@model List<Clinic.BLL.VM.BookingVM>
+@{
+    ViewBag.Title = "My Appointments";
+    Layout = "~/Views/Shared/_LayoutPatient.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">@ViewBag.Title</h3>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+
+            <div class="col-md-3">
+                <select class="form-control form-select" id="Status" onchange="GetBooking();">
+                    <option value="-1">Select Status</option>
+                    @foreach (var item in ViewBag.Status as List<Clinic.DAL.Model.SP_BookingStatuses_GetData_Result>)
+                    {
+                        <option value="@item.StatusId">@item.StatusName</option>
+                    }
+                </select>
+            </div>
+            @*<div class="col-sm-6">
+                    <div class="text-end">
+                        <a href="#modal_form" data-bs-toggle="modal" class="btn btn-primary btn-sm" tabindex="0">Add Dependent</a>
+                    </div>
+                </div>*@
+        </div>
+
+
+    </div>
+    <div class="card-body ">
+
+        <!-- Dependent Tab -->
+        <div class="card card-table mb-0">
+            <div class="card-body" id="BookingContainer">
+                <div class="table-responsive">
+                    <table class="table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Appt Date</th>
+                                <th>Booking Date</th>
+                                <th>Amount</th>
+                                <th>Paid Up</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                DateTime dayDate = item.BookingDate;
+                                string TimeFrom = (dayDate + item.DrTimingSlotFrom).ToString("hh:mm");
+
+                                //string TimeTo = (dayDate + item.DrTimingSlotTo).ToString("hh:mm");
+
+                                string AmOrPmFrom = item.DrTimingSlotFrom.Hours > 12 ? "PM" : "AM";
+
+                                //string AmOrPmTo = item.DrTimingSlotTo.Hours > 12 ? "PM" : "AM";
+
+                                string statusPaid = item.IsPaid.HasValue ? item.IsPaid.Value ? "Paid" : "Not Paid" : "Not Paid";
+
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="/Home/DoctorProfile/@item.DoctorId" class="avatar avatar-sm me-2">
+                                                <img class="avatar-img rounded-circle" src="@item.DoctorProfileImage" alt="User Image">
+                                            </a>
+                                            <a href="/Home/DoctorProfile/@item.DoctorId">Dr. @item.DoctorName <span>@item.SpecialityName</span></a>
+                                        </h2>
+                                    </td>
+                                    <td>@item.BookingDate.ToString("dd MMM yyyy") <span class="d-block text-info">@TimeFrom @AmOrPmFrom</span></td>
+                                    <td>@(item.CreationDate.ToString("dd MMM yyyy"))</td>
+                                    <td>EGP @item.BookingAmount</td>
+                                    <td>
+                                        @*<input disabled type="checkbox" @(item.IsOutService.HasValue ? item.IsOutService.Value ? "checked" : string.Empty : string.Empty)>*@
+                                        @if (item.IsPaid.HasValue && item.IsPaid.Value)
+                                        {
+                                            <span class="badge rounded-pill bg-success-light">@statusPaid</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge rounded-pill bg-danger-light">@statusPaid</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.BookingStatusId == 1)
+                                        {
+                                            <span class="badge rounded-pill bg-primary-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 2)
+                                        {
+                                            <span class="badge rounded-pill bg-warning-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 3)
+                                        {
+                                            <span class="badge rounded-pill bg-success-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 4)
+                                        {
+                                            <span class="badge rounded-pill bg-success-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 5)
+                                        {
+                                            <span class="badge rounded-pill bg-danger-light">@item.StatusName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge rounded-pill bg-danger-light">@item.StatusName</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                                            <div class="dropdown-menu">
+                                                @if (item.BookingStatusId != 4 && item.BookingStatusId != 5)
+                                                {
+
+                                                    <a class="dropdown-item" href="javascript:;" onclick="CancelBooking('@item.BookingId')"> Cancel</a>
+                                                }
+                                                @if (item.PrescriptionId != null)
+                                                {
+                                                    <a class="dropdown-item" href="/Patient/ShowPrescription/@item.PrescriptionId"><i class="far fa-eye"></i> Prescription</a>
+                                                }
+
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /Dependent Tab -->
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+
+        function GetBooking() {
+
+            let statusId = $("#Status").val() == -1 ? null : $("#Status").val();
+
+            $.ajax({
+                url: "/Patient/GetBooking",
+                type: "GET",
+                data: { BookingStatusId: statusId },
+                success: function (result) {
+                    $("#BookingContainer").html(result);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+        //CancelBooking
+
+        function CancelBooking(id) {
+            $.alert.open({
+                type: 'confirm',
+                title: 'Booking Cancelation !',
+                content: 'Are You Sure To Cancel Your Booking ?',
+                callback: function (button) {
+                    if (button === 'yes') {
+                        $.ajax({
+                            url: "/Patient/CancelBooking",
+                            type: 'POST',
+                            data: { Id: id },
+                            success: function (data) {
+
+                                if (data == 'success') {
+
+                                    toastr["success"]("Booking Canceled Successfuly", "Booking Cancelation");
+
+                                    GetBooking();
+                                }
+                                else {
+                                    toastr["error"](data, "Booking Cancelation");
+
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+    </script>
+
+}

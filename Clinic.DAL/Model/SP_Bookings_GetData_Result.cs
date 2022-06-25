@@ -15,7 +15,7 @@ namespace Clinic.DAL.Model
     {
         public int BookingId { get; set; }
         public int BookingNo { get; set; }
-        public System.DateTime BookingDate { get; set; }
+        public Nullable<System.DateTime> BookingDate { get; set; }
         public double BookingAmount { get; set; }
         public double BookingFees { get; set; }
         public System.DateTime BookingCreationDate { get; set; }
@@ -47,5 +47,6 @@ namespace Clinic.DAL.Model
         public System.TimeSpan DrTimingSlotTo { get; set; }
         public byte WeekDayId { get; set; }
         public string WeekDayName { get; set; }
+        public Nullable<int> PrescriptionId { get; set; }
     }
 }

@@ -151,7 +151,7 @@
                             </div>
                             <a class="dropdown-item" href="/Doctoe/Dashboard">Dashboard</a>
                             @*<a class="dropdown-item" href="doctor-profile-settings.html">Profile Settings</a>*@
-                            <a class="dropdown-item" href="#">Profile Settings</a>
+                            <a class="dropdown-item" href="/Doctor/ProfileSettings">Profile Settings</a>
                             @if (Request.IsAuthenticated && (User.IsInRole("Doctor")))
                             {
                                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -278,7 +278,7 @@
                                         </li>
                                         <li>
                                             @*<a href="doctor-profile-settings.html">*@
-                                            <a href="#">
+                                            <a href="/Doctor/ProfileSettings">
                                                 <i class="fas fa-user-cog"></i>
                                                 <span>Profile Settings</span>
                                             </a>
