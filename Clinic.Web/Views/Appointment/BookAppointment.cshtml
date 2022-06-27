@@ -257,18 +257,23 @@
 
                     if (data.Message == 'success') {
 
-                        toastr["success"]("Your Booking Saved Successfuly", "Book Appointment");
+                       
                         $(ele).removeAttr("disabled");
-
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 1500);
 
                         if (type == 2) {
                             let url = "/Appointment/Checkout/" + data.BookingId;
                             setTimeout(function () {
                                 window.location.href = url;
                             }, 2000);
+                        }
+                        else {
+
+                            toastr["success"]("Your Booking Saved Successfuly", "Book Appointment");
+
+                            setTimeout(function () {
+                                /*window.location.reload();*/
+                                window.location.href = "/Patient/Appointments";
+                            }, 1500);
                         }
                     }
                     else {

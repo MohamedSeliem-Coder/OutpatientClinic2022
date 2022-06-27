@@ -4,7 +4,182 @@
     Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
 }
 
-<div class="appointments">
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="card-title">@ViewBag.Title</h3>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+
+            <div class="col-md-3">
+                <select class="form-control form-select" id="Status" onchange="GetBooking();">
+                    <option value="-1">Select Status</option>
+                    @foreach (var item in ViewBag.Status as List<Clinic.DAL.Model.SP_BookingStatuses_GetData_Result>)
+                    {
+                        <option value="@item.StatusId">@item.StatusName</option>
+                    }
+                </select>
+            </div>
+            @*<div class="col-sm-6">
+                    <div class="text-end">
+                        <a href="#modal_form" data-bs-toggle="modal" class="btn btn-primary btn-sm" tabindex="0">Add Dependent</a>
+                    </div>
+                </div>*@
+        </div>
+
+
+    </div>
+    <div class="card-body ">
+
+        <!-- Dependent Tab -->
+        <div class="card card-table mb-0">
+            <div class="card-body" id="BookingContainer">
+                <div class="table-responsive">
+                    <table class="table table-hover table-center mb-0">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Appt Date</th>
+                                <th>Booking Date</th>
+                                <th>Amount</th>
+                                <th>Paid Up</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+                                DateTime dayDate = item.BookingDate;
+                                string TimeFrom = (dayDate + item.DrTimingSlotFrom).ToString("hh:mm");
+
+                                //string TimeTo = (dayDate + item.DrTimingSlotTo).ToString("hh:mm");
+
+                                string AmOrPmFrom = item.DrTimingSlotFrom.Hours > 12 ? "PM" : "AM";
+
+                                //string AmOrPmTo = item.DrTimingSlotTo.Hours > 12 ? "PM" : "AM";
+
+                                string statusPaid = item.IsPaid.HasValue ? item.IsPaid.Value ? "Paid" : "Not Paid" : "Not Paid";
+
+                                <tr>
+                                    <td>
+                                        <h2 class="table-avatar">
+                                            <a href="#" class="avatar avatar-sm me-2">
+                                                <img class="avatar-img rounded-circle" src="@item.PatientProfileImage" alt="User Image">
+                                            </a>
+                                            <a href="#"> @item.PatientName</a>
+                                        </h2>
+                                    </td>
+                                    <td>@item.BookingDate.ToString("dd MMM yyyy") <span class="d-block text-info">@TimeFrom @AmOrPmFrom</span></td>
+                                    <td>@(item.CreationDate.ToString("dd MMM yyyy"))</td>
+                                    <td>EGP @item.BookingAmount</td>
+                                    <td>
+                                        @*<input disabled type="checkbox" @(item.IsOutService.HasValue ? item.IsOutService.Value ? "checked" : string.Empty : string.Empty)>*@
+                                        @if (item.IsPaid.HasValue && item.IsPaid.Value)
+                                        {
+                                            <span class="badge rounded-pill bg-success-light">@statusPaid</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge rounded-pill bg-danger-light">@statusPaid</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.BookingStatusId == 1)
+                                        {
+                                            <span class="badge rounded-pill bg-primary-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 2)
+                                        {
+                                            <span class="badge rounded-pill bg-warning-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 3)
+                                        {
+                                            <span class="badge rounded-pill bg-success-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 4)
+                                        {
+                                            <span class="badge rounded-pill bg-success-light">@item.StatusName</span>
+                                        }
+                                        else if (item.BookingStatusId == 5)
+                                        {
+                                            <span class="badge rounded-pill bg-danger-light">@item.StatusName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge rounded-pill bg-danger-light">@item.StatusName</span>
+                                        }
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                                            <div class="dropdown-menu">
+                                                @if (item.PrescriptionId != null)
+                                                {
+                                                    <a class="dropdown-item" href="/Doctor/ShowPrescription/@item.PrescriptionId"><i class="far fa-eye"></i> Prescription</a>
+                                                }
+
+                                                @if (item.PrescriptionId == null && item.BookingStatusId != 5 && item.BookingStatusId != 6 && item.BookingStatusId != 4)
+                                                {
+                                                    <a class="dropdown-item" href="/Doctor/AddPrescription/@item.BookingId"> <i class="far fa-edit"></i> Add Prescription </a>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /Dependent Tab -->
+
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+        function GetBooking() {
+
+            let statusId = $("#Status").val() == -1 ? null : $("#Status").val();
+
+            $.ajax({
+                url: "/Doctor/GetBooking",
+                type: "GET",
+                data: { BookingStatusId: statusId },
+                success: function (result) {
+                    $("#BookingContainer").html(result);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+@*<div class="appointments">
 
 
     @foreach (var item in Model)
@@ -14,20 +189,14 @@
 
         string AmOrPmFrom = item.DrTimingSlotFrom.Hours > 12 ? "PM" : "AM";
 
-
-
-        <!-- Appointment List -->
         <div class="appointment-list">
             <div class="profile-info-widget">
-                @*<a href="patient-profile.html" class="booking-doc-img">*@
                 <a href="#" class="booking-doc-img">
                     <img src="@item.PatientProfileImage" alt="User Image">
                 </a>
                 <div class="profile-det-info">
-                    @*<h3><a href="patient-profile.html">Richard Wilson</a></h3>*@
                     <h3><a href="#">@item.PatientName</a></h3>
                     <div class="patient-details">
-                        @*<h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5>*@
                         <h5><i class="far fa-clock"></i> @item.BookingDate.ToString("dd MMM yyyy"), @TimeFrom @AmOrPmFrom</h5>
                         <h5><i class="fas fa-map-marker-alt"></i> @item.PatientAddress</h5>
                         <h5><i class="fas fa-envelope"></i> @item.PatientEmail</h5>
@@ -36,20 +205,12 @@
                 </div>
             </div>
             <div class="appointment-action">
-                @*<a href="#" class="btn btn-sm bg-info-light" data-bs-toggle="modal" data-bs-target="#appt_details">*@
                 <a href="/Doctor/AddPrescription/@item.BookingId" class="btn btn-sm bg-info-light">
                     <i class="far fa-edit"></i> Add Prescription
                 </a>
-                @*<a href="javascript:void(0);" class="btn btn-sm bg-success-light">
-                    <i class="fas fa-check"></i> Accept
-                </a>
-                <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                    <i class="fas fa-times"></i> Cancel
-                </a>*@
             </div>
         </div>
-        <!-- /Appointment List -->
     }
 
-</div>
+</div>*@
 

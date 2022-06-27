@@ -1,0 +1,98 @@
+﻿@model List<Clinic.BLL.VM.BookingVM>
+
+<div class="table-responsive">
+    <table class="table table-hover table-center mb-0">
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Appt Date</th>
+                <th>Booking Date</th>
+                <th>Amount</th>
+                <th>Paid Up</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                DateTime dayDate = item.BookingDate;
+                string TimeFrom = (dayDate + item.DrTimingSlotFrom).ToString("hh:mm");
+
+                string AmOrPmFrom = item.DrTimingSlotFrom.Hours > 12 ? "PM" : "AM";
+
+                string statusPaid = item.IsPaid.HasValue ? item.IsPaid.Value ? "Paid" : "Not Paid" : "Not Paid";
+
+                <tr>
+                    <td>
+                        <h2 class="table-avatar">
+                            <a href="#" class="avatar avatar-sm me-2">
+                                <img class="avatar-img rounded-circle" src="@item.PatientProfileImage" alt="User Image">
+                            </a>
+                            <a href="#"> @item.PatientName</a>
+                        </h2>
+                    </td>
+                    <td>@item.BookingDate.ToString("dd MMM yyyy") <span class="d-block text-info">@TimeFrom @AmOrPmFrom</span></td>
+                    <td>@(item.CreationDate.ToString("dd MMM yyyy"))</td>
+                    <td>EGP @item.BookingAmount</td>
+                    <td>
+                        @if (item.IsPaid.HasValue && item.IsPaid.Value)
+                        {
+                            <span class="badge rounded-pill bg-success-light">@statusPaid</span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill bg-danger-light">@statusPaid</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.BookingStatusId == 1)
+                        {
+                            <span class="badge rounded-pill bg-primary-light">@item.StatusName</span>
+                        }
+                        else if (item.BookingStatusId == 2)
+                        {
+                            <span class="badge rounded-pill bg-warning-light">@item.StatusName</span>
+                        }
+                        else if (item.BookingStatusId == 3)
+                        {
+                            <span class="badge rounded-pill bg-success-light">@item.StatusName</span>
+                        }
+                        else if (item.BookingStatusId == 4)
+                        {
+                            <span class="badge rounded-pill bg-success-light">@item.StatusName</span>
+                        }
+                        else if (item.BookingStatusId == 5)
+                        {
+                            <span class="badge rounded-pill bg-danger-light">@item.StatusName</span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill bg-danger-light">@item.StatusName</span>
+                        }
+                    </td>
+                    <td class="text-end">
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                            <div class="dropdown-menu">
+                                @if (item.PrescriptionId != null)
+                                {
+                                    <a class="dropdown-item" href="/Doctor/ShowPrescription/@item.PrescriptionId"><i class="far fa-eye"></i> Prescription</a>
+                                }
+
+                                @if (item.PrescriptionId == null && item.BookingStatusId != 5 && item.BookingStatusId != 6 && item.BookingStatusId != 4)
+                                {
+                                    <a class="dropdown-item" href="/Doctor/AddPrescription/@item.BookingId"> <i class="far fa-edit"></i> Add Prescription </a>
+                                }
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

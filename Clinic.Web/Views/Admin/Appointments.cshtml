@@ -1,0 +1,129 @@
+﻿@model List<Clinic.BLL.VM.BookingVM> 
+@{
+    ViewBag.Title = "Appointments";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        @*<div class="page-header">
+           
+            <div class="row align-items-center">
+            <div class="col">
+                <ul class="list-links">
+                    <li class="active"><a href="upcoming-appointments.html">Upcoming Appointments <span>(48)</span></a></li>
+                    <li><a href="past-appointments.html">Past Appointments <span>(98)</span></a></li>
+                </ul>
+            </div>
+            <div class="col-auto">
+                <div class="bookingrange btn btn-white btn-sm">
+                    <div class="cal-ico">
+                        <i class="feather-calendar mr-1"></i>
+                        <span>Select Date</span>
+                    </div>
+                    <div class="ico">
+                        <i class="fas fa-chevron-left"></i>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>*@
+        <!-- /Page Header -->
+        <!-- Upcoming Appointments -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h5 class="card-title"> Appointments</h5>
+                            </div>
+                            <div class="col-auto d-flex">
+                                @*<form action="upcoming-appointments.html">
+                                    <div class="multipleSelection">
+                                        <div class="selectBox">
+                                            <p class="mb-0"><i class="feather-filter me-1"></i> Filter</p>
+                                            <span class="down-icon"><i class="feather-chevron-down"></i></span>
+                                        </div>
+                                        <div id="checkBoxes">
+                                            <div class="form-custom">
+                                                <input type="text" class="form-control bg-grey" placeholder="Search by Patient">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+                                            <div class="form-custom">
+                                                <input type="text" class="form-control bg-grey" placeholder="Search by Doctor">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+                                            <p class="lab-title">Consultation Type</p>
+                                            <label class="custom_check w-100">
+                                                <input type="checkbox" name="year">
+                                                <span class="checkmark"></span> Video Call
+                                            </label>
+                                            <label class="custom_check w-100">
+                                                <input type="checkbox" name="year">
+                                                <span class="checkmark"></span> Audio Call
+                                            </label>
+                                            <label class="custom_check w-100">
+                                                <input type="checkbox" name="year">
+                                                <span class="checkmark"></span> Chat
+                                            </label>
+                                            <button type="submit" class="btn w-100 btn-primary">Apply</button>
+                                        </div>
+                                    </div>
+                                </form>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="datatable table table-borderless hover-table" id="data-tables">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Date & Time</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>@item.BookingNo</td>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="#"><img class="avatar avatar-img" src="@item.PatientProfileImage" alt="User Image"></a>
+                                                <a href="#"><span class="user-name">@item.PatientName</span> <span class="text-muted">@item.PatientAddress</span></a>
+                                            </h2>
+                                        </td>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a class="avatar-pos" href="/Home/DoctorProfile/@item.DoctorId"><img class="avatar avatar-img" src="@item.DoctorProfileImage" alt="User Image"></a>
+                                                <a href="/Home/DoctorProfile/@item.DoctorId" class="user-name"><span class="text-muted">Dr. @item.DoctorName</span> <span class="tab-subtext">@item.SpecialityName</span></a>
+                                            </h2>
+                                        </td>
+                                        <td><span class="user-name">@item.BookingDate.ToString("dd MMMM yyyy") </span><span class="d-block">@item.CreationDate.ToString("MM/dd/yyyy")</span></td>
+                                        <td>EGP @item.BookingAmount</td>
+
+                                    </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tablepagination" class="dataTables_wrapper"></div>
+            </div>
+        </div>
+        <!-- /Upcoming Appointments -->
+    </div>
+</div>
+<!-- /Page Wrapper -->

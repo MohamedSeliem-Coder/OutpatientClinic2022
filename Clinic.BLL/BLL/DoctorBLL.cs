@@ -141,6 +141,11 @@ namespace Clinic.BLL.BLL
             return db.SP_GetScheduleTimings_ByDate(doctorId, from, to).ToList();
         }
 
+        public List<SP_ScheduleTimings_GetData_Result> Get_ScheduleTimings_GetData(int? drTimingId,byte? weekDayId, int? doctorId,string doctorUserId)
+        {
+            return db.SP_ScheduleTimings_GetData(drTimingId, weekDayId, doctorId, doctorUserId).ToList();
+        }
+
         #endregion
     }
 }

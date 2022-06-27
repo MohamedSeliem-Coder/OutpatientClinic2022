@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Clinic.BLL.VM
 {
@@ -25,5 +26,8 @@ namespace Clinic.BLL.VM
         public string EmployeeGenderName { get; set; }
         public string Username { get; set; }
         public int? Age { get; set; }
+
+        //===========================
+        public HttpPostedFileBase Image { get; set; }
     }
 }

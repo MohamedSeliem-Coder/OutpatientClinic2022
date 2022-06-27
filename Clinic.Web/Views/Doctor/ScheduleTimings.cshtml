@@ -1,0 +1,153 @@
+﻿@model List<Clinic.DAL.Model.SP_ScheduleTimings_GetData_Result>
+@{
+    ViewBag.Title = "Schedule Timings";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+
+    var grouping = Model == null || Model.Count == 0 ? null : Model.GroupBy(a => a.WeekDayName);
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Schedule Timings</h4>
+                <div class="profile-box">
+                    <div class="row">
+
+                        @*<div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Timing Slot Duration</label>
+                                    <select class="select form-control">
+                                        <option>-</option>
+                                        <option>15 mins</option>
+                                        <option selected="selected">30 mins</option>
+                                        <option>45 mins</option>
+                                        <option>1 Hour</option>
+                                    </select>
+                                </div>
+                            </div>*@
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card schedule-widget mb-0">
+
+                                <!-- Schedule Header -->
+                                <div class="schedule-header">
+
+                                    <!-- Schedule Nav -->
+                                    <div class="schedule-nav">
+                                        <ul class="nav nav-tabs nav-justified">
+                                            @{
+                                                string currentDay = DateTime.Now.DayOfWeek.ToString();
+                                            }
+
+                                            @foreach (var item in ViewBag.WeekDays as List<Clinic.DAL.Model.SP_WeekDays_GetData_Result>)
+                                            {
+
+                                                <li class="nav-item">
+                                                    <a class="nav-link @(item.WeekDayName.ToLower() == currentDay.ToLower()? "active":"")" data-bs-toggle="tab" href="#slot_@item.WeekDayName.ToLower()">@item.WeekDayName</a>
+                                                </li>
+                                            }
+
+
+                                            @*<li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#slot_sunday">Sunday</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#slot_monday">Monday</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#slot_tuesday">Tuesday</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#slot_wednesday">Wednesday</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#slot_thursday">Thursday</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#slot_friday">Friday</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#slot_saturday">Saturday</a>
+                                                </li>*@
+                                        </ul>
+                                    </div>
+                                    <!-- /Schedule Nav -->
+
+                                </div>
+                                <!-- /Schedule Header -->
+                                <!-- Schedule Content -->
+                                <div class="tab-content schedule-cont">
+
+                                    @foreach (var item in ViewBag.WeekDays as List<Clinic.DAL.Model.SP_WeekDays_GetData_Result>)
+                                    {
+                                        //grouping
+
+                                        <div id="slot_@item.WeekDayName.ToLower()" class="tab-pane fade @(item.WeekDayName.ToLower() == currentDay.ToLower()? "show active":"")">
+                                            <h4 class="card-title d-flex justify-content-between">
+                                                <span>Time Slots</span>
+                                                @*<a class="edit-link" data-bs-toggle="modal" href="#edit_time_slot"><i class="fa fa-edit me-1"></i>Edit</a>*@
+                                            </h4>
+
+                                            @{
+                                                var currentDayTimeing = Model.Where(a => a.WeekDayName.ToLower() == item.WeekDayName.ToLower()).ToList();
+
+                                            }
+
+                                            @if (currentDayTimeing != null && currentDayTimeing.Count > 0)
+                                            {
+
+                                                string dayDate = DateTime.Now.ToString("MM/dd/yyyy");
+                                                <!-- Slot List -->
+                                                <div class="doc-times">
+
+
+                                                    @foreach (var dayTimes in currentDayTimeing)
+                                                    {
+
+                                                        string TimeFrom = (DateTime.Parse(dayDate) + dayTimes.DrTimingSlotFrom).ToString("hh:mm");
+
+                                                        string TimeTo = (DateTime.Parse(dayDate) + dayTimes.DrTimingSlotTo).ToString("hh:mm");
+
+                                                        string AmOrPmFrom = dayTimes.DrTimingSlotFrom.Hours > 12 ? "PM" : "AM";
+
+                                                        string AmOrPmTo = dayTimes.DrTimingSlotTo.Hours > 12 ? "PM" : "AM";
+
+
+                                                        <div class="doc-slot-list">
+                                                            @*8:00 pm - 11:30 pm*@
+                                                            @TimeFrom @AmOrPmFrom - @TimeTo @AmOrPmTo
+                                                            <a href="javascript:void(0)" class="delete_schedule">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <!-- /Slot List -->
+                                            }
+                                            else
+                                            {
+                                                <p class="text-muted mb-0">Not Available</p>
+                                            }
+
+
+                                        </div>
+                                    }
+
+
+                                </div>
+                                <!-- /Schedule Content -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

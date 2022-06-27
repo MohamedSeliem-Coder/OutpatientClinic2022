@@ -1349,6 +1349,15 @@
     <Content Include="Views\Patient\Favourites.cshtml" />
     <Content Include="Views\Patient\Prescriptions.cshtml" />
     <Content Include="Views\Patient\ShowPrescription.cshtml" />
+    <Content Include="Views\Doctor\Patients.cshtml" />
+    <Content Include="Views\Doctor\ScheduleTimings.cshtml" />
+    <Content Include="Views\Admin\Appointments.cshtml" />
+    <Content Include="Views\Admin\Specialities.cshtml" />
+    <Content Include="Views\Admin\Doctors.cshtml" />
+    <Content Include="Views\Admin\Patients.cshtml" />
+    <Content Include="Views\Admin\ProfileSettings.cshtml" />
+    <Content Include="Views\Doctor\_DoctorBookingList.cshtml" />
+    <Content Include="Views\Doctor\ShowPrescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,6 +15,9 @@ namespace Clinic.Web.Controllers
         [Authorize(Roles = "Doctor")]
         public ActionResult Dashboard()
         {
+            int doctorId = _doctorBLL.GetDoctorId(UserID);
+            var PatientsCount = _bookingBLL.Get_Booking_List(null, null, null, null, null, doctorId, null, null).Count();
+
             return View();
         }
 
@@ -25,7 +28,17 @@ namespace Clinic.Web.Controllers
             int doctorId = _doctorBLL.GetDoctorId(UserID);
 
             var myAppointment = _bookingBLL.Get_Booking_List(null, null, null, null, null, doctorId, null, null);
+
+            ViewBag.Status = _comonBLL.Get_BookingStatuses_Data(null);
             return View(myAppointment);
+        }
+
+        public PartialViewResult GetBooking(byte? BookingStatusId)
+        {
+            int doctorId = _doctorBLL.GetDoctorId(UserID);
+            var myAppointment = _bookingBLL.Get_Booking_List(null, null, null, BookingStatusId, null, doctorId, null, null);
+
+            return PartialView("_DoctorBookingList", myAppointment);
         }
 
 
@@ -44,6 +57,15 @@ namespace Clinic.Web.Controllers
             return View(booking);
         }
 
+
+        public ActionResult ShowPrescription(int Id)
+        {
+            var Prescription = _bookingBLL.Get_Prescription_ById(Id);
+
+            ViewBag.Patient = _patientBLL.Get_Patient_ById(Prescription.PatientId);
+
+            return View(Prescription);
+        }
 
         public PartialViewResult GetMedicationRow(int MedicationId)
         {
@@ -136,6 +158,50 @@ namespace Clinic.Web.Controllers
 
                 return Json(e.Message, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        #endregion
+
+
+        #region My Patients
+
+        public ActionResult Patients()
+        {
+            int doctorId = _doctorBLL.GetDoctorId(UserID);
+
+            var doctorBookings = _bookingBLL.Get_Booking_List(null, null, null, null, null, doctorId, null, null);
+
+            List<int> PaientsIds = new List<int>();
+
+            if(doctorBookings !=null && doctorBookings.Count > 0)
+            {
+                foreach (var item in doctorBookings)
+                {
+                    PaientsIds.Add(item.PatientId);
+                }
+            }
+
+          
+
+            var Patients = _patientBLL.Get_Patient_List(null, null, null, null, null, null, null);
+
+            Patients = Patients.Where(a => PaientsIds.Contains(a.PatientId)).ToList();
+
+            return View(Patients);
+        }
+
+        #endregion
+
+
+        #region Schedule Timings
+
+        public ActionResult ScheduleTimings()
+        {
+            var scheduleTimings = _doctorBLL.Get_ScheduleTimings_GetData(null, null, null, UserID);
+
+            ViewBag.WeekDays = _comonBLL.Get_WeekDays_Data(null, null);
+
+            return View(scheduleTimings);
         }
 
         #endregion

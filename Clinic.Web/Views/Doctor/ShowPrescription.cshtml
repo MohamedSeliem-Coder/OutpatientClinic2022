@@ -1,0 +1,143 @@
+﻿@using Clinic.BLL.VM
+@model PrescriptionVM
+@{
+    ViewBag.Title = "Prescription";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+    PatientVM Patient = ViewBag.Patient;
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title mb-0">View Prescription</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="biller-info">
+                    <h4 class="d-block">@Patient.PatientName</h4>
+                    <span class="d-block text-sm text-muted"><b>Patient ID :</b> @Patient.PatientId</span>
+                    <span class="d-block text-sm text-muted">@Patient.PatientAddress</span>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="biller-info">
+                    <h4 class="d-block">Phone :  <span>@Patient.PatientPhone</span></h4>
+                    <span class="d-block text-sm text-muted">Age <span>@Patient.Age Years, @Patient.PatientGenderName</span></span>
+                    <span class="d-block text-sm text-muted">Blood Group <span>@Patient.PatientBlodGroupName</span></span>
+                </div>
+            </div>
+            <div class="col-sm-4 text-sm-end">
+                <div class="billing-info">
+                    <h4 class="d-block">@Model.PrescriptionDate.ToString("dd MMM yyyy")</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Doctor Report</h4>
+
+                        <div class="form-group mb-0 col-md-6">
+                            <label>Disease</label>
+                            <input type="text" readonly value="@Model.DiseaseName" class="form-control" />
+                        </div>
+
+                        <br />
+                        <div class="form-group mb-0">
+                            <label>Diagnosis</label>
+                            <textarea class="form-control" readonly rows="3" id="DoctorReport">@Model.DoctorReport</textarea>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /About Me -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Medications</h4>
+
+                        <!-- Prescription Item -->
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-center">
+                                        <thead>
+                                            <tr>
+                                                <th>Medication</th>
+                                                <th>Name</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Medications)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="#" class="avatar avatar-sm me-2">
+                                                                <img class="avatar-img rounded-circle" src="@item.MedicationImagePath" alt="@item.MedicationName">
+                                                            </a>
+                                                        </h2>
+
+                                                    </td>
+                                                    <td> @item.MedicationName</td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Prescription Item -->
+
+                    </div>
+                </div>
+                <!-- /About Me -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- About Me -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Prescription Notes</h4>
+
+                        <div class="form-group mb-0">
+                            <label>Notes</label>
+                            <textarea class="form-control" rows="2" id="PrescriptionNotes" readonly>@Model.PrescriptionNotes</textarea>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /About Me -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-end">
+                <div class="signature-wrap">
+                    <div class="sign-name">
+                        <p class="mb-0">( Dr. @Model.DoctorName )</p>
+                        <span class="text-muted">Signature</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Signature -->
+
+
+    </div>
+</div>

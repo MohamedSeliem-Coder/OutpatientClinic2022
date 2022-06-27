@@ -1989,10 +1989,11 @@ button.bg-danger:hover {
 	display: inline-block;
 	line-height: 60px;
 }
-.header .header-left .logo img {
-	max-height: 45px;
-	width: auto;
-}
+	.header .header-left .logo img {
+		max-height: 65px;
+		/*width: auto;*/
+		width: 160px;
+	}
 .header-left .logo.logo-small {
 	display: none;
 }

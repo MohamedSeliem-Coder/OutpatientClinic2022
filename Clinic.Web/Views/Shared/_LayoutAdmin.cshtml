@@ -1,9 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+@{
+
+    var _AdminBLL = new Clinic.BLL.BLL.AdminBLL();
+
+    var adminId = _AdminBLL.GetEmployeeId(User.Identity.GetUserId());
+    var admin = _AdminBLL.Get_Employee_ById(adminId);
+
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Doccure - Bootstrap Admin HTML Template</title>
+    <title>@ViewBag.Title</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="~/admin/assets/img/favicon.png">
@@ -27,6 +38,12 @@
     <!-- Daterangepicker CSS -->
     <link rel="stylesheet" href="~/admin/assets/plugins/daterangepicker/daterangepicker.css">
 
+
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+
+    <link href="~/assets/bootstrap-toastr/toastr.min.css" rel="stylesheet" />
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="~/admin/assets/css/style.css">
 
@@ -44,7 +61,7 @@
                 <a href="/Home/Index" class="logo">
                     <img src="~/admin/assets/img/logo.png" alt="Logo">
                 </a>
-                <a href="index.html" class="logo logo-small">
+                <a href="/Home/Index" class="logo logo-small">
                     <img src="~/admin/assets/img/logo-small.png" alt="Logo" width="30" height="30">
                 </a>
                 <a href="javascript:void(0);" id="toggle_btn">
@@ -55,25 +72,25 @@
             <!-- Search -->
             <div class="top-nav-search">
                 <div class="main">
-                    <form class="search" method="post" action="index.html">
+                    <form class="search" method="post">
                         <div class="s-icon"><i class="fas fa-search"></i></div>
                         <input type="text" class="form-control" placeholder="Start typing your Search..." />
                         <ul class="results">
                             <li>
                                 <h6><i class="feather-calendar me-1"></i> Appointments</h6>
-                                <p>No matched Appointment found. <a href="index.html"><span>View all</span></a></p>
+                                <p>No matched Appointment found. <a href="/Admin/Appointments"><span>View all</span></a></p>
                             </li>
                             <li>
                                 <h6><i class="feather-calendar me-1"></i> Specialities</h6>
-                                <p>No matched Appointment found. <a href="index.html"><span>View all</span></a></p>
+                                <p>No matched Appointment found. <a href="/Admin/Specialities"><span>View all</span></a></p>
                             </li>
                             <li>
                                 <h6><i class="feather-user me-1"></i> Doctors</h6>
-                                <p>No matched Appointment found. <a href="index.html"><span>View all</span></a></p>
+                                <p>No matched Appointment found. <a href="/Admin/Doctors"><span>View all</span></a></p>
                             </li>
                             <li>
                                 <h6><i class="feather-users me-1"></i> Patients</h6>
-                                <p>No matched Appointment found. <a href="index.html"><span>View all</span></a></p>
+                                <p>No matched Appointment found. <a href="/Admin/Patients"><span>View all</span></a></p>
                             </li>
                         </ul>
                     </form>
@@ -167,23 +184,21 @@
                 <li class="nav-item dropdown main-drop">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <span class="user-img">
-                            <img src="~/admin/assets/img/profiles/avatar-01.jpg" alt="">
+                            <img src="@admin.EmployeeProfileImage" alt="">
                             <span class="status online"></span>
                         </span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="~/admin/assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                <img src="@admin.EmployeeProfileImage" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
-                                <h6>Robert Haddin</h6>
+                                <h6>@admin.EmployeeName</h6>
                                 <p class="text-muted mb-0">Administrator</p>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="profile.html"><i class="feather-user me-1"></i> My Profile</a>
-                        <a class="dropdown-item" href="profile.html"><i class="feather-edit me-1"></i> Edit Profile</a>
-                        <a class="dropdown-item" href="account-settings.html"><i class="feather-sliders me-1"></i> Account Settings</a>
+                        <a class="dropdown-item" href="/Admin/ProfileSettings"><i class="feather-user me-1"></i> My Profile</a>
                         <hr class="my-0 ms-2 me-2">
                         @{
                             using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -211,140 +226,27 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="menu-title"><span>Main</span></li>
+                        @*<li class="menu-title"><span>Main</span></li>*@
                         <li class="active">
-                            <a href="index.html"><i class="feather-grid"></i> <span>Dashboard</span></a>
+                            <a href="/Admin/Dashboard"><i class="feather-grid"></i> <span>Dashboard</span></a>
                         </li>
                         <li>
-                            <a href="upcoming-appointments.html"><i class="feather-calendar"></i> <span>Appointments</span></a>
+                            <a href="/Admin/Appointments"><i class="feather-calendar"></i> <span>Appointments</span></a>
                         </li>
                         <li>
-                            <a href="specialities.html"><i class="feather-package"></i> <span>Specialities</span></a>
+                            <a href="/Admin/Specialities"><i class="feather-package"></i> <span>Specialities</span></a>
                         </li>
                         <li>
-                            <a href="doctor-list.html"><i class="feather-user-plus"></i> <span>Doctors</span></a>
+                            <a href="/Admin/Doctors"><i class="feather-user-plus"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a href="patient-list.html"><i class="feather-users"></i> <span>Patients</span></a>
+                            <a href="/Admin/Patients"><i class="feather-users"></i> <span>Patients</span></a>
                         </li>
+
                         <li>
-                            <a href="ratings.html"><i class="feather-star"></i> <span>Reviews</span></a>
+                            <a href="/Admin/ProfileSettings"><i class="feather-user"></i> <span>Profile</span></a>
                         </li>
-                        <li>
-                            <a href="transaction.html"><i class="feather-credit-card"></i> <span>Transactions</span></a>
-                        </li>
-                        <li>
-                            <a href="settings.html"><i class="feather-sliders"></i> <span> Settings</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-file-text"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="appointment-report.html">Appointment Report</a></li>
-                                <li><a href="income-report.html">Income Report</a></li>
-                                <li><a href="invoice-report.html">Invoice Report</a></li>
-                                <li><a href="user-reports.html">Users Report</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-title">
-                            <span>Pharmacy</span>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-file-plus"></i> <span> Pharmacies</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="pharmacy-list.html">All Pharmacies</a></li>
-                                <li><a href="pharmacy-category.html">Categories</a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-shopping-cart"></i> <span> Product List</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="product-list.html">All Products</a></li>
-                                <li><a href="product-category.html">Categories</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-title">
-                            <span>Blog</span>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-grid"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="active-blog.html">Blogs</a></li>
-                                <li><a href="blog-details.html">Blog Details</a></li>
-                                <li><a href="add-blog.html">Add Blog</a></li>
-                                <li><a href="edit-blog.html">Edit Blog</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-title">
-                            <span>Pages</span>
-                        </li>
-                        <li>
-                            <a href="add-profile.html"><i class="feather-user"></i> <span>Profile</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-lock"></i> <span> Authentication </span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="login.html"> Login </a></li>
-                                <li><a href="register.html"> Register </a></li>
-                                <li><a href="forgot-password.html"> Forgot Password </a></li>
-                                <li><a href="lock-screen.html"> Lock Screen </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-book-open"></i> <span> Error Pages </span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="error-404.html">404 Error </a></li>
-                                <li><a href="error-500.html">500 Error </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="blank-page.html"><i class="feather-clipboard"></i> <span>Blank Page</span></a>
-                        </li>
-                        <li class="menu-title">
-                            <span>UI Interface</span>
-                        </li>
-                        <li>
-                            <a href="components.html"><i class="feather-pocket"></i> <span>Components</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-file-minus"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="form-basic-inputs.html">Basic Inputs </a></li>
-                                <li><a href="form-input-groups.html">Input Groups </a></li>
-                                <li><a href="form-horizontal.html">Horizontal Form </a></li>
-                                <li><a href="form-vertical.html"> Vertical Form </a></li>
-                                <li><a href="form-mask.html">Form Mask </a></li>
-                                <li><a href="form-validation.html">Form Validation </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="feather-align-justify"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li><a href="tables-basic.html">Basic Tables </a></li>
-                                <li><a href="data-tables.html">Data Table </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);"><i class="feather-life-buoy"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"> <span>Level 1</span> <span class="menu-arrow"></span></a>
-                                    <ul style="display: none;">
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                        <li class="submenu">
-                                            <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                                            <ul style="display: none;">
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);"> <span>Level 2</span></a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"> <span>Level 1</span></a>
-                                </li>
-                            </ul>
-                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -379,6 +281,14 @@
     <!-- Daterangepicker JS -->
     <script src="~/admin/assets/js/moment.min.js"></script>
     <script src="~/admin/assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Datatables JS -->
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/plugins/datatables/datatables.min.js"></script>
+
+    <!-- toastr JS -->
+    <script src="~/assets/bootstrap-toastr/toastr.min.js"></script>
+    <script src="~/assets/bootstrap-toastr/ui-toastr.min.js"></script>
 
     <!-- Custom JS -->
     <script src="~/admin/assets/js/script.js"></script>

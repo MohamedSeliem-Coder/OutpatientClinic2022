@@ -71,5 +71,13 @@ namespace Clinic.BLL.BLL
                 throw new Exception(e.Message);
             }
         }
+
+
+        //SP_WeekDays_GetData_Result
+
+        public List<SP_WeekDays_GetData_Result> Get_WeekDays_Data(byte? weekDayId,string weekDayName)
+        {
+            return db.SP_WeekDays_GetData(weekDayId, weekDayName).ToList();
+        }
     }
 }
